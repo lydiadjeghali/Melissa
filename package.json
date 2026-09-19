@@ -1,0 +1,9 @@
+{
+  "name": "lziz-ai-secure",
+  "version": "1.0.0",
+  "private": true,
+  "description": "L'3ZIZ - Coach Résidanat avec Gemini côté serveur",
+  "scripts": {
+    "start": "node --env-file=.env server.js"
+  }
+}
