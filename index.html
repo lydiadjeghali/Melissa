@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Objectif Résidanat - Mélissa 🩺</title>
+  <title>Objectif Résidanat — Calendrier de Mélissa 🩺</title>
   <style>
     :root {
       --bg-color: #f1f5f9;
@@ -78,9 +78,7 @@
       transition: background 0.2s;
     }
 
-    .btn-quote:hover {
-      background: #0369a1;
-    }
+    .btn-quote:hover { background: #0369a1; }
 
     /* Navigation */
     .nav-tabs {
@@ -89,6 +87,7 @@
       margin-bottom: 24px;
       border-bottom: 2px solid var(--border);
       padding-bottom: 8px;
+      flex-wrap: wrap;
     }
 
     .tab-btn {
@@ -197,6 +196,114 @@
       border-left: 1px solid var(--border);
     }
 
+    .cell-center { text-align: center; }
+
+    /* Boutons de rappel */
+    .btn-reminder {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reminder:hover {
+      background: #0284c7;
+      color: white;
+    }
+
+    /* Modale de rappel */
+    .reminder-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, .6);
+      backdrop-filter: blur(4px);
+    }
+
+    .reminder-modal.open { display: flex; }
+
+    .reminder-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      width: min(500px, 90%);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .reminder-dates {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Samedi Pédagogique */
+    .samedi-container {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .samedi-header-inputs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .samedi-header-inputs input[type="date"] {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .samedi-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .samedi-table th, .samedi-table td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .samedi-table th.col-cours, .samedi-table td.col-cours {
+      text-align: left;
+      width: 60%;
+    }
+
+    .samedi-table input[type="text"] {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.95rem;
+    }
+
+    .samedi-table input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
     /* Calendrier */
     .calendar-controls {
       display: flex;
@@ -276,7 +383,7 @@
       color: var(--text-muted);
     }
 
-    /* WIDGET CHAT L'3ZIZ */
+    /* Widget L'3ZIZ */
     #lziz-widget {
       position: fixed;
       bottom: 20px;
@@ -392,6 +499,35 @@
       font-weight: 600;
       cursor: pointer;
     }
+
+    /* MedTrack Styles */
+    .medtrack-print { background: #fff; color: #233b63; padding: 4px 0 20px; font-family: Georgia, serif; }
+    .medtrack-title { margin: 0 0 14px; color: #233b63; font-size: 1.55rem; font-weight: 400; }
+    .medtrack-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin: 0 0 10px; font-size: .78rem; }
+    .legend-box { display: inline-block; width: 27px; height: 18px; border: 1px solid #aaa; vertical-align: middle; margin-right: 4px; }
+    .legend-box.holiday { background: #ed7d31; }
+    .legend-box.ramadan { background: #e8e3ef; }
+    .legend-box.weekend { background: #eeeeee; }
+    .legend-box.concours { background: #c90000; }
+    .medtrack-month { margin-bottom: 22px; border: 1px solid #d7e0ea; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 3px 12px rgba(15,23,42,0.06); }
+    .medtrack-month-header { background: #233b63; color: #fff; text-align: center; height: 25px; line-height: 25px; font-size: .92rem; }
+    .medtrack-grid { display: grid; grid-template-columns: 80px repeat(var(--days), minmax(24px, 1fr)); border-left: 1px solid #b9b9b9; border-top: 1px solid #b9b9b9; overflow-x: auto; }
+    .medtrack-cell { border-right: 1px solid #b9b9b9; border-bottom: 1px solid #b9b9b9; }
+    .medtrack-label { background: #dceaf7; color: #233b63; font-size: .75rem; display: flex; align-items: center; padding-left: 4px; }
+    .medtrack-day-cell { position: relative; min-width: 58px; padding: 6px 5px 5px; cursor: pointer; transition: background .12s; }
+    .medtrack-day-cell:hover { background: #f8fcff; }
+    .medtrack-day-cell.has-note::after { content: ""; position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: #10b981; }
+    .medtrack-day { font-weight: 800; font-size: 0.82rem; }
+    .medtrack-weekday { font-size: 0.67rem; color: #64748b; margin-top: 3px; }
+    .medtrack-day-hint { min-height: 24px; margin-top: 5px; font-size: 0.58rem; color: #475569; word-break: break-word; }
+    .calendar-help { margin: 0 0 16px; padding: 12px 15px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; color: #475569; font-size: .9rem; }
+    .melissa-encouragement { margin-top: 24px; padding: 22px 24px; border-radius: 16px; background: linear-gradient(135deg, #eff6ff, #ffffff); border: 1px solid #bfdbfe; text-align: center; }
+
+    /* Modales Calendrier */
+    .calendar-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(15,23,42,.62); backdrop-filter: blur(4px); }
+    .calendar-modal.open { display: flex; }
+    .calendar-modal-card { position: relative; width: min(620px, 100%); max-height: 90vh; overflow: auto; padding: 28px; border-radius: 18px; background: #fff; }
+    .calendar-modal-close { position: absolute; top: 12px; right: 15px; border: 0; background: transparent; color: #64748b; font-size: 30px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -402,7 +538,7 @@
       <p class="subtitle">Espace d'organisation et de révision sur-mesure</p>
     </header>
 
-    <!-- SECTION CITATIONS D'ENCOURAGEMENT -->
+    <!-- CITATION -->
     <div class="quote-card">
       <div class="quote-content">
         <span id="quote-text">« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »</span>
@@ -411,40 +547,33 @@
       <button class="btn-quote" onclick="generateNewQuote()">✨ Autre citation</button>
     </div>
 
-    <!-- Navigation avec les 3 Onglets -->
+    <!-- NAVIGATION -->
     <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchPage('modules')">📚 Suivi par Modules</button>
+      <button class="tab-btn" onclick="switchPage('samedi')">🩺 Samedi Pédagogique</button>
       <button class="tab-btn" onclick="switchPage('todo')">📝 To-Do List</button>
       <button class="tab-btn" onclick="switchPage('calendar')">📅 Planning Journalier</button>
+      <button class="tab-btn" onclick="switchPage('medtrack')">🗓️ Planning Annuel (MedTrack)</button>
     </nav>
 
-    <!-- PAGE 1 : SUIVI PAR MODULES -->
+    <!-- PAGE 1 : MODULES & RAPPELS -->
     <div id="page-modules" class="page active">
       <section class="dashboard-grid">
         <div class="dash-card">
           <h3>Progression Couche 1</h3>
           <div class="dash-value" id="c1-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c1-progress-bar"></div>
-          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c1-progress-bar"></div></div>
         </div>
-
         <div class="dash-card">
           <h3>Progression Couche 2</h3>
           <div class="dash-value" id="c2-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c2-progress-bar"></div>
-          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c2-progress-bar"></div></div>
         </div>
-
         <div class="dash-card">
           <h3>Progression Couche 3</h3>
           <div class="dash-value" id="c3-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c3-progress-bar"></div>
-          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c3-progress-bar"></div></div>
         </div>
-
         <div class="dash-card">
           <h3>Total QCMs Validés</h3>
           <div class="dash-value" id="qcm-progress-text">0/0</div>
@@ -471,6 +600,7 @@
               <th colspan="2" class="th-group">Couche 1 (C1)</th>
               <th colspan="2" class="th-group">Couche 2 (C2)</th>
               <th colspan="2" class="th-group">Couche 3 (C3)</th>
+              <th rowspan="2" class="th-group">Rappels QCM</th>
             </tr>
             <tr>
               <th class="th-group">Cours</th>
@@ -481,14 +611,55 @@
               <th>QCM</th>
             </tr>
           </thead>
-          <tbody id="course-table-body">
-            <!-- Injecté via JS -->
-          </tbody>
+          <tbody id="course-table-body"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- PAGE 2 : PAGE TO-DO LIST DÉDIÉE -->
+    <!-- PAGE 2 : SAMEDI PÉDAGOGIQUE -->
+    <div id="page-samedi" class="page">
+      <div class="samedi-container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div>
+            <h2 style="margin: 0; color: #0369a1;">Samedi pédagogique</h2>
+            <p style="color: var(--text-muted); margin: 4px 0 0 0; font-size: 0.9rem;">Suivi spécifique des séances du samedi</p>
+          </div>
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); border: 1px solid var(--primary); padding: 4px 8px; border-radius: 6px;">JUST DO IT</span>
+        </div>
+
+        <div class="table-container">
+          <table class="samedi-table">
+            <thead>
+              <tr>
+                <th class="col-cours">Cours</th>
+                <th>c1</th>
+                <th>c2</th>
+                <th>c3</th>
+                <th>Qcm</th>
+              </tr>
+            </thead>
+            <tbody id="samedi-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="samedi-header-inputs">
+          <div style="font-style: italic; color: #0369a1; font-weight: 600; font-size: 0.9rem;">
+            La discipline transforme les simples souhaits en réalité concrète.
+          </div>
+          <div>
+            <label for="samedi-end-date"><strong>Date de fin : </strong></label>
+            <input type="date" id="samedi-end-date" onchange="saveSamediData()">
+          </div>
+        </div>
+
+        <div>
+          <label for="samedi-notes" style="display: block; font-weight: 700; margin-bottom: 6px; color: var(--text-muted);">Notes & Remarques :</label>
+          <textarea id="samedi-notes" placeholder="Remarques spécifiques au Samedi Pédagogique..." style="width: 100%; height: 80px; border: 1px solid var(--border); border-radius: 8px; padding: 10px; box-sizing: border-box; font-family: inherit;" oninput="saveSamediData()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3 : TO-DO LIST -->
     <div id="page-todo" class="page">
       <h2>📝 Ma To-Do List d'étude</h2>
       <div class="dash-card" style="max-width: 800px; margin: 0 auto;">
@@ -498,13 +669,11 @@
                  onkeypress="if(event.key==='Enter') addTodo()">
           <button onclick="addTodo()" class="btn-add" style="font-size: 1rem;">Ajouter</button>
         </div>
-        <ul id="todo-page-list" class="task-list">
-          <!-- Injecté via JS -->
-        </ul>
+        <ul id="todo-page-list" class="task-list"></ul>
       </div>
     </div>
 
-    <!-- PAGE 3 : CALENDRIER ET PLANNING -->
+    <!-- PAGE 4 : PLANNING JOURNALIER -->
     <div id="page-calendar" class="page">
       <h2>📅 Planning de Révision Journalier</h2>
       <div class="calendar-controls">
@@ -512,71 +681,88 @@
         <input type="date" id="date-picker">
         <button class="btn-add" onclick="addCalendarDay()">+ Créer la journée</button>
       </div>
-
-      <div class="planner-grid" id="planner-grid">
-        <!-- Les cartes de journées s'afficheront ici -->
-      </div>
+      <div class="planner-grid" id="planner-grid"></div>
     </div>
 
+    <!-- PAGE 5 : MEDTRACK -->
+    <div id="page-medtrack" class="page">
+      <div class="medtrack-print">
+        <h2 class="medtrack-title">Planning de révision — Septembre 2026 → Octobre 2027</h2>
+        <div class="calendar-help">
+          <strong>Comment l’utiliser :</strong> clique sur n’importe quel jour pour écrire ton programme. Un point vert apparaît sur les jours déjà remplis.
+        </div>
+        <div class="medtrack-legend">
+          <span class="legend-title">Légende :</span>
+          <span><i class="legend-box holiday"></i> Jour férié officiel</span>
+          <span><i class="legend-box ramadan"></i> Ramadan (estimé)</span>
+          <span><i class="legend-box weekend"></i> Week-end (Ven/Sam)</span>
+          <span><i class="legend-box concours"></i> Mois du concours</span>
+        </div>
+        <div id="medtrack-calendar"></div>
+        <div class="melissa-encouragement">
+          <div style="font-weight: 800; color: #0369a1; font-size: 1.35rem;">Mélissa, un jour à la fois.</div>
+          <div style="color: #475569; margin-top: 8px;">Chaque case remplie est une petite victoire. Courage !</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- WIDGET FLOTTANT L'3ZIZ -->
+  <!-- MODALE PROGRAMMATION RAPPELS QCM SUR LE SITE -->
+  <div id="reminder-modal" class="reminder-modal">
+    <div class="reminder-card">
+      <h3 style="margin-top: 0; color: #0369a1;">🔔 Rappels QCM sur le site</h3>
+      <p id="modal-cours-title" style="font-weight: bold; color: #0f172a;"></p>
+
+      <label for="date-revision" style="display: block; font-size: 0.9rem; margin-top: 10px;">Date de première révision :</label>
+      <input type="date" id="date-revision" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-top: 4px;" onchange="calculateDates()">
+
+      <div class="reminder-dates">
+        <strong>📅 Planning enregistré sur le site :</strong>
+        <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
+          <li>Rappel J-3 : <span id="date-j3" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
+          <li>Rappel J-7 : <span id="date-j7" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
+          <li>Rappel J-30 : <span id="date-j30" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
+        </ul>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+        <button onclick="closeReminderModal()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Enregistrer et Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE MEDTRACK -->
+  <div id="day-editor-modal" class="calendar-modal">
+    <div class="calendar-modal-card">
+      <button class="calendar-modal-close" onclick="closeDayEditor()">×</button>
+      <h3 id="day-editor-title">Ma journée</h3>
+      <p id="day-editor-subtitle" style="color: var(--text-muted);"></p>
+      <textarea id="day-editor-textarea" style="width:100%; height:150px; border-radius:8px; padding:10px;" placeholder="Objectifs du jour..."></textarea>
+      <div style="display:flex; justify-content:space-between; margin-top:14px; gap:10px;">
+        <button onclick="deleteDayNote()" style="background:#f1f5f9; border:none; padding:10px; border-radius:8px; cursor:pointer;">Effacer</button>
+        <button onclick="saveDayNote()" style="background:#0284c7; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; margin-left:auto;">Enregistrer</button>
+      </div>
+      <div id="day-editor-saved" style="color:#059669; text-align:right; margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <!-- WIDGET CHAT L'3ZIZ -->
   <div id="lziz-widget">
     <button id="lziz-toggle-btn" onclick="toggleLzizChat()">🤖 L'3ZIZ AI</button>
-    
     <div id="lziz-chat-window" class="lziz-chat-hidden">
       <div class="lziz-chat-header">
         <span>🩺 L'3ZIZ — Coach Résidanat</span>
         <button onclick="toggleLzizChat()" class="lziz-close-btn">✕</button>
       </div>
-
       <div class="lziz-chat-body" id="lziz-messages">
-        <div class="lziz-msg lziz-bot">
-          Bonjour Mélissa ! Je suis <b>L'3ZIZ</b> 🩺. Pose-moi n'importe quelle question sur tes cours ou QCMs de résidanat !
-        </div>
+        <div class="lziz-msg lziz-bot">Bonjour Mélissa ! Je suis <b>L'3ZIZ</b> 🩺. Pose-moi tes questions !</div>
       </div>
       <div class="lziz-chat-footer">
-        <input type="text" id="lziz-user-input" placeholder="Pose ta question à L'3ZIZ..." onkeypress="handleLzizKeyPress(event)">
+        <input type="text" id="lziz-user-input" placeholder="Pose ta question..." onkeypress="handleLzizKeyPress(event)">
         <button onclick="sendToLziz()">Envoyer</button>
       </div>
     </div>
   </div>
-
-  <!-- SCRIPT LOGIQUE CITATIONS -->
-  <script>
-    const quotes = [
-      {
-        text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »",
-        author: "— Note de motivation"
-      },
-      {
-        text: "« Le succès au résidanat n'est pas une question de chance, c'est la somme de petites victoires quotidiennes. »",
-        author: "— Objectif Résidanat"
-      },
-      {
-        text: "« Là où le sort de l'humanité est en jeu, la connaissance est le plus grand des pouvoirs. »",
-        author: "— Louis Pasteur"
-      },
-      {
-        text: "« Chaque QCM résolu, chaque cours révisé te rapproche un peu plus de ton stéthoscope de résidente. »",
-        author: "— L'3ZIZ Coach"
-      },
-      {
-        text: "« La persévérance n'est pas une longue course ; c'est plusieurs petites courses les unes après les autres. »",
-        author: "— Walter Elliot"
-      },
-      {
-        text: "« Fais de ta passion pour la médecine ton plus grand moteur. Tu en es capable ! »",
-        author: "— Rappel du jour"
-      }
-    ];
-
-    function generateNewQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quote-text').innerText = quotes[randomIndex].text;
-      document.getElementById('quote-author').innerText = quotes[randomIndex].author;
-    }
-  </script>
 
   <script src="script.js"></script>
 </body>
