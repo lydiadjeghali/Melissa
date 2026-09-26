@@ -176,7 +176,7 @@ function updateDashboards() {
   if (qcmText) qcmText.textContent = `${qcmDone} / ${totalCourses * 3}`;
 }
 
-// --- LOGIQUE DE RAPPELS QCM (J-3, J-7, J-30) & ENVOI WHATSAPP ---
+// --- LOGIQUE DE RAPPELS QCM ---
 function openReminderModal(coursName) {
   currentCoursName = coursName;
   const titleEl = document.getElementById('modal-cours-title');
@@ -213,7 +213,6 @@ function calculateDates() {
 
   const formatIso = d => d.toISOString().split('T')[0];
 
-  // Enregistrement des dates dans le navigateur pour les alertes automatique du site
   qcmReminders[currentCoursName] = {
     j3: formatIso(dJ3),
     j7: formatIso(dJ7),
@@ -250,38 +249,6 @@ function updateReminderLinks(j3, j7, j30) {
   if (waLink) waLink.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
-function downloadICS() {
-  const inputDateVal = document.getElementById('date-revision')?.value;
-  if (!inputDateVal) return;
-
-  const baseDate = new Date(inputDateVal);
-  const intervals = [3, 7, 30];
-  let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Objectif Residanat//Rappels QCM//FR\n";
-
-  intervals.forEach(days => {
-    const eventDate = new Date(baseDate);
-    eventDate.setDate(baseDate.getDate() + days);
-    const dateStr = eventDate.toISOString().replace(/-|:|\.\d\d\d/g, "").substring(0, 8);
-
-    icsContent += `BEGIN:VEVENT\n`;
-    icsContent += `SUMMARY:QCM J-${days} : ${currentCoursName} 🩺\n`;
-    icsContent += `DESCRIPTION:Rappel pour refaire les QCM du cours ${currentCoursName} sur le site !\n`;
-    icsContent += `DTSTART;VALUE=DATE:${dateStr}\n`;
-    icsContent += `END:VEVENT\n`;
-  });
-
-  icsContent += "END:VCALENDAR";
-
-  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.setAttribute('download', `Rappels_QCM_${currentCoursName.replace(/\s+/g, '_')}.ics`);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Vérification au chargement du site : Affiche une pop-up si un QCM est dû aujourd'hui
 function checkDueReminders() {
   const todayIso = new Date().toISOString().split('T')[0];
   let dueList = [];
@@ -470,6 +437,192 @@ function renderTodos() {
   });
 }
 
+// ==========================================
+// === LOGIQUE DE RENDU MEDTRACK (ANNUEL) ===
+// ==========================================
+const medtrackMonths = [
+  {y:2026,m:8,name:'Septembre 2026',holiday:{}},
+  {y:2026,m:9,name:'Octobre 2026',holiday:{}},
+  {y:2026,m:10,name:'Novembre 2026',holiday:{1:'Fête de la Révolution'}},
+  {y:2026,m:11,name:'Décembre 2026',holiday:{}},
+  {y:2027,m:0,name:'Janvier 2027',holiday:{1:'Nouvel An',12:'Yennayer (Nouvel An amazigh)'}},
+  {y:2027,m:1,name:'Février 2027',holiday:{},ramadan:true},
+  {y:2027,m:2,name:'Mars 2027',holiday:{9:'Fin Ramadan (estimé)',10:'Aid El-Fitr (1er jour)',11:'Aid El-Fitr (2e jour)',12:'Aid El-Fitr (3e jour)'},ramadan:true},
+  {y:2027,m:3,name:'Avril 2027',holiday:{}},
+  {y:2027,m:4,name:'Mai 2027',holiday:{1:'Fête du Travail',17:'Aid El-Adha (1er jour)',18:'Aid El-Adha (2e jour)',19:'Aid El-Adha (3e jour)'}},
+  {y:2027,m:5,name:'Juin 2027',holiday:{6:'Nouvel An Hidjri',15:'Achoura'}},
+  {y:2027,m:6,name:'Juillet 2027',holiday:{5:'Fête de l’Indépendance'}},
+  {y:2027,m:7,name:'Août 2027',holiday:{15:'Mawlid Nabaoui'}},
+  {y:2027,m:8,name:'Septembre 2027',holiday:{}},
+  {y:2027,m:9,name:'Octobre 2027',holiday:{},concours:true}
+];
+
+const daysFr = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
+let activeDateKey = null;
+
+function medtrackKey(y,m,d) {
+  return `melissa-calendar-${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+function getDayNote(k) {
+  return localStorage.getItem(k) || '';
+}
+
+function renderMedTrack() {
+  const root = document.getElementById('medtrack-calendar');
+  if (!root) return;
+  root.innerHTML = '';
+
+  medtrackMonths.forEach(mon => {
+    const daysInMonth = new Date(mon.y, mon.m + 1, 0).getDate();
+    const wrap = document.createElement('section');
+    wrap.className = 'medtrack-month' + (mon.concours ? ' concours' : '');
+
+    const title = document.createElement('div');
+    title.className = 'medtrack-month-header';
+    title.textContent = mon.name;
+
+    if (mon.concours) {
+      title.title = 'Clique pour ouvrir le message de fin';
+      title.addEventListener('click', openFinalMonth);
+    }
+    wrap.appendChild(title);
+
+    const grid = document.createElement('div');
+    grid.className = 'medtrack-grid';
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      grid.appendChild(createMedtrackDayCell(mon, d));
+    }
+
+    wrap.appendChild(grid);
+    root.appendChild(wrap);
+  });
+}
+
+function createMedtrackDayCell(mon, d) {
+  const date = new Date(mon.y, mon.m, d);
+  const cell = document.createElement('div');
+  cell.className = 'medtrack-day-cell';
+
+  const isWeekend = date.getDay() === 5 || date.getDay() === 6;
+  const isHoliday = Object.prototype.hasOwnProperty.call(mon.holiday, d);
+
+  if (isWeekend) cell.classList.add('weekend');
+  if (isHoliday) cell.classList.add('holiday');
+  if (mon.ramadan && !isHoliday) cell.classList.add('ramadan');
+  if (mon.concours) cell.classList.add('concours-day');
+
+  const noteKey = medtrackKey(mon.y, mon.m, d);
+  const note = getDayNote(noteKey);
+  if (note.trim()) cell.classList.add('has-note');
+
+  const topRow = document.createElement('div');
+  topRow.className = 'medtrack-day-top';
+
+  const dayNum = document.createElement('span');
+  dayNum.className = 'medtrack-day';
+  dayNum.textContent = d;
+
+  const dayName = document.createElement('span');
+  dayName.className = 'medtrack-weekday';
+  dayName.textContent = daysFr[date.getDay()];
+
+  topRow.append(dayNum, dayName);
+
+  const hint = document.createElement('div');
+  hint.className = 'medtrack-day-hint' + (note.trim() ? '' : ' empty');
+  hint.textContent = note.trim() || 'cliquer pour écrire';
+
+  cell.append(topRow, hint);
+  cell.addEventListener('click', () => openDayEditor(mon.y, mon.m, d, mon.holiday[d] || ''));
+
+  return cell;
+}
+
+function openDayEditor(y, m, d, holiday) {
+  activeDateKey = medtrackKey(y, m, d);
+  const date = new Date(y, m, d);
+  const title = document.getElementById('day-editor-title');
+  const subtitle = document.getElementById('day-editor-subtitle');
+  const textarea = document.getElementById('day-editor-textarea');
+  const saved = document.getElementById('day-editor-saved');
+
+  if (title) title.textContent = `${d} ${date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}`;
+  if (subtitle) {
+    subtitle.textContent = holiday
+      ? `${daysFr[date.getDay()]} • ${holiday}`
+      : `${daysFr[date.getDay()]} • Ma journée de révision`;
+  }
+
+  if (textarea) textarea.value = getDayNote(activeDateKey);
+  if (saved) saved.textContent = '';
+
+  const modal = document.getElementById('day-editor-modal');
+  if (modal) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+  setTimeout(() => textarea?.focus(), 50);
+}
+
+window.closeDayEditor = function() {
+  const modal = document.getElementById('day-editor-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+  activeDateKey = null;
+};
+
+window.saveDayNote = function() {
+  if (!activeDateKey) return;
+  const textarea = document.getElementById('day-editor-textarea');
+  if (textarea) {
+    localStorage.setItem(activeDateKey, textarea.value);
+  }
+  const saved = document.getElementById('day-editor-saved');
+  if (saved) saved.textContent = '✓ Journée enregistrée';
+  renderMedTrack();
+  setTimeout(() => { if (saved) saved.textContent = ''; }, 1800);
+};
+
+window.deleteDayNote = function() {
+  if (!activeDateKey) return;
+  localStorage.removeItem(activeDateKey);
+  const textarea = document.getElementById('day-editor-textarea');
+  if (textarea) textarea.value = '';
+  const saved = document.getElementById('day-editor-saved');
+  if (saved) saved.textContent = 'Journée effacée';
+  renderMedTrack();
+};
+
+window.openFinalMonth = function() {
+  const modal = document.getElementById('final-month-modal');
+  if (modal) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+};
+
+window.closeFinalMonth = function() {
+  const modal = document.getElementById('final-month-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+};
+
+window.finalReady = function() {
+  const messages = [
+    'Alors, Mélissa… respire. Tu as travaillé pour ce moment. ✨',
+    'Dernier chapitre : confiance, concentration et une question à la fois. 🩺',
+    'Tout ce que tu as construit est encore avec toi. Maintenant, donne le meilleur de toi-même. ✨'
+  ];
+  const box = document.getElementById('final-ready-message');
+  if (box) box.textContent = messages[Math.floor(Math.random() * messages.length)];
+};
+
 // Logique Coach L'3ZIZ AI
 function toggleLzizChat() {
   const chatWindow = document.getElementById('lziz-chat-window');
@@ -533,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSamediTable();
   renderTodos();
   renderCalendar();
+  renderMedTrack();
   checkDueReminders();
 
   const datePicker = document.getElementById('date-picker');
