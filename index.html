@@ -78,7 +78,9 @@
       transition: background 0.2s;
     }
 
-    .btn-quote:hover { background: #0369a1; }
+    .btn-quote:hover {
+      background: #0369a1;
+    }
 
     /* Navigation */
     .nav-tabs {
@@ -216,7 +218,7 @@
       color: white;
     }
 
-    /* Modale de rappel */
+    /* Modale de rappel sur le site */
     .reminder-modal {
       position: fixed;
       inset: 0;
@@ -247,7 +249,7 @@
       font-size: 0.95rem;
     }
 
-    /* Samedi Pédagogique */
+    /* STYLES SPÉCIFIQUES SAMEDI PÉDAGOGIQUE */
     .samedi-container {
       background: white;
       border-radius: var(--radius);
@@ -304,12 +306,13 @@
       accent-color: var(--primary);
     }
 
-    /* Calendrier */
+    /* Planning Journalier */
     .calendar-controls {
       display: flex;
       gap: 12px;
       margin-bottom: 20px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .calendar-controls input[type="date"] {
@@ -331,7 +334,7 @@
 
     .planner-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
     }
 
@@ -339,43 +342,84 @@
       background: white;
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      padding: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-weight: 700;
       color: #0369a1;
-      margin-bottom: 12px;
       border-bottom: 1px solid #f1f5f9;
       padding-bottom: 8px;
+      margin: 0;
+    }
+
+    .day-progress-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .day-progress-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .task-input-group {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
     }
 
     .task-input-group input {
       flex: 1;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border: 1px solid var(--border);
       border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .task-input-group button {
+      padding: 8px 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .task-list {
       list-style: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .task-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed #f1f5f9;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      gap: 8px;
+    }
+
+    .task-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
     }
 
     .task-item.completed span {
@@ -383,7 +427,21 @@
       color: var(--text-muted);
     }
 
-    /* Widget L'3ZIZ */
+    .btn-delete-task {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-delete-task:hover {
+      background: #fee2e2;
+    }
+
+    /* WIDGET CHAT L'3ZIZ */
     #lziz-widget {
       position: fixed;
       bottom: 20px;
@@ -500,34 +558,401 @@
       cursor: pointer;
     }
 
-    /* MedTrack Styles */
-    .medtrack-print { background: #fff; color: #233b63; padding: 4px 0 20px; font-family: Georgia, serif; }
-    .medtrack-title { margin: 0 0 14px; color: #233b63; font-size: 1.55rem; font-weight: 400; }
-    .medtrack-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin: 0 0 10px; font-size: .78rem; }
-    .legend-box { display: inline-block; width: 27px; height: 18px; border: 1px solid #aaa; vertical-align: middle; margin-right: 4px; }
-    .legend-box.holiday { background: #ed7d31; }
-    .legend-box.ramadan { background: #e8e3ef; }
-    .legend-box.weekend { background: #eeeeee; }
-    .legend-box.concours { background: #c90000; }
-    .medtrack-month { margin-bottom: 22px; border: 1px solid #d7e0ea; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 3px 12px rgba(15,23,42,0.06); }
-    .medtrack-month-header { background: #233b63; color: #fff; text-align: center; height: 25px; line-height: 25px; font-size: .92rem; }
-    .medtrack-grid { display: grid; grid-template-columns: 80px repeat(var(--days), minmax(24px, 1fr)); border-left: 1px solid #b9b9b9; border-top: 1px solid #b9b9b9; overflow-x: auto; }
-    .medtrack-cell { border-right: 1px solid #b9b9b9; border-bottom: 1px solid #b9b9b9; }
-    .medtrack-label { background: #dceaf7; color: #233b63; font-size: .75rem; display: flex; align-items: center; padding-left: 4px; }
-    .medtrack-day-cell { position: relative; min-width: 58px; padding: 6px 5px 5px; cursor: pointer; transition: background .12s; }
-    .medtrack-day-cell:hover { background: #f8fcff; }
-    .medtrack-day-cell.has-note::after { content: ""; position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: #10b981; }
-    .medtrack-day { font-weight: 800; font-size: 0.82rem; }
-    .medtrack-weekday { font-size: 0.67rem; color: #64748b; margin-top: 3px; }
-    .medtrack-day-hint { min-height: 24px; margin-top: 5px; font-size: 0.58rem; color: #475569; word-break: break-word; }
-    .calendar-help { margin: 0 0 16px; padding: 12px 15px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; color: #475569; font-size: .9rem; }
-    .melissa-encouragement { margin-top: 24px; padding: 22px 24px; border-radius: 16px; background: linear-gradient(135deg, #eff6ff, #ffffff); border: 1px solid #bfdbfe; text-align: center; }
+    /* MEDTRACK — reproduction du planning PDF */
+    .medtrack-print {
+      background: #fff;
+      color: #233b63;
+      padding: 4px 0 20px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
 
-    /* Modales Calendrier */
-    .calendar-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(15,23,42,.62); backdrop-filter: blur(4px); }
+    .medtrack-title {
+      margin: 0 0 14px;
+      color: #233b63;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .medtrack-legend {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 0 0 16px;
+      font-size: .85rem;
+      color: #333;
+    }
+
+    .legend-title {
+      color: #233b63;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .legend-box {
+      display: inline-block;
+      width: 24px;
+      height: 16px;
+      border: 1px solid #aaa;
+      vertical-align: middle;
+      margin-right: 6px;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    .legend-box.holiday { background: #fed7aa; border-color: #f97316; }
+    .legend-box.ramadan { background: #e8e3ef; border-color: #a855f7; }
+    .legend-box.weekend { background: #f1f5f9; border-color: #cbd5e1; }
+    .legend-box.concours { background: #fecdd3; border-color: #e11d48; }
+
+    .medtrack-month {
+      margin-bottom: 22px;
+      border: 1px solid #d7e0ea;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    .medtrack-month-header {
+      padding: 10px;
+      text-align: center;
+      background: #233b63;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    .medtrack-month.concours {
+      border: 2px solid #ef4444;
+      box-shadow: 0 6px 22px rgba(239, 68, 68, 0.15);
+    }
+
+    .medtrack-month.concours .medtrack-month-header {
+      background: #c90000;
+      cursor: pointer;
+    }
+
+    .medtrack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1px;
+      background: #e2e8f0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .medtrack-day-cell {
+      position: relative;
+      background: #ffffff;
+      padding: 10px;
+      min-height: 80px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all .15s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .medtrack-day-cell:hover {
+      z-index: 2;
+      box-shadow: inset 0 0 0 2px var(--primary);
+      background: #f0f9ff;
+    }
+
+    .medtrack-day-cell.weekend { background: #f8fafc; }
+    .medtrack-day-cell.holiday { background: #fff7ed; }
+    .medtrack-day-cell.ramadan { background: #faf5ff; }
+    .medtrack-day-cell.concours-day { background: #fff1f2; }
+
+    .medtrack-day-cell.has-note::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 2px #fff;
+    }
+
+    .medtrack-day-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .medtrack-day {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .medtrack-weekday {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .medtrack-day-hint {
+      font-size: 0.75rem;
+      line-height: 1.3;
+      color: #334155;
+      word-break: break-word;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .medtrack-day-hint.empty {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .calendar-help {
+      margin: 0 0 16px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: .9rem;
+    }
+
+    .calendar-help strong { color: #0369a1; }
+
+    .melissa-encouragement {
+      margin-top: 24px;
+      padding: 22px 24px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #eff6ff, #ffffff);
+      border: 1px solid #bfdbfe;
+      text-align: center;
+    }
+
+    .melissa-encouragement-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+
+    .melissa-encouragement-text {
+      max-width: 780px;
+      margin: 0 auto;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .melissa-signature {
+      margin-top: 12px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    /* MODALES CALENDRIER MEDTRACK */
+    .calendar-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, .62);
+      backdrop-filter: blur(4px);
+    }
+
     .calendar-modal.open { display: flex; }
-    .calendar-modal-card { position: relative; width: min(620px, 100%); max-height: 90vh; overflow: auto; padding: 28px; border-radius: 18px; background: #fff; }
-    .calendar-modal-close { position: absolute; top: 12px; right: 15px; border: 0; background: transparent; color: #64748b; font-size: 30px; cursor: pointer; }
+
+    .calendar-modal-card {
+      position: relative;
+      width: min(620px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      box-sizing: border-box;
+      padding: 28px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 25px 70px rgba(15, 23, 42, .25);
+    }
+
+    .calendar-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-size: 30px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .calendar-modal-kicker {
+      color: #0284c7;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      margin-bottom: 7px;
+    }
+
+    .calendar-modal-card h3 {
+      margin: 0 35px 5px 0;
+      font-size: 1.45rem;
+      color: #0f172a;
+    }
+
+    .calendar-modal-subtitle {
+      color: #64748b;
+      margin: 0 0 18px;
+    }
+
+    .calendar-modal-card label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    #day-editor-textarea {
+      width: 100%;
+      min-height: 190px;
+      box-sizing: border-box;
+      resize: vertical;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 14px;
+      font: inherit;
+      line-height: 1.55;
+      outline: none;
+    }
+
+    #day-editor-textarea:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, .12);
+    }
+
+    .day-editor-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .day-editor-save,
+    .day-editor-delete,
+    .final-ready-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .day-editor-save {
+      background: #0284c7;
+      color: #fff;
+      margin-left: auto;
+    }
+
+    .day-editor-delete {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .day-editor-saved {
+      min-height: 20px;
+      margin-top: 9px;
+      color: #059669;
+      font-size: .85rem;
+      text-align: right;
+    }
+
+    .final-card {
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(145deg, #fff, #fff7ed);
+    }
+
+    .final-symbol {
+      font-size: 2rem;
+      color: #f59e0b;
+      margin-bottom: 5px;
+    }
+
+    .final-card h3 {
+      font-size: 1.8rem;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .final-message {
+      color: #475569;
+      line-height: 1.65;
+      max-width: 500px;
+      margin: 16px auto;
+    }
+
+    .final-quote {
+      margin: 18px auto;
+      padding: 15px 18px;
+      max-width: 480px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.8);
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .final-ready-btn {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    .final-ready-message {
+      min-height: 24px;
+      margin-top: 13px;
+      color: #059669;
+      font-weight: 800;
+    }
+
+    @media (max-width: 800px) {
+      .medtrack-grid {
+        grid-template-columns: 70px repeat(var(--days), 25px);
+      }
+      .medtrack-title { font-size: 1.2rem; }
+      .medtrack-legend { gap: 9px; }
+    }
+
+    @media print {
+      body {
+        background: #fff !important;
+        padding: 0;
+      }
+      .container {
+        max-width: none;
+      }
+      header, .quote-card, .nav-tabs, #lziz-widget {
+        display: none !important;
+      }
+      #page-medtrack {
+        display: block !important;
+      }
+      .medtrack-print {
+        padding: 0;
+      }
+      .medtrack-month {
+        break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
@@ -538,7 +963,7 @@
       <p class="subtitle">Espace d'organisation et de révision sur-mesure</p>
     </header>
 
-    <!-- CITATION -->
+    <!-- SECTION CITATIONS D'ENCOURAGEMENT -->
     <div class="quote-card">
       <div class="quote-content">
         <span id="quote-text">« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »</span>
@@ -547,7 +972,7 @@
       <button class="btn-quote" onclick="generateNewQuote()">✨ Autre citation</button>
     </div>
 
-    <!-- NAVIGATION -->
+    <!-- Navigation avec les Onglets -->
     <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchPage('modules')">📚 Suivi par Modules</button>
       <button class="tab-btn" onclick="switchPage('samedi')">🩺 Samedi Pédagogique</button>
@@ -556,23 +981,29 @@
       <button class="tab-btn" onclick="switchPage('medtrack')">🗓️ Planning Annuel (MedTrack)</button>
     </nav>
 
-    <!-- PAGE 1 : MODULES & RAPPELS -->
+    <!-- PAGE 1 : SUIVI PAR MODULES -->
     <div id="page-modules" class="page active">
       <section class="dashboard-grid">
         <div class="dash-card">
           <h3>Progression Couche 1</h3>
           <div class="dash-value" id="c1-progress-text">0%</div>
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c1-progress-bar"></div></div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="c1-progress-bar"></div>
+          </div>
         </div>
         <div class="dash-card">
           <h3>Progression Couche 2</h3>
           <div class="dash-value" id="c2-progress-text">0%</div>
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c2-progress-bar"></div></div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="c2-progress-bar"></div>
+          </div>
         </div>
         <div class="dash-card">
           <h3>Progression Couche 3</h3>
           <div class="dash-value" id="c3-progress-text">0%</div>
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="c3-progress-bar"></div></div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="c3-progress-bar"></div>
+          </div>
         </div>
         <div class="dash-card">
           <h3>Total QCMs Validés</h3>
@@ -611,7 +1042,9 @@
               <th>QCM</th>
             </tr>
           </thead>
-          <tbody id="course-table-body"></tbody>
+          <tbody id="course-table-body">
+            <!-- Injecté via JS -->
+          </tbody>
         </table>
       </div>
     </div>
@@ -638,13 +1071,15 @@
                 <th>Qcm</th>
               </tr>
             </thead>
-            <tbody id="samedi-table-body"></tbody>
+            <tbody id="samedi-table-body">
+              <!-- Injecté via JS -->
+            </tbody>
           </table>
         </div>
 
         <div class="samedi-header-inputs">
           <div style="font-style: italic; color: #0369a1; font-weight: 600; font-size: 0.9rem;">
-            La discipline transforme les simples souhaits en réalité concrète.
+           La discipline transforme les simples souhaits en réalité concrète.
           </div>
           <div>
             <label for="samedi-end-date"><strong>Date de fin : </strong></label>
@@ -669,28 +1104,39 @@
                  onkeypress="if(event.key==='Enter') addTodo()">
           <button onclick="addTodo()" class="btn-add" style="font-size: 1rem;">Ajouter</button>
         </div>
-        <ul id="todo-page-list" class="task-list"></ul>
+        <ul id="todo-page-list" class="task-list">
+          <!-- Injecté via JS -->
+        </ul>
       </div>
     </div>
 
     <!-- PAGE 4 : PLANNING JOURNALIER -->
     <div id="page-calendar" class="page">
       <h2>📅 Planning de Révision Journalier</h2>
+      <p style="color: var(--text-muted); margin-top: -8px; margin-bottom: 20px;">Organise tes objectifs jour par jour et suis ta progression quotidienne.</p>
+
       <div class="calendar-controls">
         <label for="date-picker"><strong>Ajouter une journée :</strong></label>
         <input type="date" id="date-picker">
         <button class="btn-add" onclick="addCalendarDay()">+ Créer la journée</button>
       </div>
-      <div class="planner-grid" id="planner-grid"></div>
+
+      <div class="planner-grid" id="planner-grid">
+        <!-- Cartes injectées via JS -->
+      </div>
     </div>
 
-    <!-- PAGE 5 : MEDTRACK -->
+    <!-- PAGE 5 : PLANNING ANNUEL MEDTRACK 2026-2027 -->
     <div id="page-medtrack" class="page">
       <div class="medtrack-print">
         <h2 class="medtrack-title">Planning de révision — Septembre 2026 → Octobre 2027</h2>
+
         <div class="calendar-help">
-          <strong>Comment l’utiliser :</strong> clique sur n’importe quel jour pour écrire ton programme. Un point vert apparaît sur les jours déjà remplis.
+          <strong>Comment l’utiliser :</strong> clique sur n’importe quel jour pour écrire ton programme,
+          tes objectifs, tes QCM ou tes notes. Un point vert apparaît sur les jours déjà remplis.
+          Tes notes sont conservées dans ton navigateur.
         </div>
+
         <div class="medtrack-legend">
           <span class="legend-title">Légende :</span>
           <span><i class="legend-box holiday"></i> Jour férié officiel</span>
@@ -698,10 +1144,19 @@
           <span><i class="legend-box weekend"></i> Week-end (Ven/Sam)</span>
           <span><i class="legend-box concours"></i> Mois du concours</span>
         </div>
-        <div id="medtrack-calendar"></div>
+
+        <div id="medtrack-calendar">
+          <!-- Injecté via JS -->
+        </div>
+
         <div class="melissa-encouragement">
-          <div style="font-weight: 800; color: #0369a1; font-size: 1.35rem;">Mélissa, un jour à la fois.</div>
-          <div style="color: #475569; margin-top: 8px;">Chaque case remplie est une petite victoire. Courage !</div>
+          <div class="melissa-encouragement-title">Mélissa, un jour à la fois.</div>
+          <div class="melissa-encouragement-text">
+            Chaque case remplie est une petite victoire. Chaque cours appris, chaque QCM travaillé
+            et chaque journée où tu continues te rapproche de ton objectif.
+            <strong>Tu n’as pas besoin d’être parfaite, tu as juste besoin de continuer.</strong>
+          </div>
+          <div class="melissa-signature">Ton futur toi sera fière de la Mélissa d’aujourd’hui.</div>
         </div>
       </div>
     </div>
@@ -731,22 +1186,47 @@
     </div>
   </div>
 
-  <!-- MODALE MEDTRACK -->
-  <div id="day-editor-modal" class="calendar-modal">
+  <!-- MODALE : ÉCRIRE POUR UN JOUR -->
+  <div id="day-editor-modal" class="calendar-modal" aria-hidden="true">
     <div class="calendar-modal-card">
-      <button class="calendar-modal-close" onclick="closeDayEditor()">×</button>
+      <button class="calendar-modal-close" onclick="closeDayEditor()" aria-label="Fermer">×</button>
+      <div class="calendar-modal-kicker">JOURNÉE DE RÉVISION</div>
       <h3 id="day-editor-title">Ma journée</h3>
-      <p id="day-editor-subtitle" style="color: var(--text-muted);"></p>
-      <textarea id="day-editor-textarea" style="width:100%; height:150px; border-radius:8px; padding:10px;" placeholder="Objectifs du jour..."></textarea>
-      <div style="display:flex; justify-content:space-between; margin-top:14px; gap:10px;">
-        <button onclick="deleteDayNote()" style="background:#f1f5f9; border:none; padding:10px; border-radius:8px; cursor:pointer;">Effacer</button>
-        <button onclick="saveDayNote()" style="background:#0284c7; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; margin-left:auto;">Enregistrer</button>
+      <p id="day-editor-subtitle" class="calendar-modal-subtitle"></p>
+
+      <label for="day-editor-textarea">Ce que je veux faire / retenir aujourd’hui</label>
+      <textarea id="day-editor-textarea"
+        placeholder="Ex. : Cardiologie — 2 chapitres + 40 QCM&#10;À revoir : insuffisance cardiaque&#10;Objectif : 3 h de révision"></textarea>
+
+      <div class="day-editor-actions">
+        <button class="day-editor-delete" onclick="deleteDayNote()">Effacer</button>
+        <button class="day-editor-save" onclick="saveDayNote()">Enregistrer</button>
       </div>
-      <div id="day-editor-saved" style="color:#059669; text-align:right; margin-top:6px;"></div>
+      <div id="day-editor-saved" class="day-editor-saved"></div>
     </div>
   </div>
 
-  <!-- WIDGET CHAT L'3ZIZ -->
+  <!-- MODALE : OCTOBRE 2027 / DERNIER CHAPITRE -->
+  <div id="final-month-modal" class="calendar-modal final-modal" aria-hidden="true">
+    <div class="calendar-modal-card final-card">
+      <button class="calendar-modal-close" onclick="closeFinalMonth()" aria-label="Fermer">×</button>
+      <div class="final-symbol">✦</div>
+      <div class="calendar-modal-kicker">OCTOBRE 2027</div>
+      <h3>Le dernier chapitre commence ici.</h3>
+      <p class="final-message">
+        Mélissa, tu es arrivée jusqu’à cette case après des mois de travail.
+        Tout ce que tu auras écrit dans ce calendrier représente des journées où tu as choisi
+        de croire en ton objectif.
+      </p>
+      <div class="final-quote" id="final-quote">
+        « Tu n’es pas arrivée jusqu’ici par hasard. Tu as construit ce moment, jour après jour. »
+      </div>
+      <button class="final-ready-btn" onclick="finalReady()">Je suis prête pour le dernier chapitre ✨</button>
+      <div id="final-ready-message" class="final-ready-message"></div>
+    </div>
+  </div>
+
+  <!-- WIDGET FLOTTANT L'3ZIZ -->
   <div id="lziz-widget">
     <button id="lziz-toggle-btn" onclick="toggleLzizChat()">🤖 L'3ZIZ AI</button>
     <div id="lziz-chat-window" class="lziz-chat-hidden">
@@ -754,16 +1234,20 @@
         <span>🩺 L'3ZIZ — Coach Résidanat</span>
         <button onclick="toggleLzizChat()" class="lziz-close-btn">✕</button>
       </div>
+
       <div class="lziz-chat-body" id="lziz-messages">
-        <div class="lziz-msg lziz-bot">Bonjour Mélissa ! Je suis <b>L'3ZIZ</b> 🩺. Pose-moi tes questions !</div>
+        <div class="lziz-msg lziz-bot">
+          Bonjour Mélissa ! Je suis <b>L'3ZIZ</b> 🩺. Pose-moi n'importe quelle question sur tes cours ou QCMs de résidanat !
+        </div>
       </div>
       <div class="lziz-chat-footer">
-        <input type="text" id="lziz-user-input" placeholder="Pose ta question..." onkeypress="handleLzizKeyPress(event)">
+        <input type="text" id="lziz-user-input" placeholder="Pose ta question à L'3ZIZ..." onkeypress="handleLzizKeyPress(event)">
         <button onclick="sendToLziz()">Envoyer</button>
       </div>
     </div>
   </div>
 
+  <!-- CHARGEMENT UNIQUE DU JAVASCRIPT EXTERNE -->
   <script src="script.js"></script>
 </body>
 </html>
