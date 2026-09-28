@@ -5,6 +5,190 @@ const DEFAULT_PHONE_MELISSA = "213555174313";
 
 // Modules & cours
 const modulesData = {
+  pharmaco: [
+    { id: 'ph1', title: 'Pharmaco Cours / Sucre C2' },
+    { id: 'ph2', title: 'GPK' },
+    { id: 'ph3', title: 'GCM G' },
+    { id: 'ph4', title: 'Mub' },
+    { id: 'ph5', title: 'Estrenat' }
+  ],
+  biochimie: [
+    { id: 'b1', title: 'Lespectfundum' },
+    { id: 'b2', title: 'ACP' }
+  ],
+  anapath_acp: [
+    { id: 'acp1', title: 'Toutes altérations' },
+    { id: 'acp2', title: 'Pattern' },
+    { id: 'acp3', title: '11ης θετική' },
+    { id: 'acp4', title: 'Progr' },
+    { id: 'acp5', title: 'Tumeurs bénignes & malignes' },
+    { id: 'acp6', title: 'Tous épithéliums / Tumeurs' }
+  ],
+  embryo: [
+    { id: 'em1', title: "Symbole de l'acte" },
+    { id: 'em2', title: 'CROUCHE' },
+    { id: 'em3', title: '1PY (OTHMANE Ex / Manda)' },
+    { id: 'em4', title: 'PY CHER' },
+    { id: 'em5', title: 'PY CHERIFT REN' },
+    { id: 'em6', title: 'PDJOGHLAFSP' },
+    { id: 'em7', title: 'LOR' }
+  ],
+  cytologie: [
+    { id: 'cy1', title: 'Organisation générale de la cellule' },
+    { id: 'cy2', title: "Méthodes d'étude de la cellule" },
+    { id: 'cy3', title: 'Membrane plasmique (MP)' },
+    { id: 'cy4', title: 'Spécialisations morphologiques (Différenciations membranaires)' },
+    { id: 'cy5', title: "Molécules d'adhérence (Adhésivité cellulaire) / Transport membranaire" },
+    { id: 'cy6', title: 'Communication intercellulaire' },
+    { id: 'cy7', title: 'Hyaloplasme & Cytosquelette' },
+    { id: 'cy8', title: 'Système endomembranaire SEM (RE, Lysosome, Golgi)' },
+    { id: 'cy9', title: 'Mitochondrie' },
+    { id: 'cy10', title: 'Noyau interphasique & Cycle cellulaire' }
+  ],
+  histologie: [
+    { id: 'h1', title: 'ATR' },
+    { id: 'h2', title: 'Vazcam Bat' },
+    { id: 'h3', title: 'Pogled' }
+  ],
+  microbio_dermato_parasito: [
+    { id: 'mdp1', title: 'Constantes' },
+    { id: 'mdp2', title: 'CAT œdème (TD)' },
+    { id: 'mdp3', title: 'Mycoses' },
+    { id: 'mdp4', title: 'CAT (TD)' },
+    { id: 'mdp5', title: 'CAT purpura (TD)' }
+  ],
+  physiologie: [
+    { id: 'phy1', title: 'Généralités sur la physiologie' },
+    { id: 'phy2', title: 'Dérivés sur la pesse / Physiologie' },
+    { id: 'phy3', title: 'Din' },
+    { id: 'phy4', title: 'Principe du système hormonal / nerveux' },
+    { id: 'phy5', title: 'Conduite endothéliale' },
+    { id: 'phy6', title: 'TD' }
+  ],
+  gastro: [
+    { id: 'g1', title: 'Pathologie digestive' },
+    { id: 'g2', title: 'Conduite à tenir (CAT)' },
+    { id: 'g3', title: 'Syndrome du...' },
+    { id: 'g4', title: 'Va' },
+    { id: 'g5', title: 'SAPL' }
+  ],
+  ortho_mpr: [
+    { id: 'o1', title: 'Généralités sur fractures (TD: Appareils plâtrés)' },
+    { id: 'o2', title: "Traumatismes de l'épaule" },
+    { id: 'o3', title: 'Fractures de lhumérus supérieur'},
+    { id: 'o4', title: 'Fractures de lhumérus' },
+    { id: 'o5', title: 'Traumatismes du coude' },
+    { id: 'o6', title: 'Fractures diaphysaires des 2 os du bras' },
+    { id: 'o7', title: 'Fractures du fémur' },
+    { id: 'o8', title: 'Luxations de la hanche' },
+    { id: 'o9', title: "Lésions de la hanche chez l'enfant" },
+    { id: 'o10', title: 'Tumeurs osseuses & Lésions musculaires' },
+    { id: 'o11', title: 'Fractures de la rotule' },
+    { id: 'o12', title: 'Entorses / Fonctions' },
+    { id: 'o13', title: 'Fractures de la jambe' },
+    { id: 'o14', title: 'Fractures malléolaires' },
+    { id: 'o15', title: 'Fractures du pied' },
+    { id: 'o16', title: 'Malformations / Affections du Pied / Rachis' },
+    { id: 'o17', title: 'CAT devant entorse de la cheville (TD)' },
+    { id: 'o18', title: 'CAT Polytrauma (TD)' },
+    { id: 'o19', title: 'Fractures du rachis' },
+    { id: 'o20', title: 'Traumatisme Thoraco-abdominal' },
+    { id: 'o21', title: 'Ostéomyélite aiguë hématogène (OAH)' },
+    { id: 'o22', title: 'Tuberculose ostéo-articulaire & Mal de Pott' },
+    { id: 'o23', title: 'Fractures de la main (TD: CAT devant une plaie de la main)' },
+    { id: 'o24', title: 'Les tumeurs osseuses' },
+    { id: 'o25', title: 'MPR et handicap (Introduction à la MPR)' },
+    { id: 'o26', title: 'Complications du décubitus' },
+    { id: 'o27', title: 'Lésions nerveuses périphériques (LNP)' },
+    { id: 'o28', title: 'Paraplégie & Tétraplégie' },
+    { id: 'o29', title: 'Déviations rachidiennes' },
+    { id: 'o30', title: 'Amputations & Appareillage' }
+  ],
+  pediatrie: [
+    { id: 'pd1', title: 'Développement psychomoteur (DPM)' },
+    { id: 'pd2', title: "Urgence chirurgicale du nouveau-né" },
+    { id: 'pd3', title: 'Urgences chirurgicales abdominales de lenfant' },
+    { id: 'pd4', title: 'Déshydratation aiguë (DHA)' },
+    { id: 'pd5', title: 'Convulsions' },
+    { id: 'pd6', title: 'Anémies du nouveau-né / Anémies carentielles' },
+    { id: 'pd7', title: 'Anémies hémolytiques' },
+    { id: 'pd8', title: 'Bronchopneumonies virales' },
+    { id: 'pd9', title: 'Bronchopneumonies bactériennes' },
+    { id: 'pd10', title: 'Asthme' },
+    { id: 'pd11', title: 'Rhumatisme articulaire aigu (RAA)' },
+    { id: 'pd12', title: 'Insuffisance cardiaque (IC)' },
+    { id: 'pd13', title: 'Syndrome néphrotique (SN)' },
+    { id: 'pd14', title: 'Glomérulonéphrite aiguë (GNA) post-infectieuse' },
+    { id: 'pd15', title: 'Vomissements (VMS) & RGO' },
+    { id: 'pd16', title: 'Diarrhées aiguës (DA)' },
+    { id: 'pd17', title: 'Diarrhées chroniques (DC)' },
+    { id: 'pd18', title: 'Tumeurs malignes abdominales' },
+    { id: 'pd19', title: 'Diabète' },
+    { id: 'pd20', title: 'Dysthyroïdie (Hypothyroïdie & Hyperthyroïdie)' },
+    { id: 'pd21', title: "Obésité de l'enfant" },
+    { id: 'pd22', title: 'Méningites & Méningo-encéphalites' },
+    { id: 'pd23', title: "Infections sévères chez l'enfant" },
+    { id: 'pd24', title: "Tuberculose chez l'enfant" },
+    { id: 'pd25', title: 'Vaccinations' },
+    { id: 'pd26', title: 'Arthrite juvénile idiopathique (AJI)' },
+    { id: 'pd27', title: 'Dermatoses' },
+    { id: 'pd28', title: 'Malnutrition protéino-énergétique (MPE)' },
+    { id: 'pd29', title: 'Rachitisme' },
+    { id: 'pd30', title: 'Accidents médicamenteux' }
+  ],
+  endocrino: [
+    { id: 'e1', title: 'Hypothyroïdie & Thyroïdite' },
+    { id: 'e2', title: 'Troubles dus à la carence iodée (TDCI)' },
+    { id: 'e3', title: 'Cancer de la thyroïde' },
+    { id: 'e4', title: 'Hypoparathyroïdie' },
+    { id: 'e5', title: 'Hyperparathyroïdie' },
+    { id: 'e6', title: 'Diabète insipide' },
+    { id: 'e7', title: 'Insuffisance antéhypophysaire (DAI)' },
+    { id: 'e8', title: 'HTA endocrinienne' },
+    { id: 'e9', title: 'Insuffisance surrénalienne (IS)' },
+    { id: 'e10', title: 'Hypogonadismes' },
+    { id: 'e11', title: 'Hirsutisme & Hyperandrogénies' },
+    { id: 'e12', title: 'Définition & Classification du Diabète (2010 ADA)' },
+    { id: 'e13', title: 'Urgences métaboliques du diabète' },
+    { id: 'e14', title: 'Complications dégénératives du diabète sucré' },
+    { id: 'e15', title: 'Prévention du diabète sucré' },
+    { id: 'e16', title: 'Diététique du diabète sucré' },
+    { id: 'e17', title: 'Traitement oral du diabète sucré' },
+    { id: 'e18', title: 'Insulines & Insulinothérapie' },
+    { id: 'e19', title: 'Obésité' },
+    { id: 'e20', title: 'Dyslipidémies (Hyperprotéinémies)' }
+  ],
+  pneumo: [
+    { id: 'p1', title: 'Infections respiratoires aiguës (bronchite, PFLA)' },
+    { id: 'p2', title: 'Dilatation des bronches' },
+    { id: 'p3', title: 'Grippe et virus' },
+    { id: 'p4', title: 'Tabagisme' },
+    { id: 'p5', title: 'Pollution' },
+    { id: 'p6', title: 'Abcès pulmonaire' },
+    { id: 'p7', title: 'Staphylococcie pleuropulmonaire' },
+    { id: 'p8', title: 'Pleurésie purulente' },
+    { id: 'p9', title: 'Primo-infection tuberculose' },
+    { id: 'p10', title: 'Tuberculose pulmonaire' },
+    { id: 'p11', title: 'Tuberculose extrapulmonaire' },
+    { id: 'p12', title: 'Traitement anti-tuberculeux' },
+    { id: 'p13', title: 'Le programme national de lutte anti-tuberculeuse' },
+    { id: 'p14', title: 'BPCO stable' },
+    { id: 'p15', title: 'Insuffisance respiratoire aiguë et chronique' },
+    { id: 'p16', title: 'Emphysème' },
+    { id: 'p17', title: 'BPCO en exacerbation' },
+    { id: 'p18', title: 'Exploration fonctionnelle respiratoire (EFR)' },
+    { id: 'p19', title: 'Asthme bronchique' },
+    { id: 'p20', title: "Exacerbation d'asthme bronchique" },
+    { id: 'p21', title: 'PNO spontané (Pneumothorax)' },
+    { id: 'p22', title: 'Sarcoïdose' },
+    { id: 'p23', title: 'Pneumoconioses / Kystes bronchiques' },
+    { id: 'p24', title: 'ADP et tumeurs médiastinales' },
+    { id: 'p25', title: 'Kyste hydatique' },
+    { id: 'p26', title: "Syndrome d'apnée du sommeil" },
+    { id: 'p27', title: 'Les urgences en pneumologie' },
+    { id: 'p28', title: 'CAT devant un épanchement pleural / CAT détresse respiratoire' },
+    { id: 'p29', title: 'CAT hémoptysie' }
+  ],
   cardio: [
     { id: 'c1', title: 'Rhumatisme articulaire aigu (RAA)' },
     { id: 'c2', title: 'Insuffisance mitrale' },
@@ -12,47 +196,110 @@ const modulesData = {
     { id: 'c4', title: 'Insuffisance aortique' },
     { id: 'c5', title: 'Rétrécissement aortique' },
     { id: 'c6', title: 'Péricardite' },
-    { id: 'c7', title: 'Insuffisance cardiaque' },
-    { id: 'c8', title: 'Hypertension artérielle (HTA)' },
-    { id: 'c9', title: 'Syndromes coronariens aigus (SCA)' },
-    { id: 'c10', title: 'Thrombose veineuse profonde & Embolie pulmonaire' }
-  ],
-  pneumo: [
-    { id: 'p1', title: 'Infections respiratoires aiguës' },
-    { id: 'p2', title: 'Dilatation des bronches' },
-    { id: 'p3', title: 'Tuberculose pulmonaire' },
-    { id: 'p4', title: 'BPCO' },
-    { id: 'p5', title: 'Asthme bronchique' },
-    { id: 'p6', title: 'Pneumothorax spontané (PNO)' }
-  ],
-  pediatrie: [
-    { id: 'pd1', title: 'Développement psychomoteur (DPM)' },
-    { id: 'pd2', title: 'Déshydratation aiguë (DHA)' },
-    { id: 'pd3', title: 'Bronchopneumonies' },
-    { id: 'pd4', title: 'Rachitisme' },
-    { id: 'pd5', title: 'Meningites chez l’enfant' }
-  ],
-  gastro: [
-    { id: 'g1', title: 'Hémorragies digestives' },
-    { id: 'g2', title: 'Cirrhose et ses complications' },
-    { id: 'g3', title: 'Maladies Inflammatoires Chroniques (MICI)' },
-    { id: 'g4', title: 'Ulcérations gastroduodénales' }
+    { id: 'c7', title: 'Troubles du rythme' },
+    { id: 'c8', title: 'Cardiomyopathies' },
+    { id: 'c9', title: 'Insuffisance cardiaque' },
+    { id: 'c10', title: 'Hypertension artérielle (HTA)' },
+    { id: 'c11', title: 'Syndromes coronariens aigus (SCA)' },
+    { id: 'c12', title: 'Angor stable / SCAST-' },
+    { id: 'c13', title: 'Cardiopathie ischémique SCAST+' },
+    { id: 'c14', title: 'Artériopathie oblitérante des membres inférieurs (AOMI)' },
+    { id: 'c15', title: 'Thrombose veineuse profonde - Embolie pulmonaire' },
+    { id: 'c16', title: 'Cardiopathies congénitales' },
+    { id: 'c17', title: 'Électrocardiogramme normal' },
+    { id: 'c18', title: 'Troubles de la conduction' },
+    { id: 'c19', title: 'Hypertrophies électriques' },
+    { id: 'c20', title: 'Facteurs de risque cardiovasculaires' },
+    { id: 'c21', title: "Surveillance d'un opéré du cœur" },
+    { id: 'c22', title: 'Choc cardiogénique' },
+    { id: 'c23', title: 'Cœur pulmonaire chronique' },
+    { id: 'c24', title: 'Conduite à tenir devant une embolie pulmonaire' },
+    { id: 'c25', title: 'Conduite à tenir devant un arrêt cardio-respiratoire' },
+    { id: 'c26', title: 'Conduite à tenir devant une poussée hypertensive' },
+    { id: 'c27', title: 'Diurétiques' },
+    { id: 'c28', title: 'Vasodilatateurs' }
   ],
   infectieuse: [
-    { id: 'i1', title: 'Méningites purulentes' },
-    { id: 'i2', title: 'Infections à Staphylocoque' },
-    { id: 'i3', title: 'Fièvre typhoïde' },
-    { id: 'i4', title: 'Paludisme' },
-    { id: 'i5', title: 'VIH / SIDA' }
+    { id: 'i1', title: 'Méningites purulentes (Infections à Méningocoque & Pneumocoque)' },
+    { id: 'i2', title: 'Méningites à liquide clair' },
+    { id: 'i3', title: 'Infections à Staphylocoque' },
+    { id: 'i4', title: 'Infections à Streptocoque & Dermohypodermites' },
+    { id: 'i5', title: 'Diphtérie (CAT devant une angine)' },
+    { id: 'i6', title: 'Fièvre typhoïde (FT)' },
+    { id: 'i7', title: 'Sepsis à BGN & Choc septique' },
+    { id: 'i8', title: 'Choléra' },
+    { id: 'i9', title: 'Diarrhées aiguës infectieuses & TIAC' },
+    { id: 'i10', title: 'Varicelle, Zona & Mononucléose infectieuse (MNI)' },
+    { id: 'i11', title: 'Rage' },
+    { id: 'i12', title: 'Leptospirose ictéro-hémorragique (LIH)' },
+    { id: 'i13', title: 'Brucellose' },
+    { id: 'i14', title: 'Fièvre boutonneuse méditerranéenne (FBM)' },
+    { id: 'i15', title: 'Paludisme' },
+    { id: 'i16', title: 'Toxoplasmose' },
+    { id: 'i17', title: 'VIH / SIDA' },
+    { id: 'i18', title: 'Morsures & Griffures' },
+    { id: 'i19', title: 'CAT devant une Coqueluche (TD)' },
+    { id: 'i20', title: 'CAT devant un Accident exposant au sang (AES)' },
+    { id: 'i21', title: 'Antibiotiques (ATB) (TD)' },
+    { id: 'i22', title: 'CAT devant une Fièvre (TD)' },
+    { id: 'i23', title: 'CAT devant un Syndrome méningé et encéphalique (TD)' },
+    { id: 'i24', title: 'CAT devant les États septiques (TD)' },
+    { id: 'i25', title: 'CAT devant une Éruption fébrile (Exanthème / Purpura) (TD)' },
+    { id: 'i26', title: 'CAT devant une adénopathie infectieuse (TD)' },
+    { id: 'i27', title: 'Herpès' },
+    { id: 'i28', title: 'Rougeole' },
+    { id: 'i29', title: 'Fièvre typhoïde' },
+    { id: 'i30', title: 'Poliomyélite' }
   ],
-  ortho: [
-    { id: 'o1', title: 'Généralités sur les fractures' },
-    { id: 'o2', title: 'Traumatismes de l’épaule' },
-    { id: 'o3', title: 'Fractures du fémur' },
-    { id: 'o4', title: 'Osteomyélite aiguë hématogène' }
+  uro_nephro: [
+    { id: 'un1', title: 'Compilation / Anurie' },
+    { id: 'un2', title: 'Hypertrophie bénigne de la prostate (HBP) (TD: Sondage/Rétention)' },
+    { id: 'un3', title: 'Vésical: CAT devant une Anurie' },
+    { id: 'un4', title: 'ANAPATH URO / Cytologie' }
+  ],
+  ophtalmo_orl: [
+    { id: 'oorl1', title: 'Pathologies en milieu marin' },
+    { id: 'oorl2', title: 'Troubles auditifs (surdité)' },
+    { id: 'oorl3', title: 'Otites moyennes chroniques (OMC) et complications' },
+    { id: 'oorl4', title: 'Diagnostic des vertiges (TD: Examen dun patient vertigineux)' },
+    { id: 'oorl5', title: 'Cancers des VADS (Nasopharynx, Langue, Larynx...)' },
+    { id: 'oorl6', title: 'Cancer du cavum' },
+    { id: 'oorl7', title: 'Diagnostic des adénopathies / masses cervicales' },
+    { id: 'oorl8', title: 'Diagnostic des tumeurs cutanées' },
+    { id: 'oorl9', title: 'Angines et amygdalites' },
+    { id: 'oorl10', title: 'Affections du larynx / dysphonies' },
+    { id: 'oorl11', title: 'Tumeurs du rhinopharynx de ladulte et de lenfant' },
+    { id: 'oorl12', title: 'Sinusite de ladulte et de lenfant infectieuse' },
+    { id: 'oorl13', title: 'Infections Larynx & Pharynx (TD)' },
+    { id: 'oorl14', title: 'Explorations fonctionnelles en ORL (TD)' },
+    { id: 'oorl15', title: 'CAT devant une épistaxis (TD)' },
+    { id: 'oorl16', title: 'Dyspnée laryngée / Stridor (TD)' },
+    { id: 'oorl17', title: 'Corps étranger en ORL (TD) / Trachéotomie (TD)' },
+    { id: 'oorl18', title: 'CAT devant une paralysie faciale' },
+    { id: 'oorl19', title: 'Aspects endoscopiques en Rhinologie (TD)' },
+    { id: 'oorl20', title: 'Aspects endoscopiques en Otologie (TD)' },
+    { id: 'oorl21', title: 'Aspect normal (TD)' }
+  ],
+  epidemiologie: [
+    { id: 'ep1', title: 'Cours Épidémiologie' }
+  ],
+  medecine_travail: [
+    { id: 'mt1', title: 'Cours Médecine du Travail' }
+  ],
+  psychiatrie: [
+    { id: 'psy1', title: 'Généralités et sémiologie psychiatrique' },
+    { id: 'psy2', title: "CAT devant un état d'agitation / Urgences" },
+    { id: 'psy3', title: 'Trouble psychotique' },
+    { id: 'psy4', title: 'Schizophrénie' },
+    { id: 'psy5', title: 'Addictions / Alcoologie (TD)' },
+    { id: 'psy6', title: 'Thymie / Troubles thymiques' },
+    { id: 'psy7', title: 'Traitement psychotropes / Neuroleptiques' },
+    { id: 'psy8', title: 'Troubles anxieux / TOC' },
+    { id: 'psy9', title: 'Conduites suicidaires' },
+    { id: 'psy10', title: 'Perturbations et leurs troubles / Confusions' },
+    { id: 'psy11', title: 'Trouble dysfonctionnel / Personnalité' }
   ]
 };
-
 // Citations d'encouragement
 const quotes = [
   { text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »", author: "— Note de motivation" },
@@ -201,37 +448,37 @@ function closeReminderModal() {
   if (modal) modal.classList.remove('open');
 }
 
+
 function calculateDates() {
   const inputDateVal = document.getElementById('date-revision')?.value;
   if (!inputDateVal) return;
 
   const baseDate = new Date(inputDateVal);
 
-  const dJ3 = new Date(baseDate); dJ3.setDate(baseDate.getDate() + 3);
-  const dJ7 = new Date(baseDate); dJ7.setDate(baseDate.getDate() + 7);
-  const dJ30 = new Date(baseDate); dJ30.setDate(baseDate.getDate() + 30);
+  const dJ8 = new Date(baseDate);
+  dJ8.setDate(baseDate.getDate() + 8);
+
+  const dJ30 = new Date(baseDate);
+  dJ30.setDate(baseDate.getDate() + 30);
 
   const formatIso = d => d.toISOString().split('T')[0];
 
   qcmReminders[currentCoursName] = {
-    j3: formatIso(dJ3),
-    j7: formatIso(dJ7),
+    j8: formatIso(dJ8),
     j30: formatIso(dJ30)
   };
   localStorage.setItem('melissa_qcm_reminders', JSON.stringify(qcmReminders));
 
-  const j3El = document.getElementById('date-j3');
-  const j7El = document.getElementById('date-j7');
+  const j8El = document.getElementById('date-j8');
   const j30El = document.getElementById('date-j30');
 
-  if (j3El) j3El.innerText = dJ3.toLocaleDateString('fr-FR');
-  if (j7El) j7El.innerText = dJ7.toLocaleDateString('fr-FR');
+  if (j8El) j8El.innerText = dJ8.toLocaleDateString('fr-FR');
   if (j30El) j30El.innerText = dJ30.toLocaleDateString('fr-FR');
 
-  updateReminderLinks(dJ3, dJ7, dJ30);
+  updateReminderLinks(dJ8, dJ30);
 }
 
-function updateReminderLinks(j3, j7, j30) {
+function updateReminderLinks(dJ8, dJ30) {
   let phone = document.getElementById('user-phone')?.value || DEFAULT_PHONE_MELISSA;
   phone = phone.replace(/[^0-9]/g, '');
   if (phone.startsWith('0')) {
@@ -240,7 +487,7 @@ function updateReminderLinks(j3, j7, j30) {
     phone = '213' + phone;
   }
 
-  const message = `Rappel QCM Résidanat pour Mélissa 🩺\n- Cours : ${currentCoursName}\nN'oublie pas de refaire les QCM sur le site aux dates suivantes :\n• J-3 : ${j3.toLocaleDateString('fr-FR')}\n• J-7 : ${j7.toLocaleDateString('fr-FR')}\n• J-30 : ${j30.toLocaleDateString('fr-FR')}`;
+  const message = `Rappel QCM Résidanat pour Mélissa 🩺\n- Cours : ${currentCoursName}\nN'oublie pas de refaire les QCM aux dates suivantes :\n• Rappel J-8 : ${dJ8.toLocaleDateString('fr-FR')}\n• Rappel J-30 : ${dJ30.toLocaleDateString('fr-FR')}`;
 
   const smsLink = document.getElementById('sms-link');
   const waLink = document.getElementById('wa-link');
@@ -248,15 +495,15 @@ function updateReminderLinks(j3, j7, j30) {
   if (smsLink) smsLink.href = `sms:${phone}?body=${encodeURIComponent(message)}`;
   if (waLink) waLink.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
-
+ 
 function checkDueReminders() {
   const todayIso = new Date().toISOString().split('T')[0];
   let dueList = [];
 
   Object.keys(qcmReminders).forEach(cours => {
     const dates = qcmReminders[cours];
-    if (dates.j3 === todayIso) dueList.push(`${cours} (Rappel J-3)`);
-    if (dates.j7 === todayIso) dueList.push(`${cours} (Rappel J-7)`);
+  
+    if (dates.j8 === todayIso) dueList.push(`${cours} (Rappel J-8)`);
     if (dates.j30 === todayIso) dueList.push(`${cours} (Rappel J-30)`);
   });
 
