@@ -78,9 +78,7 @@
       transition: background 0.2s;
     }
 
-    .btn-quote:hover {
-      background: #0369a1;
-    }
+    .btn-quote:hover { background: #0369a1; }
 
     /* Navigation */
     .nav-tabs {
@@ -117,7 +115,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .dash-card {
@@ -134,10 +132,29 @@
       color: var(--text-muted);
     }
 
+    .dash-card.global {
+      background: linear-gradient(135deg, #0369a1, #0284c7);
+      border-color: #0369a1;
+      color: white;
+    }
+
+    .dash-card.global h3,
+    .dash-card.global .dash-detail { color: #e0f2fe; }
+    .dash-card.global .dash-value { color: white; }
+    .dash-card.global .progress-bar-bg { background: rgba(255,255,255,.25); }
+    .dash-card.global .progress-bar-fill { background: #ffffff; }
+
     .dash-value {
       font-size: 1.6rem;
       font-weight: 700;
       color: var(--primary);
+    }
+
+    .dash-detail {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .progress-bar-bg {
@@ -156,7 +173,63 @@
       transition: width 0.3s ease;
     }
 
-    .module-selector { margin-bottom: 20px; }
+    /* Rappels à venir */
+    .reminders-panel { margin-bottom: 24px; }
+
+    .reminders-panel h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .due-badge {
+      background: #ef4444;
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .reminders-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .reminders-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    .reminders-list li.today {
+      background: #fef2f2;
+      border-color: #fecaca;
+      font-weight: 700;
+    }
+
+    .reminders-list .r-date {
+      white-space: nowrap;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .reminders-list li.today .r-date { color: #dc2626; }
+
+    .reminders-empty {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .module-selector { margin-bottom: 12px; }
 
     .module-selector select {
       padding: 10px 16px;
@@ -166,6 +239,26 @@
       background: white;
       font-weight: 600;
     }
+
+    /* Avancement du module sélectionné */
+    .module-progress {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .mp-pill {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .mp-pill strong { color: var(--primary); }
+    .mp-pill.total { border-color: var(--primary); background: var(--primary-light); }
 
     /* Tableau */
     .table-container {
@@ -211,6 +304,7 @@
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .btn-reminder:hover {
@@ -218,7 +312,18 @@
       color: white;
     }
 
-    /* Modale de rappel sur le site */
+    .btn-reminder.is-set {
+      background: #d1fae5;
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+
+    .btn-reminder.is-set:hover {
+      background: #059669;
+      color: white;
+    }
+
+    /* Modale de rappel */
     .reminder-modal {
       position: fixed;
       inset: 0;
@@ -248,6 +353,33 @@
       margin: 14px 0;
       font-size: 0.95rem;
     }
+
+    .reminder-status {
+      min-height: 20px;
+      font-size: 0.85rem;
+      color: #059669;
+      font-weight: 600;
+    }
+
+    .reminder-status.error { color: #dc2626; }
+
+    .reminder-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .reminder-actions button {
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-r-delete { background: #fee2e2; color: #b91c1c; }
+    .btn-r-cancel { background: #f1f5f9; color: #475569; margin-left: auto; }
+    .btn-r-save { background: var(--primary); color: white; }
 
     /* STYLES SPÉCIFIQUES SAMEDI PÉDAGOGIQUE */
     .samedi-container {
@@ -360,18 +492,6 @@
       margin: 0;
     }
 
-    .day-progress-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .day-progress-text {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
     .task-input-group {
       display: flex;
       gap: 8px;
@@ -383,16 +503,6 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 0.9rem;
-    }
-
-    .task-input-group button {
-      padding: 8px 12px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
     }
 
     .task-list {
@@ -415,150 +525,12 @@
       gap: 8px;
     }
 
-    .task-item-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-    }
-
     .task-item.completed span {
       text-decoration: line-through;
       color: var(--text-muted);
     }
 
-    .btn-delete-task {
-      background: transparent;
-      border: none;
-      color: #ef4444;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    .btn-delete-task:hover {
-      background: #fee2e2;
-    }
-
-    /* WIDGET CHAT L'3ZIZ */
-    #lziz-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    #lziz-toggle-btn {
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 14px 22px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);
-      transition: transform 0.2s;
-    }
-
-    #lziz-toggle-btn:hover { transform: scale(1.05); }
-
-    #lziz-chat-window {
-      width: 360px;
-      height: 480px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      bottom: 65px;
-      right: 0;
-      overflow: hidden;
-      border: 1px solid #cbd5e1;
-    }
-
-    .lziz-chat-hidden { display: none !important; }
-
-    .lziz-chat-header {
-      background: #0369a1;
-      color: white;
-      padding: 14px 16px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .lziz-close-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .lziz-chat-body {
-      flex: 1;
-      padding: 14px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: #f8fafc;
-    }
-
-    .lziz-msg {
-      padding: 10px 14px;
-      border-radius: 12px;
-      max-width: 82%;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      word-wrap: break-word;
-    }
-
-    .lziz-bot {
-      background: #e0f2fe;
-      color: #0369a1;
-      align-self: flex-start;
-      border-bottom-left-radius: 2px;
-    }
-
-    .lziz-user {
-      background: #0284c7;
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 2px;
-    }
-
-    .lziz-chat-footer {
-      display: flex;
-      padding: 10px;
-      border-top: 1px solid #e2e8f0;
-      background: white;
-    }
-
-    .lziz-chat-footer input {
-      flex: 1;
-      padding: 8px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .lziz-chat-footer button {
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      margin-left: 6px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* MEDTRACK — reproduction du planning PDF */
+    /* MEDTRACK */
     .medtrack-print {
       background: #fff;
       color: #233b63;
@@ -925,11 +897,13 @@
     }
 
     @media (max-width: 800px) {
+      body { padding: 12px; }
       .medtrack-grid {
-        grid-template-columns: 70px repeat(var(--days), 25px);
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
       }
       .medtrack-title { font-size: 1.2rem; }
       .medtrack-legend { gap: 9px; }
+      .quote-card { flex-direction: column; align-items: flex-start; }
     }
 
     @media print {
@@ -937,21 +911,13 @@
         background: #fff !important;
         padding: 0;
       }
-      .container {
-        max-width: none;
-      }
-      header, .quote-card, .nav-tabs, #lziz-widget {
+      .container { max-width: none; }
+      header, .quote-card, .nav-tabs {
         display: none !important;
       }
-      #page-medtrack {
-        display: block !important;
-      }
-      .medtrack-print {
-        padding: 0;
-      }
-      .medtrack-month {
-        break-inside: avoid;
-      }
+      #page-medtrack { display: block !important; }
+      .medtrack-print { padding: 0; }
+      .medtrack-month { break-inside: avoid; }
     }
   </style>
 </head>
@@ -972,78 +938,91 @@
       <button class="btn-quote" onclick="generateNewQuote()">✨ Autre citation</button>
     </div>
 
-    <!-- Navigation avec les Onglets -->
+    <!-- Navigation -->
     <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchPage('modules')">📚 Suivi par Modules</button>
-      <button class="tab-btn" onclick="switchPage('samedi')">🩺 Samedi Pédagogique</button>
-      <button class="tab-btn" onclick="switchPage('todo')">📝 To-Do List</button>
-      <button class="tab-btn" onclick="switchPage('calendar')">📅 Planning Journalier</button>
-      <button class="tab-btn" onclick="switchPage('medtrack')">🗓️ Planning Annuel (MedTrack)</button>
+      <button class="tab-btn active" onclick="switchPage('modules', this)">📚 Suivi par Modules</button>
+      <button class="tab-btn" onclick="switchPage('samedi', this)">🩺 Samedi Pédagogique</button>
+      <button class="tab-btn" onclick="switchPage('todo', this)">📝 To-Do List</button>
+      <button class="tab-btn" onclick="switchPage('calendar', this)">📅 Planning Journalier</button>
+      <button class="tab-btn" onclick="switchPage('medtrack', this)">🗓️ Planning Annuel (MedTrack)</button>
     </nav>
 
     <!-- PAGE 1 : SUIVI PAR MODULES -->
     <div id="page-modules" class="page active">
       <section class="dashboard-grid">
+        <div class="dash-card global">
+          <h3>🎯 Avancement global</h3>
+          <div class="dash-value" id="global-progress-text">0%</div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="global-progress-bar"></div>
+          </div>
+          <div class="dash-detail" id="global-detail">—</div>
+        </div>
         <div class="dash-card">
-          <h3>Progression Couche 1</h3>
+          <h3>Couche 1 (C1)</h3>
           <div class="dash-value" id="c1-progress-text">0%</div>
           <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="c1-progress-bar"></div>
           </div>
+          <div class="dash-detail" id="c1-detail">—</div>
         </div>
         <div class="dash-card">
-          <h3>Progression Couche 2</h3>
+          <h3>Couche 2 (C2)</h3>
           <div class="dash-value" id="c2-progress-text">0%</div>
           <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="c2-progress-bar"></div>
           </div>
+          <div class="dash-detail" id="c2-detail">—</div>
         </div>
         <div class="dash-card">
-          <h3>Progression Couche 3</h3>
+          <h3>Couche 3 (C3)</h3>
           <div class="dash-value" id="c3-progress-text">0%</div>
           <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="c3-progress-bar"></div>
           </div>
-        </div>
-        <div class="dash-card">
-          <h3>Total QCMs Validés</h3>
-          <div class="dash-value" id="qcm-progress-text">0/0</div>
+          <div class="dash-detail" id="c3-detail">—</div>
         </div>
       </section>
 
-      <div class="module-selector">
-    <label for="module-select"><strong>Module : </strong></label>
-    <select id="module-select" onchange="renderTable()">
-      
-        <option value="pharmaco">Pharmacologie</option>
-        <option value="biochimie">Biochimie</option>
-        <option value="anapath_acp">ACP</option>
-        <option value="embryo">Embryologie</option>
-        <option value="cytologie">Cytologie</option>
-        <option value="histologie">Histologie</option>
-        <option value="microbio">Microbiologie</option>
-        <option value="dermato">Dermatologie</option>
-        <option value="physiologie">Physiologie</option>
-        <option value="gastro">Gastro-entérologie</option>
-        <option value="ortho_mpr">Orthopédie - MPR</option>
-        <option value="pediatrie">Pédiatrie</option>
-        <option value="endocrino">Endocrinologie</option>
-        <option value="pneumo">Pneumologie</option>
-        <option value="cardio">Cardiologie</option>
-        <option value="infectieuse">Maladies infectieuses</option>
-        <option value="uro_nephro">Urologie - Néphrologie</option>
-        <option value="ophtalmo">Ophtalmologie</option>
-        <option value="orl">ORL</option>
-        <option value="epidemiologie">Épidémiologie</option>
-        <option value="medecine_travail">Médecine du travail</option>
-        <option value="psychiatrie">Psychiatrie</option>
-        <option value="medecine_legale">Médecine légale</option>
-        <option value="gyneco">Gynécologie - Obstétrique</option>
-        <option value="rhumato_systeme">Rhumatologie - Maladies de système</option>
-        <option value="hemato_onco">Hématologie - Oncologie</option>
+      <section class="dash-card reminders-panel">
+        <h3>🔔 Mes prochains rappels QCM <span class="due-badge" id="due-badge" style="display:none"></span></h3>
+        <ul class="reminders-list" id="reminders-list"></ul>
+      </section>
 
-    </select>
-    </div>
+      <div class="module-selector">
+        <label for="module-select"><strong>Module : </strong></label>
+        <select id="module-select" onchange="renderTable()">
+          <option value="pharmaco">Pharmacologie</option>
+          <option value="biochimie">Biochimie</option>
+          <option value="immunologie">Immunologie</option>
+          <option value="anapath_acp">ACP</option>
+          <option value="embryo">Embryologie</option>
+          <option value="cytologie">Cytologie</option>
+          <option value="histologie">Histologie</option>
+          <option value="microbio">Microbiologie</option>
+          <option value="dermato">Dermatologie</option>
+          <option value="physiologie">Physiologie</option>
+          <option value="gastro">Gastro-entérologie</option>
+          <option value="ortho_mpr">Orthopédie - MPR</option>
+          <option value="pediatrie">Pédiatrie</option>
+          <option value="endocrino">Endocrinologie</option>
+          <option value="pneumo">Pneumologie</option>
+          <option value="cardio">Cardiologie</option>
+          <option value="infectieuse">Maladies infectieuses</option>
+          <option value="uro_nephro">Urologie - Néphrologie</option>
+          <option value="ophtalmo">Ophtalmologie</option>
+          <option value="orl">ORL</option>
+          <option value="epidemiologie">Épidémiologie</option>
+          <option value="medecine_travail">Médecine du travail</option>
+          <option value="psychiatrie">Psychiatrie</option>
+          <option value="medecine_legale">Médecine légale</option>
+          <option value="gyneco">Gynécologie - Obstétrique</option>
+          <option value="rhumato_systeme">Rhumatologie - Maladies de système</option>
+          <option value="hemato_onco">Hématologie - Oncologie</option>
+        </select>
+      </div>
+
+      <div class="module-progress" id="module-progress"></div>
 
       <div class="table-container">
         <table>
@@ -1064,9 +1043,7 @@
               <th>QCM</th>
             </tr>
           </thead>
-          <tbody id="course-table-body">
-            <!-- Injecté via JS -->
-          </tbody>
+          <tbody id="course-table-body"></tbody>
         </table>
       </div>
     </div>
@@ -1093,15 +1070,13 @@
                 <th>Qcm</th>
               </tr>
             </thead>
-            <tbody id="samedi-table-body">
-              <!-- Injecté via JS -->
-            </tbody>
+            <tbody id="samedi-table-body"></tbody>
           </table>
         </div>
 
         <div class="samedi-header-inputs">
           <div style="font-style: italic; color: #0369a1; font-weight: 600; font-size: 0.9rem;">
-           La discipline transforme les simples souhaits en réalité concrète.
+            La discipline transforme les simples souhaits en réalité concrète.
           </div>
           <div>
             <label for="samedi-end-date"><strong>Date de fin : </strong></label>
@@ -1121,14 +1096,12 @@
       <h2>📝 Ma To-Do List d'étude</h2>
       <div class="dash-card" style="max-width: 800px; margin: 0 auto;">
         <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-          <input type="text" id="todo-page-input" placeholder="Ajouter une tâche (ex: Réviser QCM Cardio)..." 
-                 style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;" 
+          <input type="text" id="todo-page-input" placeholder="Ajouter une tâche (ex: Réviser QCM Cardio)..."
+                 style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;"
                  onkeypress="if(event.key==='Enter') addTodo()">
           <button onclick="addTodo()" class="btn-add" style="font-size: 1rem;">Ajouter</button>
         </div>
-        <ul id="todo-page-list" class="task-list">
-          <!-- Injecté via JS -->
-        </ul>
+        <ul id="todo-page-list" class="task-list"></ul>
       </div>
     </div>
 
@@ -1143,9 +1116,7 @@
         <button class="btn-add" onclick="addCalendarDay()">+ Créer la journée</button>
       </div>
 
-      <div class="planner-grid" id="planner-grid">
-        <!-- Cartes injectées via JS -->
-      </div>
+      <div class="planner-grid" id="planner-grid"></div>
     </div>
 
     <!-- PAGE 5 : PLANNING ANNUEL MEDTRACK 2026-2027 -->
@@ -1167,9 +1138,7 @@
           <span><i class="legend-box concours"></i> Mois du concours</span>
         </div>
 
-        <div id="medtrack-calendar">
-          <!-- Injecté via JS -->
-        </div>
+        <div id="medtrack-calendar"></div>
 
         <div class="melissa-encouragement">
           <div class="melissa-encouragement-title">Mélissa, un jour à la fois.</div>
@@ -1184,26 +1153,29 @@
     </div>
   </div>
 
-  <!-- MODALE PROGRAMMATION RAPPELS QCM SUR LE SITE -->
-  <div id="reminder-modal" class="reminder-modal">
+  <!-- MODALE RAPPELS QCM -->
+  <div id="reminder-modal" class="reminder-modal" onclick="if(event.target===this) closeReminderModal()">
     <div class="reminder-card">
-      <h3 style="margin-top: 0; color: #0369a1;">🔔 Rappels QCM sur le site</h3>
+      <h3 style="margin-top: 0; color: #0369a1;">🔔 Rappels QCM</h3>
       <p id="modal-cours-title" style="font-weight: bold; color: #0f172a;"></p>
 
       <label for="date-revision" style="display: block; font-size: 0.9rem; margin-top: 10px;">Date de première révision :</label>
-      <input type="date" id="date-revision" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-top: 4px;" onchange="calculateDates()">
+      <input type="date" id="date-revision" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-top: 4px; box-sizing: border-box;" oninput="previewReminderDates()" onchange="previewReminderDates()">
 
       <div class="reminder-dates">
-        <strong>📅 Planning enregistré sur le site :</strong>
+        <strong>📅 Rappels prévus :</strong>
         <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
-          
-          <li>Rappel J-8 : <span id="date-j8" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
-          <li>Rappel J-30 : <span id="date-j30" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
+          <li>Rappel J+8 : <span id="date-j8" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
+          <li>Rappel J+30 : <span id="date-j30" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
         </ul>
       </div>
 
-      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
-        <button onclick="closeReminderModal()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">Enregistrer et Fermer</button>
+      <div id="reminder-status" class="reminder-status"></div>
+
+      <div class="reminder-actions">
+        <button id="reminder-delete-btn" class="btn-r-delete" onclick="deleteReminder()">Supprimer</button>
+        <button class="btn-r-cancel" onclick="closeReminderModal()">Annuler</button>
+        <button class="btn-r-save" onclick="saveReminder()">Enregistrer</button>
       </div>
     </div>
   </div>
@@ -1248,28 +1220,6 @@
     </div>
   </div>
 
-  <!-- WIDGET FLOTTANT L'3ZIZ -->
-  <div id="lziz-widget">
-    <button id="lziz-toggle-btn" onclick="toggleLzizChat()">🤖 L'3ZIZ AI</button>
-    <div id="lziz-chat-window" class="lziz-chat-hidden">
-      <div class="lziz-chat-header">
-        <span>🩺 L'3ZIZ — Coach Résidanat</span>
-        <button onclick="toggleLzizChat()" class="lziz-close-btn">✕</button>
-      </div>
-
-      <div class="lziz-chat-body" id="lziz-messages">
-        <div class="lziz-msg lziz-bot">
-          Bonjour Mélissa ! Je suis <b>L'3ZIZ</b> 🩺. Pose-moi n'importe quelle question sur tes cours ou QCMs de résidanat !
-        </div>
-      </div>
-      <div class="lziz-chat-footer">
-        <input type="text" id="lziz-user-input" placeholder="Pose ta question à L'3ZIZ..." onkeypress="handleLzizKeyPress(event)">
-        <button onclick="sendToLziz()">Envoyer</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- CHARGEMENT UNIQUE DU JAVASCRIPT EXTERNE -->
   <script src="script.js"></script>
 </body>
 </html>
