@@ -930,17 +930,33 @@ function formatShort(iso) {
   return parseIso(iso).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
 }
 
+// Pourcentage précis (non arrondi)
 function pct(done, total) {
-  return total > 0 ? Math.round((done / total) * 100) : 0;
+  return total > 0 ? (done / total) * 100 : 0;
+}
+
+// Affichage : décimale sous 10 % pour que chaque case cochée se voie
+function fmtPct(p) {
+  if (p <= 0) return '0';
+  if (p >= 100) return '100';
+  const rounded = p < 10 ? Math.round(p * 10) / 10 : Math.round(p);
+  return (rounded === 0 ? 0.1 : rounded).toLocaleString('fr-FR');
+}
+
+// Largeur de barre : un minimum visible dès qu'il y a du progrès
+function barWidth(p) {
+  return p <= 0 ? '0%' : Math.max(p, 1.5) + '%';
 }
 
 // =====================================
 // Citations
 // =====================================
 const quotes = [
-  { text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »", author: "— Note de motivation" },
-  { text: "« Le succès au résidanat n'est pas une question de chance, c'est la somme de petites victoires quotidiennes. »", author: "— Objectif Résidanat" },
-  { text: "« Chaque QCM résolu, chaque cours révisé te rapproche un peu plus de ton stéthoscope de résidente. »", author: "— Objectif Résidanat" }
+  { text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. »", author: "Note de motivation" },
+  { text: "« Le succès au résidanat n'est pas une question de chance, c'est la somme de petites victoires quotidiennes. »", author: "Objectif résidanat" },
+  { text: "« Chaque QCM résolu, chaque cours révisé te rapproche un peu plus de ton stéthoscope de résidente. »", author: "Objectif résidanat" },
+  { text: "« On ne retient pas un cours en le lisant une fois, mais en y revenant. C'est tout l'intérêt des trois couches. »", author: "Méthode des 3 couches" },
+  { text: "« Une mauvaise journée de révision vaut mieux qu'une journée sans révision. »", author: "Note de motivation" }
 ];
 
 function generateNewQuote() {
@@ -1001,14 +1017,18 @@ function renderTable() {
   const courses = modulesData[selectEl.value] || [];
   tbody.innerHTML = '';
 
-  const checkbox = (id, key) =>
-    `<td class="cell-center"><input type="checkbox" ${getItemState(id, key) ? 'checked' : ''} onchange="setItemState('${id}', '${key}', this.checked)"></td>`;
+  const checkbox = (id, key) => {
+    const layer = key.charAt(1); // '1', '2' ou '3'
+    const start = key.endsWith('_cours') ? ' l-start' : '';
+    const label = `Couche ${layer} : ${key.endsWith('_cours') ? 'cours' : 'QCM'}`;
+    return `<td class="cell-center l${layer}${start}"><input type="checkbox" aria-label="${label}" ${getItemState(id, key) ? 'checked' : ''} onchange="setItemState('${id}', '${key}', this.checked)"></td>`;
+  };
 
   courses.forEach(course => {
     const r = qcmReminders[course.id];
     const btnLabel = r
-      ? `🔔 ${formatShort(r.j8)} · ${formatShort(r.j30)}`
-      : '🔔 Programmer';
+      ? `J+8 ${formatShort(r.j8)} · J+30 ${formatShort(r.j30)}`
+      : 'Programmer';
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -1043,39 +1063,137 @@ function computeStats(courses) {
   return stats;
 }
 
+// Couleurs de chaque couche
+const LAYER_STYLE = {
+  1: { accent: '#0284c7', soft: '#e0f2fe', tag: 'Première lecture' },
+  2: { accent: '#7c3aed', soft: '#ede9fe', tag: 'Consolidation' },
+  3: { accent: '#059669', soft: '#d1fae5', tag: 'Maîtrise' }
+};
+
+const RING_R = 54;
+const RING_C = 2 * Math.PI * RING_R;
+
+// Construit le tableau de bord une seule fois (les valeurs sont mises à jour ensuite)
+function buildDashboard() {
+  const root = document.getElementById('dashboard');
+  if (!root || root.dataset.built) return;
+  root.dataset.built = '1';
+
+  const layerCard = k => {
+    const st = LAYER_STYLE[k];
+    return `
+      <div class="kpi" style="--accent:var(--c${k});--accent-soft:var(--c${k}-soft)">
+        <div class="kpi-head">
+          <span class="kpi-label">Couche ${k}</span>
+          <span class="kpi-tag">${st.tag}</span>
+        </div>
+        <div class="kpi-value"><span id="c${k}-pct">0</span><small>%</small></div>
+        <div class="kpi-rows">
+          <div>
+            <div class="kpi-row-top"><span>Cours</span><b id="c${k}-cours-n">0 / 0</b></div>
+            <div class="bar"><span id="c${k}-cours-bar"></span></div>
+          </div>
+          <div>
+            <div class="kpi-row-top"><span>QCM</span><b id="c${k}-qcm-n">0 / 0</b></div>
+            <div class="bar light"><span id="c${k}-qcm-bar"></span></div>
+          </div>
+        </div>
+      </div>`;
+  };
+
+  root.innerHTML = `
+    <div class="kpi global">
+      <div class="ring">
+        <svg viewBox="0 0 128 128" aria-hidden="true">
+          <defs>
+            <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7dd3fc"/>
+              <stop offset="100%" stop-color="#34d399"/>
+            </linearGradient>
+          </defs>
+          <circle class="track" cx="64" cy="64" r="${RING_R}" fill="none" stroke-width="11"/>
+          <circle class="fill" id="global-ring" cx="64" cy="64" r="${RING_R}" fill="none" stroke-width="11"
+                  stroke-dasharray="${RING_C}" stroke-dashoffset="${RING_C}"/>
+        </svg>
+        <div class="ring-center">
+          <div class="big"><span id="global-pct">0</span>%</div>
+          <div class="sub">global</div>
+        </div>
+      </div>
+      <div class="global-body">
+        <span class="kpi-label">Avancement global</span>
+        <div class="kpi-value"><span id="global-done">0</span><small id="global-total">/ 0 étapes</small></div>
+        <div class="global-stats">
+          <div class="gstat"><div class="n" id="global-cours">0</div><div class="l">Cours lus</div></div>
+          <div class="gstat"><div class="n" id="global-qcm">0</div><div class="l">QCM faits</div></div>
+          <div class="gstat"><div class="n" id="global-closed">0</div><div class="l">Cours bouclés (C1→C3)</div></div>
+        </div>
+        <div class="global-caption" id="global-caption"></div>
+      </div>
+    </div>
+    ${layerCard(1)}${layerCard(2)}${layerCard(3)}
+  `;
+}
+
+function setText(id, txt) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = txt;
+}
+
+function setBar(id, p) {
+  const el = document.getElementById(id);
+  if (el) el.style.width = barWidth(p);
+}
+
 function updateDashboards() {
+  buildDashboard();
+
   const allCourses = Object.values(modulesData).flat();
   const s = computeStats(allCourses);
   const total = s.total;
+  const nf = n => n.toLocaleString('fr-FR');
 
-  let globalDone = 0;
   let globalCours = 0;
   let globalQcm = 0;
 
   // Chaque couche = cours + QCM de cette couche
   [1, 2, 3].forEach(k => {
     const { cours, qcm } = s.layers[k];
-    const p = pct(cours + qcm, total * 2);
-    globalDone += cours + qcm;
     globalCours += cours;
     globalQcm += qcm;
 
-    const bar = document.getElementById(`c${k}-progress-bar`);
-    const txt = document.getElementById(`c${k}-progress-text`);
-    const det = document.getElementById(`c${k}-detail`);
-    if (bar) bar.style.width = p + '%';
-    if (txt) txt.textContent = p + '%';
-    if (det) det.innerHTML = `Cours : <strong>${cours}/${total}</strong> (${pct(cours, total)}%)<br>QCM : <strong>${qcm}/${total}</strong> (${pct(qcm, total)}%)`;
+    setText(`c${k}-pct`, fmtPct(pct(cours + qcm, total * 2)));
+    setText(`c${k}-cours-n`, `${nf(cours)} / ${nf(total)}`);
+    setText(`c${k}-qcm-n`, `${nf(qcm)} / ${nf(total)}`);
+    setBar(`c${k}-cours-bar`, pct(cours, total));
+    setBar(`c${k}-qcm-bar`, pct(qcm, total));
   });
 
   // Global = toutes les cases des 3 couches
+  const globalDone = globalCours + globalQcm;
   const gp = pct(globalDone, total * 6);
-  const gBar = document.getElementById('global-progress-bar');
-  const gTxt = document.getElementById('global-progress-text');
-  const gDet = document.getElementById('global-detail');
-  if (gBar) gBar.style.width = gp + '%';
-  if (gTxt) gTxt.textContent = gp + '%';
-  if (gDet) gDet.innerHTML = `${globalDone} / ${total * 6} étapes validées<br>Cours : ${globalCours}/${total * 3} · QCM : ${globalQcm}/${total * 3}`;
+
+  const closed = allCourses.filter(c =>
+    ['c1_cours','c1_qcm','c2_cours','c2_qcm','c3_cours','c3_qcm'].every(key => getItemState(c.id, key))
+  ).length;
+
+  setText('global-pct', fmtPct(gp));
+  setText('global-done', nf(globalDone));
+  setText('global-total', ` / ${nf(total * 6)} étapes`);
+  document.getElementById('global-cours').innerHTML = `${nf(globalCours)} <small>/ ${nf(total * 3)}</small>`;
+  document.getElementById('global-qcm').innerHTML = `${nf(globalQcm)} <small>/ ${nf(total * 3)}</small>`;
+  document.getElementById('global-closed').innerHTML = `${nf(closed)} <small>/ ${nf(total)}</small>`;
+
+  const remaining = total * 6 - globalDone;
+  setText('global-caption', globalDone === 0
+    ? 'Coche ta première case dans le tableau pour lancer le compteur.'
+    : `Encore ${nf(remaining)} étapes — continue, chaque case compte.`);
+
+  const ring = document.getElementById('global-ring');
+  if (ring) {
+    const visible = gp <= 0 ? 0 : Math.max(gp, 1);
+    ring.style.strokeDashoffset = RING_C * (1 - visible / 100);
+  }
 
   updateModuleProgress();
 }
@@ -1094,11 +1212,11 @@ function updateModuleProgress() {
   const pills = [1, 2, 3].map(k => {
     const { cours, qcm } = s.layers[k];
     done += cours + qcm;
-    return `<span class="mp-pill">C${k} : <strong>${pct(cours + qcm, total * 2)}%</strong></span>`;
+    return `<span class="mp-pill">C${k} : <strong>${fmtPct(pct(cours + qcm, total * 2))} %</strong></span>`;
   });
 
   const moduleName = selectEl.options[selectEl.selectedIndex]?.text || '';
-  box.innerHTML = `<span class="mp-pill total">${escapeHtml(moduleName)} : <strong>${pct(done, total * 6)}%</strong></span>` + pills.join('');
+  box.innerHTML = `<span class="mp-pill total">${escapeHtml(moduleName)} : <strong>${fmtPct(pct(done, total * 6))} %</strong></span>` + pills.join('');
 }
 
 // =====================================
@@ -1124,7 +1242,7 @@ function openReminderModal(courseId) {
   document.getElementById('modal-cours-title').innerText = 'Cours : ' + course.title;
   document.getElementById('date-revision').value = existing ? existing.base : todayIso();
   document.getElementById('reminder-delete-btn').style.display = existing ? '' : 'none';
-  setReminderStatus(existing ? '✓ Rappels déjà enregistrés pour ce cours' : '');
+  setReminderStatus(existing ? 'Rappels déjà enregistrés pour ce cours.' : '');
 
   previewReminderDates();
   document.getElementById('reminder-modal').classList.add('open');
@@ -1198,7 +1316,7 @@ function renderRemindersList() {
   }
 
   if (items.length === 0) {
-    list.innerHTML = '<li class="reminders-empty" style="background:none;border:none;padding:0">Aucun rappel à venir. Clique sur « 🔔 Programmer » à côté d’un cours.</li>';
+    list.innerHTML = '<li class="reminders-empty">Aucun rappel prévu. Clique sur « Programmer » à côté d’un cours dans le tableau.</li>';
     return;
   }
 
@@ -1302,7 +1420,7 @@ function renderCalendar() {
 
   const dates = Object.keys(calendarState).sort();
   if (dates.length === 0) {
-    grid.innerHTML = '<p style="color: var(--text-muted)">Aucune journée planifiée. Choisis une date pour commencer !</p>';
+    grid.innerHTML = '<p class="empty-state">Aucune journée pour l’instant. Choisis une date puis clique sur « Créer la journée ».</p>';
     return;
   }
 
@@ -1318,7 +1436,7 @@ function renderCalendar() {
     `).join('');
 
     dayCard.innerHTML = `
-      <div class="day-header">📅 ${parseIso(date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+      <div class="day-header">${parseIso(date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
       <div class="task-input-group">
         <input type="text" id="input-${date}" placeholder="Objectif du jour..." onkeypress="if(event.key==='Enter') addTaskToDay('${date}')">
         <button class="btn-add" onclick="addTaskToDay('${date}')">+</button>
@@ -1364,7 +1482,7 @@ function renderTodos() {
   list.innerHTML = '';
 
   if (todos.length === 0) {
-    list.innerHTML = '<li style="color: var(--text-muted); font-size: 0.95rem;">Aucune tâche pour le moment. Ajoute ta première révision ci-dessus !</li>';
+    list.innerHTML = '<li class="empty-state">Rien à faire pour l’instant. Ajoute une tâche dans le champ au-dessus.</li>';
     return;
   }
 
@@ -1376,7 +1494,7 @@ function renderTodos() {
         <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
         <span style="font-size: 1rem;">${escapeHtml(todo.text)}</span>
       </div>
-      <button onclick="deleteTodo(${todo.id})" style="background:none; border:none; color:#ef4444; font-weight:bold; cursor:pointer; font-size:1.1rem;">✕</button>
+      <button onclick="deleteTodo(${todo.id})" aria-label="Supprimer la tâche" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:1.2rem; line-height:1;">×</button>
     `;
     list.appendChild(li);
   });
@@ -1418,24 +1536,54 @@ function renderMedTrack() {
   if (!root) return;
   root.innerHTML = '';
 
+  const today = todayIso();
+
   medtrackMonths.forEach(mon => {
     const daysInMonth = new Date(mon.y, mon.m + 1, 0).getDate();
     const wrap = document.createElement('section');
     wrap.className = 'medtrack-month' + (mon.concours ? ' concours' : '');
 
+    // Nombre de jours remplis dans le mois
+    let filled = 0;
+    for (let d = 1; d <= daysInMonth; d++) {
+      if (getDayNote(medtrackKey(mon.y, mon.m, d)).trim()) filled++;
+    }
+
     const title = document.createElement('div');
     title.className = 'medtrack-month-header';
-    title.textContent = mon.name;
-    if (mon.concours) {
-      title.title = 'Clique pour ouvrir le message de fin';
-      title.addEventListener('click', openFinalMonth);
-    }
+    const label = document.createElement('span');
+    label.textContent = mon.name;
+    const count = document.createElement('small');
+    count.textContent = mon.concours
+      ? 'Ouvrir le message de fin'
+      : (filled ? `${filled} jour${filled > 1 ? 's' : ''} noté${filled > 1 ? 's' : ''}` : '');
+    title.append(label, count);
+    if (mon.concours) title.addEventListener('click', openFinalMonth);
     wrap.appendChild(title);
+
+    // En-tête des jours (semaine de dimanche à samedi)
+    const head = document.createElement('div');
+    head.className = 'medtrack-weekdays';
+    daysFr.forEach(n => {
+      const s = document.createElement('span');
+      s.textContent = n;
+      head.appendChild(s);
+    });
+    wrap.appendChild(head);
 
     const grid = document.createElement('div');
     grid.className = 'medtrack-grid';
+
+    // Cases vides avant le 1er du mois
+    const offset = new Date(mon.y, mon.m, 1).getDay();
+    for (let i = 0; i < offset; i++) {
+      const blank = document.createElement('div');
+      blank.className = 'medtrack-day-cell blank';
+      grid.appendChild(blank);
+    }
+
     for (let d = 1; d <= daysInMonth; d++) {
-      grid.appendChild(createMedtrackDayCell(mon, d));
+      grid.appendChild(createMedtrackDayCell(mon, d, today));
     }
 
     wrap.appendChild(grid);
@@ -1443,40 +1591,34 @@ function renderMedTrack() {
   });
 }
 
-function createMedtrackDayCell(mon, d) {
+function createMedtrackDayCell(mon, d, today) {
   const date = new Date(mon.y, mon.m, d);
-  const cell = document.createElement('div');
+  const cell = document.createElement('button');
+  cell.type = 'button';
   cell.className = 'medtrack-day-cell';
 
   const isWeekend = date.getDay() === 5 || date.getDay() === 6;
   const isHoliday = Object.prototype.hasOwnProperty.call(mon.holiday, d);
 
   if (isWeekend) cell.classList.add('weekend');
-  if (isHoliday) cell.classList.add('holiday');
   if (mon.ramadan && !isHoliday) cell.classList.add('ramadan');
+  if (isHoliday) cell.classList.add('holiday');
   if (mon.concours) cell.classList.add('concours-day');
+  if (toLocalIso(date) === today) cell.classList.add('today');
 
-  const note = getDayNote(medtrackKey(mon.y, mon.m, d));
-  if (note.trim()) cell.classList.add('has-note');
+  const note = getDayNote(medtrackKey(mon.y, mon.m, d)).trim();
+  if (note) cell.classList.add('has-note');
 
-  const topRow = document.createElement('div');
-  topRow.className = 'medtrack-day-top';
+  const fullDate = date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const tip = [fullDate, mon.holiday[d], note].filter(Boolean).join('\n');
+  cell.title = tip;
+  cell.setAttribute('aria-label', tip);
 
   const dayNum = document.createElement('span');
   dayNum.className = 'medtrack-day';
   dayNum.textContent = d;
+  cell.appendChild(dayNum);
 
-  const dayName = document.createElement('span');
-  dayName.className = 'medtrack-weekday';
-  dayName.textContent = daysFr[date.getDay()];
-
-  topRow.append(dayNum, dayName);
-
-  const hint = document.createElement('div');
-  hint.className = 'medtrack-day-hint' + (note.trim() ? '' : ' empty');
-  hint.textContent = note.trim() || 'cliquer pour écrire';
-
-  cell.append(topRow, hint);
   cell.addEventListener('click', () => openDayEditor(mon.y, mon.m, d, mon.holiday[d] || ''));
   return cell;
 }
@@ -1489,12 +1631,8 @@ function openDayEditor(y, m, d, holiday) {
   const textarea = document.getElementById('day-editor-textarea');
   const saved = document.getElementById('day-editor-saved');
 
-  if (title) title.textContent = `${d} ${date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}`;
-  if (subtitle) {
-    subtitle.textContent = holiday
-      ? `${daysFr[date.getDay()]} • ${holiday}`
-      : `${daysFr[date.getDay()]} • Ma journée de révision`;
-  }
+  if (title) title.textContent = date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  if (subtitle) subtitle.textContent = holiday ? `Jour férié : ${holiday}` : '';
   if (textarea) textarea.value = getDayNote(activeDateKey);
   if (saved) saved.textContent = '';
 
@@ -1520,7 +1658,7 @@ function saveDayNote() {
   const textarea = document.getElementById('day-editor-textarea');
   if (textarea) localStorage.setItem(activeDateKey, textarea.value);
   const saved = document.getElementById('day-editor-saved');
-  if (saved) saved.textContent = '✓ Journée enregistrée';
+  if (saved) saved.textContent = 'Journée enregistrée';
   renderMedTrack();
   setTimeout(() => { if (saved) saved.textContent = ''; }, 1800);
 }
@@ -1553,9 +1691,9 @@ function closeFinalMonth() {
 
 function finalReady() {
   const messages = [
-    'Alors, Mélissa… respire. Tu as travaillé pour ce moment. ✨',
-    'Dernier chapitre : confiance, concentration et une question à la fois. 🩺',
-    'Tout ce que tu as construit est encore avec toi. Maintenant, donne le meilleur de toi-même. ✨'
+    'Alors, Mélissa… respire. Tu as travaillé pour ce moment.',
+    'Dernier chapitre : confiance, concentration et une question à la fois.',
+    'Tout ce que tu as construit est encore avec toi. Maintenant, donne le meilleur de toi-même.'
   ];
   const box = document.getElementById('final-ready-message');
   if (box) box.textContent = messages[Math.floor(Math.random() * messages.length)];
@@ -1564,7 +1702,25 @@ function finalReady() {
 // =====================================
 // Initialisation
 // =====================================
+// Date du concours (estimée : début octobre 2027)
+const CONCOURS_DATE = new Date(2027, 9, 1);
+
+function renderHero() {
+  const dateEl = document.getElementById('hero-date');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  const cd = document.getElementById('countdown-days');
+  if (cd) {
+    const start = parseIso(todayIso());
+    const days = Math.max(0, Math.round((CONCOURS_DATE - start) / 86400000));
+    cd.textContent = days.toLocaleString('fr-FR');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  renderHero();
   renderTable();
   renderRemindersList();
   renderSamediTable();
