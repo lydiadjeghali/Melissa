@@ -1,11 +1,11 @@
-// La clé Gemini est conservée côté serveur dans .env
-
-// Numéro par défaut de Mélissa (Algérie)
-const DEFAULT_PHONE_MELISSA = "213555174313";
+// =====================================
+// Suivi Résidanat — Mélissa
+// (version sans IA : tout fonctionne en local dans le navigateur)
+// =====================================
 
 // Modules & cours
 const modulesData = {
-  
+
   pharmaco: [
     { id: 'ph1', title: 'Introduction à la pharmacologie' },
     { id: 'ph2', title: 'Pharmacocinétique' },
@@ -29,7 +29,7 @@ const modulesData = {
     { id: 'ph20', title: 'Antidiabétiques' },
     { id: 'ph21', title: 'Antihistaminiques' }
   ],
- 
+
   biochimie: [
     { id: 'b1', title: 'Oligo-aliments' },
     { id: 'b2', title: 'Vitamines' },
@@ -41,7 +41,7 @@ const modulesData = {
     { id: 'b8', title: 'Les aspect biochimique du remodelage osseux' },
     { id: 'b9', title: 'Exploration de la thyroide' }
   ],
-  
+
   anapath_acp: [
     { id: 'acp1', title: "Introduction à l'Anatomie Pathologique" },
     { id: 'acp2', title: 'Lésions cellulaires, tissulaires et adaptatives' },
@@ -59,7 +59,7 @@ const modulesData = {
     { id: 'acp14', title: 'Tumeurs non épithéliales : Tumeurs mésenchymateuses' },
     { id: 'acp15', title: 'Tumeurs spéciales : Tumeurs nerveuses et mélanocytaires & Tumeurs embryonnaires & Lymphomes' }
   ],
-  
+
   embryo: [
     { id: 'em1', title: "Introduction à l'embryologie" },
     { id: 'em2', title: 'Cycle cellulaire' },
@@ -74,7 +74,7 @@ const modulesData = {
     { id: 'em11', title: 'Cellules souches' },
     { id: 'em12', title: 'Malformations congénitales' }
   ],
-  
+
   cytologie: [
     { id: 'cy1', title: 'Organisation générale de la cellule' },
     { id: 'cy2', title: "Méthodes d'étude de la cellule" },
@@ -90,7 +90,6 @@ const modulesData = {
     { id: 'cy12', title: 'Noyau interphasique & Cycle cellulaire' }
   ],
 
-  
   histologie: [
     { id: 'h1', title: 'Appareil Cardio-Vasculaire' },
     { id: 'h2', title: 'Appareil Respiratoire' },
@@ -125,8 +124,7 @@ const modulesData = {
     { id: 'h31', title: 'Gustation' },
     { id: 'h32', title: 'Vision' }
   ],
-   
-  
+
   microbio: [
     { id: 'mi1', title: 'Introduction à la Microbiologie & Structure bactérienne' },
     { id: 'mi2', title: 'Physiologie bactérienne' },
@@ -155,7 +153,7 @@ const modulesData = {
     { id: 'mi25', title: 'Diagnostic Virologique' },
     { id: 'mi26', title: 'Traitement & Prévention des Infections virales' }
   ],
-  
+
   dermato: [
     { id: 'der1', title: 'Démarche diagnostique en Dermatologie' },
     { id: 'der2', title: 'Infections cutanées bactériennes à pyogènes' },
@@ -174,7 +172,7 @@ const modulesData = {
     { id: 'der15', title: 'Taches rouges congénitales (TD)' },
     { id: 'der16', title: 'CAT devant un prurit (TD)' }
   ],
-  
+
   physiologie: [
     { id: 'phy1', title: 'Électrophysiologie cardiaque' },
     { id: 'phy2', title: 'Cycle cardiaque' },
@@ -229,7 +227,6 @@ const modulesData = {
     { id: 'phy51', title: 'EMG (TD)' }
   ],
 
-  
   gastro: [
     { id: 'g1', title: 'Endoscopie en pathologie digestive' },
     { id: 'g2', title: 'Imagerie médicale en pathologie digestive' },
@@ -308,7 +305,6 @@ const modulesData = {
     { id: 'g75', title: 'Conduite à tenir devant une masse abdominale' }
   ],
 
-  
   ortho_mpr: [
     { id: 'o1', title: 'Généralités sur les fractures (+ TD : Appareils plâtrés / Ostéosynthèse)' },
     { id: 'o2', title: 'Syndrome des loges & Syndrome de Volkmann' },
@@ -339,7 +335,6 @@ const modulesData = {
     { id: 'o27', title: 'Tuberculose ostéo-articulaire & Mal de Pott' },
     { id: 'o28', title: 'Infections de la main (+ TD : CAT devant une plaie de la main)' },
     { id: 'o29', title: 'Généralités sur les tumeurs osseuses' },
-
     // Médecine Physique et Réadaptation (MPR)
     { id: 'o30', title: 'MPR et handicap (Introduction à la MPR)' },
     { id: 'o31', title: 'Complications du décubitus' },
@@ -349,7 +344,6 @@ const modulesData = {
     { id: 'o35', title: 'Amputations & Appareillage' }
   ],
 
-  
   pediatrie: [
     { id: 'pd1', title: 'Diététique' },
     { id: 'pd2', title: 'Croissance' },
@@ -390,7 +384,6 @@ const modulesData = {
     { id: 'pd37', title: 'Risque médicamenteux' }
   ],
 
-  
   endocrino: [
     { id: 'e1', title: 'Hyperthyroïdie' },
     { id: 'e2', title: 'Hypothyroïdie & Thyroïdites' },
@@ -424,7 +417,6 @@ const modulesData = {
     { id: 'e30', title: 'Dyslipidémies (Hyperlipoprotéinémies)' }
   ],
 
-  
   pneumo: [
     { id: 'p1', title: 'Infection respiratoire aiguë (bronchite, PFLA)' },
     { id: 'p2', title: 'Dilatation des bronches' },
@@ -460,7 +452,6 @@ const modulesData = {
     { id: 'p32', title: 'Conduite intra parenchymateuse' }
   ],
 
-  
   cardio: [
     { id: 'c1', title: 'Rhumatisme articulaire aigu' },
     { id: 'c2', title: 'Insuffisance mitrale' },
@@ -500,7 +491,6 @@ const modulesData = {
     { id: 'c36', title: 'Anti-arythmiques' }
   ],
 
-  
   infectieuse: [
     { id: 'i1', title: 'Méningites purulentes (Infections à Méningocoque & Infections à Pneumocoque)' },
     { id: 'i2', title: 'Méningites à liquide clair' },
@@ -538,7 +528,6 @@ const modulesData = {
     { id: 'i34', title: 'Poliomyélite' }
   ],
 
-  
   uro_nephro: [
     // UROLOGIE
     { id: 'un1', title: "Explorations radiologiques de l'appareil urinaire (TD)" },
@@ -558,7 +547,6 @@ const modulesData = {
     { id: 'un15', title: 'CAT devant une grosse bourse (TD)' },
     { id: 'un16', title: "Infertilité masculine & Troubles érectiles de l'homme (Dysfonction érectile)" },
     { id: 'un17', title: 'ANAPATH URO QCM 2019' },
-
     // NÉPHROLOGIE
     { id: 'un18', title: 'Transplantation rénale' },
     { id: 'un19', title: 'Explorations biologiques rénales (TD)' },
@@ -583,7 +571,6 @@ const modulesData = {
     { id: 'un38', title: 'Infections urinaires (TD)' }
   ],
 
-  
   ophtalmo: [
     { id: 'op1', title: "Anatomie de l'appareil visuel" },
     { id: 'op2', title: 'Démarche diagnostique en Ophtalmologie' },
@@ -604,7 +591,7 @@ const modulesData = {
     { id: 'op17', title: 'Primo-infection herpétique chez l’enfant (TD)' },
     { id: 'op18', title: 'Divers QCM' }
   ],
-  
+
   orl: [
     { id: 'orl1', title: "Pathologies de l'oreille externe" },
     { id: 'orl2', title: 'Otite moyenne aiguë (OMA) et complications' },
@@ -634,7 +621,6 @@ const modulesData = {
     { id: 'orl26', title: 'Aspects endoscopiques en Rhinologie (TD)' }
   ],
 
-
   epidemiologie: [
     // ÉPIDÉMIOLOGIE
     { id: 'ep1', title: "Introduction à l'Épidémiologie" },
@@ -644,19 +630,16 @@ const modulesData = {
     { id: 'ep5', title: 'Biostatistique inférentielle (QCM 2) (+ TD)' },
     { id: 'ep6', title: 'Investigation d’une épidémie (+ TD)' },
     { id: 'ep7', title: 'Validité diagnostique (+ TD)' },
-
     // MÉTHODOLOGIE DE RECHERCHE
     { id: 'ep8', title: 'Introduction à la méthodologie de recherche' },
     { id: 'ep9', title: 'Initiation à la recherche documentaire et bibliographique médicale' },
     { id: 'ep10', title: "Élaboration d'un protocole de recherche" },
     { id: 'ep11', title: 'Initiation à la rédaction scientifique et médicale' },
     { id: 'ep12', title: 'Initiation à la communication scientifique et médicale' },
-
     // LECTURE CRITIQUE D'ARTICLE (LCA)
     { id: 'ep13', title: 'Introduction' },
     { id: 'ep14', title: 'Étapes' },
     { id: 'ep15', title: "Synthèse et évaluation d'un article (+ TD)" },
-
     // SANTÉ PUBLIQUE
     { id: 'ep16', title: 'Introduction à la santé publique' },
     { id: 'ep17', title: 'Programmation en santé' },
@@ -666,7 +649,6 @@ const modulesData = {
     { id: 'ep21', title: 'Programmes nationaux de santé en milieu spécifique (Santé scolaire)' },
     { id: 'ep22', title: 'Programmes nationaux de lutte contre les maladies prévalentes (PEV)' },
     { id: 'ep23', title: 'Hygiène hospitalière et lutte contre les infections associées aux soins (+ TD)' },
-
     // ÉCONOMIE DE LA SANTÉ
     { id: 'ep24', title: 'Organisation des systèmes de santé dans le monde (Systèmes de santé dans le monde)' },
     { id: 'ep25', title: 'Organisation des systèmes de santé en Algérie (Système national de santé)' },
@@ -676,8 +658,6 @@ const modulesData = {
     { id: 'ep29', title: 'Outils d’analyse économique en santé' }
   ],
 
-  
-  
   medecine_travail: [
     { id: 'mt1', title: 'Introduction à la santé au travail (Introduction à la médecine du travail)' },
     { id: 'mt2', title: 'Introduction à la santé environnementale' },
@@ -703,7 +683,6 @@ const modulesData = {
     { id: 'mt22', title: 'Place de l’anamnèse dans le diagnostic des pathologies professionnelles (TD)' },
     { id: 'mt23', title: 'Conduite d’une visite médicale d’aptitude (TD)' }
   ],
-
 
   psychiatrie: [
     { id: 'psy1', title: 'Introduction générale à la Santé mentale' },
@@ -732,7 +711,7 @@ const modulesData = {
     { id: 'psy24', title: 'Troubles du sommeil (+ TD : CAT devant une insomnie)' },
     { id: 'psy25', title: 'Troubles sexuels (Dysfonctions sexuelles)' }
   ],
-  
+
   medecine_legale: [
     { id: 'ml1', title: 'Introduction à la médecine légale' },
     { id: 'ml2', title: 'Réquisition' },
@@ -815,7 +794,6 @@ const modulesData = {
     { id: 'rs9', title: 'Rhumatismes métaboliques' },
     { id: 'rs10', title: 'Arthrite septique' },
     { id: 'rs11', title: 'Syndrome du canal carpien' },
-
     // MALADIES DE SYSTÈME
     { id: 'rs12', title: 'Vascularites' },
     { id: 'rs13', title: 'Sclérodermie systémique' },
@@ -851,7 +829,6 @@ const modulesData = {
     { id: 'ho14', title: 'CAT devant un syndrome tumoral (Adénopathies + ADP & Splénomégalie + SPM)' },
     { id: 'ho15', title: 'Dysglobulinémies (Myélome multiple & Maladie de Waldenström)' },
     { id: 'ho16', title: 'Questions diverses' },
-
     // ONCOLOGIE
     { id: 'ho17', title: 'Histoire naturelle des cancers' },
     { id: 'ho18', title: 'Épidémiologie des cancers' },
@@ -895,240 +872,347 @@ const modulesData = {
     { id: 'im24', title: 'Syndromes lymphoprolifératifs (Gammapathies monoclonales)' },
     { id: 'im25', title: 'Implications du HLA en médecine' },
     { id: 'im26', title: 'Immunothérapie & Immunosuppression' }
-  ],
-
-  anapath_acp: [
-    { id: 'acp1', title: "Introduction à l'Anatomie Pathologique" },
-    { id: 'acp2', title: 'Lésions cellulaires, tissulaires et adaptatives' },
-    { id: 'acp3', title: 'Pathologie de la Matrice Extracellulaire (Lésions intercellulaires)' },
-    { id: 'acp4', title: 'Troubles des métabolismes (Glucides & Lipides & Protides & Sels minéraux & Pigments) & Athérosclérose' },
-    { id: 'acp5', title: 'Pathologie vasculaire (Troubles circulatoires)' },
-    { id: 'acp6', title: 'Processus inflammatoire & Réparation et cicatrisation' },
-    { id: 'acp7', title: "Formes de l'inflammation aiguë & Inflammations granulomateuses" },
-    { id: 'acp8', title: 'Aspects anatomopathologiques des Infections (Inflammations virales, parasitaires et mycosiques)' },
-    { id: 'acp9', title: 'Aspects anatomopathologiques des Affections immunitaires' },
-    { id: 'acp10', title: 'Pathologie tumorale & Bases des classifications et moyens diagnostiques des tumeurs (Généralités sur les tumeurs)' },
-    { id: 'acp11', title: 'Étiologies du cancer & Mécanismes de la Carcinogenèse (Étiopathogénie du cancer)' },
-    { id: 'acp12', title: 'Progression du cancer (Processus cancéreux & Tissu cancéreux)' },
-    { id: 'acp13', title: 'Tumeurs épithéliales (Malpighiennes et Urothéliales & Glandulaires)' },
-    { id: 'acp14', title: 'Tumeurs non épithéliales : Tumeurs mésenchymateuses' },
-    { id: 'acp15', title: 'Tumeurs spéciales : Tumeurs nerveuses et mélanocytaires & Tumeurs embryonnaires & Lymphomes' }
   ]
-
 };
-// Citations d'encouragement
-const quotes = [
-  { text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »", author: "— Note de motivation" },
-  { text: "« Le succès au résidanat n'est pas une question de chance, c'est la somme de petites victoires quotidiennes. »", author: "— Objectif Résidanat" },
-  { text: "« Chaque QCM résolu, chaque cours révisé te rapproche un peu plus de ton stéthoscope de résidente. »", author: "— L'3ZIZ Coach" }
-];
 
-function generateNewQuote() {
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const qText = document.getElementById('quote-text');
-  const qAuthor = document.getElementById('quote-author');
-  if (qText) qText.innerText = quotes[randomIndex].text;
-  if (qAuthor) qAuthor.innerText = quotes[randomIndex].author;
-}
-
-// États locaux
-let userState = JSON.parse(localStorage.getItem('melissa_residanat_3couches')) || {};
-let calendarState = JSON.parse(localStorage.getItem('melissa_calendar_data')) || {};
-let qcmReminders = JSON.parse(localStorage.getItem('melissa_qcm_reminders')) || {};
-let currentCoursName = "";
-
-// Navigation entre pages
-function switchPage(pageId) {
-  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-  const targetPage = document.getElementById('page-' + pageId);
-  if (targetPage) targetPage.classList.add('active');
-
-  if (window.event && window.event.currentTarget) {
-    window.event.currentTarget.classList.add('active');
+// =====================================
+// Outils
+// =====================================
+function loadJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) {
+    return fallback;
   }
 }
 
-// Suivi des cours par couche
-function saveState() {
-  localStorage.setItem('melissa_residanat_3couches', JSON.stringify(userState));
-  updateDashboards();
+function saveJSON(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+const pad2 = n => String(n).padStart(2, '0');
+
+// Dates en heure LOCALE (évite les décalages d'un jour dus à l'UTC)
+function toLocalIso(d) {
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+}
+
+function parseIso(s) {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function todayIso() {
+  return toLocalIso(new Date());
+}
+
+function addDaysIso(iso, n) {
+  const d = parseIso(iso);
+  d.setDate(d.getDate() + n);
+  return toLocalIso(d);
+}
+
+function formatFr(iso) {
+  return parseIso(iso).toLocaleDateString('fr-FR');
+}
+
+function formatShort(iso) {
+  return parseIso(iso).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+}
+
+function pct(done, total) {
+  return total > 0 ? Math.round((done / total) * 100) : 0;
+}
+
+// =====================================
+// Citations
+// =====================================
+const quotes = [
+  { text: "« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »", author: "— Note de motivation" },
+  { text: "« Le succès au résidanat n'est pas une question de chance, c'est la somme de petites victoires quotidiennes. »", author: "— Objectif Résidanat" },
+  { text: "« Chaque QCM résolu, chaque cours révisé te rapproche un peu plus de ton stéthoscope de résidente. »", author: "— Objectif Résidanat" }
+];
+
+function generateNewQuote() {
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  const qText = document.getElementById('quote-text');
+  const qAuthor = document.getElementById('quote-author');
+  if (qText) qText.innerText = q.text;
+  if (qAuthor) qAuthor.innerText = q.author;
+}
+
+// =====================================
+// États locaux
+// =====================================
+let userState = loadJSON('melissa_residanat_3couches', {});
+let calendarState = loadJSON('melissa_calendar_data', {});
+let qcmReminders = loadJSON('melissa_qcm_reminders_v2', {}); // clé = id du cours
+let currentReminderCourse = null;
+
+// =====================================
+// Navigation
+// =====================================
+function switchPage(pageId, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+  const target = document.getElementById('page-' + pageId);
+  if (target) target.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+// =====================================
+// Suivi des cours par couche
+// =====================================
 function getItemState(courseId, key) {
-  return userState[courseId] && userState[courseId][key] ? true : false;
+  return !!(userState[courseId] && userState[courseId][key]);
 }
 
 function setItemState(courseId, key, value) {
   if (!userState[courseId]) userState[courseId] = {};
   userState[courseId][key] = value;
-  saveState();
+  saveJSON('melissa_residanat_3couches', userState);
+  updateDashboards();
+}
+
+function findCourse(courseId) {
+  for (const moduleKey of Object.keys(modulesData)) {
+    const c = modulesData[moduleKey].find(x => x.id === courseId);
+    if (c) return c;
+  }
+  return null;
 }
 
 function renderTable() {
   const selectEl = document.getElementById('module-select');
-  if (!selectEl) return;
-
-  const selectedModule = selectEl.value;
-  const courses = modulesData[selectedModule] || [];
   const tbody = document.getElementById('course-table-body');
-  
-  if (!tbody) return;
+  if (!selectEl || !tbody) return;
+
+  const courses = modulesData[selectEl.value] || [];
   tbody.innerHTML = '';
 
-  courses.forEach(course => {
-    const tr = document.createElement('tr');
+  const checkbox = (id, key) =>
+    `<td class="cell-center"><input type="checkbox" ${getItemState(id, key) ? 'checked' : ''} onchange="setItemState('${id}', '${key}', this.checked)"></td>`;
 
+  courses.forEach(course => {
+    const r = qcmReminders[course.id];
+    const btnLabel = r
+      ? `🔔 ${formatShort(r.j8)} · ${formatShort(r.j30)}`
+      : '🔔 Programmer';
+
+    const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><strong>${course.title}</strong></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c1_cours') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c1_cours', this.checked)"></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c1_qcm') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c1_qcm', this.checked)"></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c2_cours') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c2_cours', this.checked)"></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c2_qcm') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c2_qcm', this.checked)"></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c3_cours') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c3_cours', this.checked)"></td>
-      <td class="cell-center"><input type="checkbox" ${getItemState(course.id, 'c3_qcm') ? 'checked' : ''} onchange="setItemState('${course.id}', 'c3_qcm', this.checked)"></td>
+      <td><strong>${escapeHtml(course.title)}</strong></td>
+      ${checkbox(course.id, 'c1_cours')}
+      ${checkbox(course.id, 'c1_qcm')}
+      ${checkbox(course.id, 'c2_cours')}
+      ${checkbox(course.id, 'c2_qcm')}
+      ${checkbox(course.id, 'c3_cours')}
+      ${checkbox(course.id, 'c3_qcm')}
       <td class="cell-center">
-        <button class="btn-reminder" onclick="openReminderModal('${course.title.replace(/'/g, "\\'")}')">🔔 Rappels QCM (J-3, J-7, J-30)</button>
+        <button class="btn-reminder ${r ? 'is-set' : ''}" onclick="openReminderModal('${course.id}')">${btnLabel}</button>
       </td>
     `;
-
     tbody.appendChild(tr);
   });
 
   updateDashboards();
 }
 
-function updateDashboards() {
-  let totalCourses = 0;
-  let c1Done = 0, c2Done = 0, c3Done = 0, qcmDone = 0;
-
-  Object.keys(modulesData).forEach(moduleKey => {
-    modulesData[moduleKey].forEach(course => {
-      totalCourses++;
-      if (getItemState(course.id, 'c1_cours')) c1Done++;
-      if (getItemState(course.id, 'c2_cours')) c2Done++;
-      if (getItemState(course.id, 'c3_cours')) c3Done++;
-
-      if (getItemState(course.id, 'c1_qcm')) qcmDone++;
-      if (getItemState(course.id, 'c2_qcm')) qcmDone++;
-      if (getItemState(course.id, 'c3_qcm')) qcmDone++;
+// Compte cours / QCM faits pour chaque couche sur une liste de cours
+function computeStats(courses) {
+  const stats = { total: courses.length, layers: {} };
+  [1, 2, 3].forEach(k => {
+    let cours = 0, qcm = 0;
+    courses.forEach(c => {
+      if (getItemState(c.id, `c${k}_cours`)) cours++;
+      if (getItemState(c.id, `c${k}_qcm`)) qcm++;
     });
+    stats.layers[k] = { cours, qcm };
   });
-
-  const c1Pct = totalCourses > 0 ? Math.round((c1Done / totalCourses) * 100) : 0;
-  const c2Pct = totalCourses > 0 ? Math.round((c2Done / totalCourses) * 100) : 0;
-  const c3Pct = totalCourses > 0 ? Math.round((c3Done / totalCourses) * 100) : 0;
-
-  const c1Bar = document.getElementById('c1-progress-bar');
-  const c1Text = document.getElementById('c1-progress-text');
-  if (c1Bar) c1Bar.style.width = c1Pct + '%';
-  if (c1Text) c1Text.textContent = c1Pct + '%';
-
-  const c2Bar = document.getElementById('c2-progress-bar');
-  const c2Text = document.getElementById('c2-progress-text');
-  if (c2Bar) c2Bar.style.width = c2Pct + '%';
-  if (c2Text) c2Text.textContent = c2Pct + '%';
-
-  const c3Bar = document.getElementById('c3-progress-bar');
-  const c3Text = document.getElementById('c3-progress-text');
-  if (c3Bar) c3Bar.style.width = c3Pct + '%';
-  if (c3Text) c3Text.textContent = c3Pct + '%';
-
-  const qcmText = document.getElementById('qcm-progress-text');
-  if (qcmText) qcmText.textContent = `${qcmDone} / ${totalCourses * 3}`;
+  return stats;
 }
 
-// --- LOGIQUE DE RAPPELS QCM ---
-function openReminderModal(coursName) {
-  currentCoursName = coursName;
-  const titleEl = document.getElementById('modal-cours-title');
-  if (titleEl) titleEl.innerText = "Cours : " + coursName;
+function updateDashboards() {
+  const allCourses = Object.values(modulesData).flat();
+  const s = computeStats(allCourses);
+  const total = s.total;
 
-  const today = new Date().toISOString().split('T')[0];
-  const dateInput = document.getElementById('date-revision');
-  if (dateInput) dateInput.value = today;
+  let globalDone = 0;
+  let globalCours = 0;
+  let globalQcm = 0;
 
-  const phoneInput = document.getElementById('user-phone');
-  if (phoneInput && !phoneInput.value) {
-    phoneInput.value = DEFAULT_PHONE_MELISSA;
-  }
+  // Chaque couche = cours + QCM de cette couche
+  [1, 2, 3].forEach(k => {
+    const { cours, qcm } = s.layers[k];
+    const p = pct(cours + qcm, total * 2);
+    globalDone += cours + qcm;
+    globalCours += cours;
+    globalQcm += qcm;
 
-  calculateDates();
-  const modal = document.getElementById('reminder-modal');
-  if (modal) modal.classList.add('open');
+    const bar = document.getElementById(`c${k}-progress-bar`);
+    const txt = document.getElementById(`c${k}-progress-text`);
+    const det = document.getElementById(`c${k}-detail`);
+    if (bar) bar.style.width = p + '%';
+    if (txt) txt.textContent = p + '%';
+    if (det) det.innerHTML = `Cours : <strong>${cours}/${total}</strong> (${pct(cours, total)}%)<br>QCM : <strong>${qcm}/${total}</strong> (${pct(qcm, total)}%)`;
+  });
+
+  // Global = toutes les cases des 3 couches
+  const gp = pct(globalDone, total * 6);
+  const gBar = document.getElementById('global-progress-bar');
+  const gTxt = document.getElementById('global-progress-text');
+  const gDet = document.getElementById('global-detail');
+  if (gBar) gBar.style.width = gp + '%';
+  if (gTxt) gTxt.textContent = gp + '%';
+  if (gDet) gDet.innerHTML = `${globalDone} / ${total * 6} étapes validées<br>Cours : ${globalCours}/${total * 3} · QCM : ${globalQcm}/${total * 3}`;
+
+  updateModuleProgress();
+}
+
+// Avancement du module sélectionné
+function updateModuleProgress() {
+  const box = document.getElementById('module-progress');
+  const selectEl = document.getElementById('module-select');
+  if (!box || !selectEl) return;
+
+  const courses = modulesData[selectEl.value] || [];
+  const s = computeStats(courses);
+  const total = s.total;
+  let done = 0;
+
+  const pills = [1, 2, 3].map(k => {
+    const { cours, qcm } = s.layers[k];
+    done += cours + qcm;
+    return `<span class="mp-pill">C${k} : <strong>${pct(cours + qcm, total * 2)}%</strong></span>`;
+  });
+
+  const moduleName = selectEl.options[selectEl.selectedIndex]?.text || '';
+  box.innerHTML = `<span class="mp-pill total">${escapeHtml(moduleName)} : <strong>${pct(done, total * 6)}%</strong></span>` + pills.join('');
+}
+
+// =====================================
+// Rappels QCM
+// =====================================
+function saveReminders() {
+  saveJSON('melissa_qcm_reminders_v2', qcmReminders);
+}
+
+function setReminderStatus(text, isError) {
+  const el = document.getElementById('reminder-status');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.toggle('error', !!isError);
+}
+
+function openReminderModal(courseId) {
+  const course = findCourse(courseId);
+  if (!course) return;
+  currentReminderCourse = course;
+
+  const existing = qcmReminders[courseId];
+  document.getElementById('modal-cours-title').innerText = 'Cours : ' + course.title;
+  document.getElementById('date-revision').value = existing ? existing.base : todayIso();
+  document.getElementById('reminder-delete-btn').style.display = existing ? '' : 'none';
+  setReminderStatus(existing ? '✓ Rappels déjà enregistrés pour ce cours' : '');
+
+  previewReminderDates();
+  document.getElementById('reminder-modal').classList.add('open');
 }
 
 function closeReminderModal() {
-  const modal = document.getElementById('reminder-modal');
-  if (modal) modal.classList.remove('open');
+  document.getElementById('reminder-modal').classList.remove('open');
+  currentReminderCourse = null;
 }
 
-
-function calculateDates() {
-  const inputDateVal = document.getElementById('date-revision')?.value;
-  if (!inputDateVal) return;
-
-  const baseDate = new Date(inputDateVal);
-
-  const dJ8 = new Date(baseDate);
-  dJ8.setDate(baseDate.getDate() + 8);
-
-  const dJ30 = new Date(baseDate);
-  dJ30.setDate(baseDate.getDate() + 30);
-
-  const formatIso = d => d.toISOString().split('T')[0];
-
-  qcmReminders[currentCoursName] = {
-    j8: formatIso(dJ8),
-    j30: formatIso(dJ30)
-  };
-  localStorage.setItem('melissa_qcm_reminders', JSON.stringify(qcmReminders));
-
+function previewReminderDates() {
+  const base = document.getElementById('date-revision').value;
   const j8El = document.getElementById('date-j8');
   const j30El = document.getElementById('date-j30');
 
-  if (j8El) j8El.innerText = dJ8.toLocaleDateString('fr-FR');
-  if (j30El) j30El.innerText = dJ30.toLocaleDateString('fr-FR');
-
-  updateReminderLinks(dJ8, dJ30);
+  if (!base) {
+    j8El.innerText = '--/--/----';
+    j30El.innerText = '--/--/----';
+    return;
+  }
+  j8El.innerText = formatFr(addDaysIso(base, 8));
+  j30El.innerText = formatFr(addDaysIso(base, 30));
 }
 
-function updateReminderLinks(dJ8, dJ30) {
-  let phone = document.getElementById('user-phone')?.value || DEFAULT_PHONE_MELISSA;
-  phone = phone.replace(/[^0-9]/g, '');
-  if (phone.startsWith('0')) {
-    phone = '213' + phone.substring(1);
-  } else if (!phone.startsWith('213') && phone.length > 0) {
-    phone = '213' + phone;
+function saveReminder() {
+  if (!currentReminderCourse) return;
+  const base = document.getElementById('date-revision').value;
+  if (!base) {
+    setReminderStatus('Choisis d’abord une date.', true);
+    return;
   }
 
-  const message = `Rappel QCM Résidanat pour Mélissa 🩺\n- Cours : ${currentCoursName}\nN'oublie pas de refaire les QCM aux dates suivantes :\n• Rappel J-8 : ${dJ8.toLocaleDateString('fr-FR')}\n• Rappel J-30 : ${dJ30.toLocaleDateString('fr-FR')}`;
-
-  const smsLink = document.getElementById('sms-link');
-  const waLink = document.getElementById('wa-link');
-
-  if (smsLink) smsLink.href = `sms:${phone}?body=${encodeURIComponent(message)}`;
-  if (waLink) waLink.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  qcmReminders[currentReminderCourse.id] = {
+    title: currentReminderCourse.title,
+    base,
+    j8: addDaysIso(base, 8),
+    j30: addDaysIso(base, 30)
+  };
+  saveReminders();
+  closeReminderModal();
+  renderTable();
+  renderRemindersList();
 }
- 
-function checkDueReminders() {
-  const todayIso = new Date().toISOString().split('T')[0];
-  let dueList = [];
 
-  Object.keys(qcmReminders).forEach(cours => {
-    const dates = qcmReminders[cours];
-  
-    if (dates.j8 === todayIso) dueList.push(`${cours} (Rappel J-8)`);
-    if (dates.j30 === todayIso) dueList.push(`${cours} (Rappel J-30)`);
+function deleteReminder() {
+  if (!currentReminderCourse) return;
+  delete qcmReminders[currentReminderCourse.id];
+  saveReminders();
+  closeReminderModal();
+  renderTable();
+  renderRemindersList();
+}
+
+function renderRemindersList() {
+  const list = document.getElementById('reminders-list');
+  const badge = document.getElementById('due-badge');
+  if (!list) return;
+
+  const today = todayIso();
+  const items = [];
+  Object.values(qcmReminders).forEach(r => {
+    if (r.j8 >= today) items.push({ title: r.title, date: r.j8, label: 'J+8' });
+    if (r.j30 >= today) items.push({ title: r.title, date: r.j30, label: 'J+30' });
   });
+  items.sort((a, b) => a.date.localeCompare(b.date));
 
-  if (dueList.length > 0) {
-    alert(`🩺 RAPPEL QCM DU JOUR (${new Date().toLocaleDateString('fr-FR')}) :\n\nMélissa, il est temps de refaire les QCM pour les cours suivants :\n\n- ` + dueList.join('\n- '));
+  const dueToday = items.filter(i => i.date === today).length;
+  if (badge) {
+    badge.style.display = dueToday ? '' : 'none';
+    badge.textContent = `${dueToday} aujourd'hui`;
   }
+
+  if (items.length === 0) {
+    list.innerHTML = '<li class="reminders-empty" style="background:none;border:none;padding:0">Aucun rappel à venir. Clique sur « 🔔 Programmer » à côté d’un cours.</li>';
+    return;
+  }
+
+  list.innerHTML = items.slice(0, 10).map(i => `
+    <li class="${i.date === today ? 'today' : ''}">
+      <span>${escapeHtml(i.title)} <small style="color:var(--text-muted)">(${i.label})</small></span>
+      <span class="r-date">${i.date === today ? "Aujourd'hui" : formatFr(i.date)}</span>
+    </li>
+  `).join('');
 }
 
+// =====================================
 // Samedi Pédagogique
+// =====================================
 const SAMEDI_ROWS_COUNT = 15;
 
 function renderSamediTable() {
@@ -1136,17 +1220,17 @@ function renderSamediTable() {
   if (!tbody) return;
   tbody.innerHTML = '';
 
-  const savedData = JSON.parse(localStorage.getItem('melissa-samedi-data') || '{}');
+  const savedData = loadJSON('melissa-samedi-data', {});
 
   for (let i = 0; i < SAMEDI_ROWS_COUNT; i++) {
-    const rowData = savedData[i] || { cours: '', c1: false, c2: false, c3: false, qcm: false };
+    const row = savedData[i] || { cours: '', c1: false, c2: false, c3: false, qcm: false };
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="col-cours"><input type="text" value="${rowData.cours || ''}" placeholder="Intitulé du cours ${i+1}..." onchange="saveSamediData()"></td>
-      <td><input type="checkbox" ${rowData.c1 ? 'checked' : ''} onchange="saveSamediData()"></td>
-      <td><input type="checkbox" ${rowData.c2 ? 'checked' : ''} onchange="saveSamediData()"></td>
-      <td><input type="checkbox" ${rowData.c3 ? 'checked' : ''} onchange="saveSamediData()"></td>
-      <td><input type="checkbox" ${rowData.qcm ? 'checked' : ''} onchange="saveSamediData()"></td>
+      <td class="col-cours"><input type="text" value="${escapeHtml(row.cours || '')}" placeholder="Intitulé du cours ${i + 1}..." onchange="saveSamediData()"></td>
+      <td><input type="checkbox" ${row.c1 ? 'checked' : ''} onchange="saveSamediData()"></td>
+      <td><input type="checkbox" ${row.c2 ? 'checked' : ''} onchange="saveSamediData()"></td>
+      <td><input type="checkbox" ${row.c3 ? 'checked' : ''} onchange="saveSamediData()"></td>
+      <td><input type="checkbox" ${row.qcm ? 'checked' : ''} onchange="saveSamediData()"></td>
     `;
     tbody.appendChild(tr);
   }
@@ -1160,10 +1244,9 @@ function renderSamediTable() {
 function saveSamediData() {
   const tbody = document.getElementById('samedi-table-body');
   if (!tbody) return;
-  const rows = tbody.querySelectorAll('tr');
   const data = {};
 
-  rows.forEach((tr, idx) => {
+  tbody.querySelectorAll('tr').forEach((tr, idx) => {
     const inputs = tr.querySelectorAll('input');
     data[idx] = {
       cours: inputs[0].value,
@@ -1174,21 +1257,22 @@ function saveSamediData() {
     };
   });
 
-  localStorage.setItem('melissa-samedi-data', JSON.stringify(data));
+  saveJSON('melissa-samedi-data', data);
   localStorage.setItem('melissa-samedi-end-date', document.getElementById('samedi-end-date')?.value || '');
   localStorage.setItem('melissa-samedi-notes', document.getElementById('samedi-notes')?.value || '');
 }
 
+// =====================================
 // Planning Journalier
+// =====================================
 function saveCalendar() {
-  localStorage.setItem('melissa_calendar_data', JSON.stringify(calendarState));
+  saveJSON('melissa_calendar_data', calendarState);
   renderCalendar();
 }
 
 function addCalendarDay() {
   const dateInput = document.getElementById('date-picker').value;
   if (!dateInput) return;
-
   if (!calendarState[dateInput]) {
     calendarState[dateInput] = [];
     saveCalendar();
@@ -1199,7 +1283,6 @@ function addTaskToDay(date) {
   const input = document.getElementById(`input-${date}`);
   const text = input ? input.value.trim() : '';
   if (!text) return;
-
   calendarState[date].push({ id: Date.now(), text, completed: false });
   saveCalendar();
 }
@@ -1218,7 +1301,6 @@ function renderCalendar() {
   grid.innerHTML = '';
 
   const dates = Object.keys(calendarState).sort();
-
   if (dates.length === 0) {
     grid.innerHTML = '<p style="color: var(--text-muted)">Aucune journée planifiée. Choisis une date pour commencer !</p>';
     return;
@@ -1230,57 +1312,57 @@ function renderCalendar() {
 
     const tasksHtml = calendarState[date].map(task => `
       <li class="task-item ${task.completed ? 'completed' : ''}">
-        <span>${task.text}</span>
+        <span>${escapeHtml(task.text)}</span>
         <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="toggleTask('${date}', ${task.id})">
       </li>
     `).join('');
 
     dayCard.innerHTML = `
-      <div class="day-header">📅 ${new Date(date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+      <div class="day-header">📅 ${parseIso(date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
       <div class="task-input-group">
-        <input type="text" id="input-${date}" placeholder="Objectif du jour...">
+        <input type="text" id="input-${date}" placeholder="Objectif du jour..." onkeypress="if(event.key==='Enter') addTaskToDay('${date}')">
         <button class="btn-add" onclick="addTaskToDay('${date}')">+</button>
       </div>
       <ul class="task-list">${tasksHtml}</ul>
     `;
-
     grid.appendChild(dayCard);
   });
 }
 
+// =====================================
 // To-Do List
-let todos = JSON.parse(localStorage.getItem('melissa_todos')) || [];
+// =====================================
+let todos = loadJSON('melissa_todos', []);
 
 function saveTodos() {
-  localStorage.setItem('melissa_todos', JSON.stringify(todos));
+  saveJSON('melissa_todos', todos);
   renderTodos();
 }
 
-window.addTodo = function() {
+function addTodo() {
   const input = document.getElementById('todo-page-input');
   const text = input ? input.value.trim() : '';
   if (!text) return;
-
   todos.push({ id: Date.now(), text, completed: false });
   input.value = '';
   saveTodos();
-};
+}
 
-window.toggleTodo = function(id) {
+function toggleTodo(id) {
   todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
   saveTodos();
-};
+}
 
-window.deleteTodo = function(id) {
+function deleteTodo(id) {
   todos = todos.filter(t => t.id !== id);
   saveTodos();
-};
+}
 
 function renderTodos() {
   const list = document.getElementById('todo-page-list');
   if (!list) return;
-
   list.innerHTML = '';
+
   if (todos.length === 0) {
     list.innerHTML = '<li style="color: var(--text-muted); font-size: 0.95rem;">Aucune tâche pour le moment. Ajoute ta première révision ci-dessus !</li>';
     return;
@@ -1292,7 +1374,7 @@ function renderTodos() {
     li.innerHTML = `
       <div style="display: flex; align-items: center; gap: 10px;">
         <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
-        <span style="font-size: 1rem;">${todo.text}</span>
+        <span style="font-size: 1rem;">${escapeHtml(todo.text)}</span>
       </div>
       <button onclick="deleteTodo(${todo.id})" style="background:none; border:none; color:#ef4444; font-weight:bold; cursor:pointer; font-size:1.1rem;">✕</button>
     `;
@@ -1300,9 +1382,9 @@ function renderTodos() {
   });
 }
 
-// ==========================================
-// === LOGIQUE DE RENDU MEDTRACK (ANNUEL) ===
-// ==========================================
+// =====================================
+// Planning annuel MedTrack
+// =====================================
 const medtrackMonths = [
   {y:2026,m:8,name:'Septembre 2026',holiday:{}},
   {y:2026,m:9,name:'Octobre 2026',holiday:{}},
@@ -1323,8 +1405,8 @@ const medtrackMonths = [
 const daysFr = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
 let activeDateKey = null;
 
-function medtrackKey(y,m,d) {
-  return `melissa-calendar-${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+function medtrackKey(y, m, d) {
+  return `melissa-calendar-${y}-${pad2(m + 1)}-${pad2(d)}`;
 }
 
 function getDayNote(k) {
@@ -1344,7 +1426,6 @@ function renderMedTrack() {
     const title = document.createElement('div');
     title.className = 'medtrack-month-header';
     title.textContent = mon.name;
-
     if (mon.concours) {
       title.title = 'Clique pour ouvrir le message de fin';
       title.addEventListener('click', openFinalMonth);
@@ -1353,7 +1434,6 @@ function renderMedTrack() {
 
     const grid = document.createElement('div');
     grid.className = 'medtrack-grid';
-
     for (let d = 1; d <= daysInMonth; d++) {
       grid.appendChild(createMedtrackDayCell(mon, d));
     }
@@ -1376,8 +1456,7 @@ function createMedtrackDayCell(mon, d) {
   if (mon.ramadan && !isHoliday) cell.classList.add('ramadan');
   if (mon.concours) cell.classList.add('concours-day');
 
-  const noteKey = medtrackKey(mon.y, mon.m, d);
-  const note = getDayNote(noteKey);
+  const note = getDayNote(medtrackKey(mon.y, mon.m, d));
   if (note.trim()) cell.classList.add('has-note');
 
   const topRow = document.createElement('div');
@@ -1399,7 +1478,6 @@ function createMedtrackDayCell(mon, d) {
 
   cell.append(topRow, hint);
   cell.addEventListener('click', () => openDayEditor(mon.y, mon.m, d, mon.holiday[d] || ''));
-
   return cell;
 }
 
@@ -1417,7 +1495,6 @@ function openDayEditor(y, m, d, holiday) {
       ? `${daysFr[date.getDay()]} • ${holiday}`
       : `${daysFr[date.getDay()]} • Ma journée de révision`;
   }
-
   if (textarea) textarea.value = getDayNote(activeDateKey);
   if (saved) saved.textContent = '';
 
@@ -1429,28 +1506,26 @@ function openDayEditor(y, m, d, holiday) {
   setTimeout(() => textarea?.focus(), 50);
 }
 
-window.closeDayEditor = function() {
+function closeDayEditor() {
   const modal = document.getElementById('day-editor-modal');
   if (modal) {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
   }
   activeDateKey = null;
-};
+}
 
-window.saveDayNote = function() {
+function saveDayNote() {
   if (!activeDateKey) return;
   const textarea = document.getElementById('day-editor-textarea');
-  if (textarea) {
-    localStorage.setItem(activeDateKey, textarea.value);
-  }
+  if (textarea) localStorage.setItem(activeDateKey, textarea.value);
   const saved = document.getElementById('day-editor-saved');
   if (saved) saved.textContent = '✓ Journée enregistrée';
   renderMedTrack();
   setTimeout(() => { if (saved) saved.textContent = ''; }, 1800);
-};
+}
 
-window.deleteDayNote = function() {
+function deleteDayNote() {
   if (!activeDateKey) return;
   localStorage.removeItem(activeDateKey);
   const textarea = document.getElementById('day-editor-textarea');
@@ -1458,25 +1533,25 @@ window.deleteDayNote = function() {
   const saved = document.getElementById('day-editor-saved');
   if (saved) saved.textContent = 'Journée effacée';
   renderMedTrack();
-};
+}
 
-window.openFinalMonth = function() {
+function openFinalMonth() {
   const modal = document.getElementById('final-month-modal');
   if (modal) {
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
   }
-};
+}
 
-window.closeFinalMonth = function() {
+function closeFinalMonth() {
   const modal = document.getElementById('final-month-modal');
   if (modal) {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
   }
-};
+}
 
-window.finalReady = function() {
+function finalReady() {
   const messages = [
     'Alors, Mélissa… respire. Tu as travaillé pour ce moment. ✨',
     'Dernier chapitre : confiance, concentration et une question à la fois. 🩺',
@@ -1484,74 +1559,27 @@ window.finalReady = function() {
   ];
   const box = document.getElementById('final-ready-message');
   if (box) box.textContent = messages[Math.floor(Math.random() * messages.length)];
-};
-
-// Logique Coach L'3ZIZ AI
-function toggleLzizChat() {
-  const chatWindow = document.getElementById('lziz-chat-window');
-  if (chatWindow) chatWindow.classList.toggle('lziz-chat-hidden');
 }
 
-function handleLzizKeyPress(e) {
-  if (e.key === 'Enter') sendToLziz();
-}
-
-async function sendToLziz() {
-  const input = document.getElementById('lziz-user-input');
-  const text = input ? input.value.trim() : '';
-  if (!text) return;
-
-  const messagesDiv = document.getElementById('lziz-messages');
-
-  const userMsg = document.createElement('div');
-  userMsg.className = 'lziz-msg lziz-user';
-  userMsg.textContent = text;
-  messagesDiv.appendChild(userMsg);
-  input.value = '';
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-  const loadingId = 'loading-' + Date.now();
-  const loader = document.createElement('div');
-  loader.className = 'lziz-msg lziz-bot';
-  loader.id = loadingId;
-  loader.textContent = "L'3ZIZ réfléchit...";
-  messagesDiv.appendChild(loader);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text })
-    });
-
-    const data = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      throw new Error(data.error || `Erreur serveur (${response.status})`);
-    }
-
-    document.getElementById(loadingId).textContent = data.reply || "Je n'ai pas reçu de réponse.";
-  } catch (err) {
-    console.error('Erreur L\'3ZIZ:', err);
-    const message = err.name === 'TypeError'
-      ? "Impossible de contacter le serveur. Vérifie que le serveur L'3ZIZ est bien lancé."
-      : `⚠️ ${err.message}`;
-    document.getElementById(loadingId).textContent = message;
-  }
-
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-// Initialisations au chargement du DOM
+// =====================================
+// Initialisation
+// =====================================
 document.addEventListener('DOMContentLoaded', () => {
   renderTable();
+  renderRemindersList();
   renderSamediTable();
   renderTodos();
   renderCalendar();
   renderMedTrack();
-  checkDueReminders();
 
   const datePicker = document.getElementById('date-picker');
-  if (datePicker) datePicker.valueAsDate = new Date();
+  if (datePicker) datePicker.value = todayIso();
+
+  // Échap ferme les fenêtres ouvertes
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeReminderModal();
+    closeDayEditor();
+    closeFinalMonth();
+  });
 });
