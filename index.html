@@ -3,1060 +3,1234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Objectif Résidanat — Calendrier de Mélissa 🩺</title>
+  <title>Résidanat — Mélissa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* =========================================================
+       Tokens
+       ========================================================= */
     :root {
-      --bg-color: #f1f5f9;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #0284c7;
-      --primary-light: #e0f2fe;
-      --success: #10b981;
-      --border: #cbd5e1;
-      --radius: 12px;
+      --ink: #14302f;
+      --ink-2: #1d4442;
+      --text: #1b2b2a;
+      --text-2: #43575a;
+      --muted: #6f8381;
+      --paper: #f4f6f5;
+      --surface: #ffffff;
+      --line: #e1e7e5;
+      --line-2: #edf1ef;
+      --brand: #1f6f6b;
+      --brand-soft: #e3f1ee;
+
+      --c1: #2f6fb0; --c1-soft: #e7eff8;
+      --c2: #7b55b3; --c2-soft: #f0eaf8;
+      --c3: #1f8a5b; --c3-soft: #e3f4eb;
+
+      --alert: #c2410c; --alert-soft: #fdeee6;
+
+      --brand-hover: #185b58;
+      --focus-ring: rgba(31,111,107,.14);
+      --side-bg: var(--ink);
+      --side-title: #ffffff;
+      --side-hover: rgba(255,255,255,.06);
+      --side-foot-bg: rgba(255,255,255,.05);
+      --side-active-shadow: none;
+      --side-mark: #2a5e5a;
+      --side-text: #d6e5e2;
+      --side-link: #b7cecb;
+      --side-muted: #8fb0ab;
+      --side-foot: #a9c3bf;
+      --on-ink: #c6dbd7;
+      --thead: #fafbfb;
+      --row-hover: #f8faf9;
+      --dash: #c4d0cd;
+      --ghost-hover: #c9d4d1;
+      --weekend: #f0f3f2;
+      --weekend-legend: #dfe6e4;
+      --overlay: rgba(20,48,47,.45);
+      --shadow: rgba(20,48,47,.25);
+
+      --r-lg: 16px;
+      --r-md: 10px;
+      --r-sm: 7px;
+
+      --font-display: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+      --font-body: "Figtree", system-ui, -apple-system, sans-serif;
+
+      --sidebar: 248px;
     }
+
+    /* Palette bleu clair (palette du site) */
+    :root {
+      --ink: #1e3a5c;
+      --ink-2: #2a4a70;
+      --text: #1f2f40;
+      --text-2: #4a5d72;
+      --muted: #73859a;
+      --paper: #f1f6fb;
+      --line: #dbe6f1;
+      --line-2: #e9f0f7;
+      --brand: #3b82c4;
+      --brand-soft: #e3effa;
+
+      --c1: #2a8c9c; --c1-soft: #e2f3f5;
+      --c2: #7b5bb5; --c2-soft: #f0ebf8;
+      --c3: #2f8f5e; --c3-soft: #e4f4ea;
+
+      --brand-hover: #2f6ea9;
+      --focus-ring: rgba(59,130,196,.18);
+
+      --side-bg: #e3eefa;
+      --side-title: #1e3a5c;
+      --side-hover: rgba(255,255,255,.6);
+      --side-foot-bg: rgba(255,255,255,.65);
+      --side-active-shadow: 0 1px 3px rgba(30,58,92,.12);
+      --side-mark: #3b82c4;
+      --side-text: #34506f;
+      --side-link: #48627f;
+      --side-muted: #6f88a3;
+      --side-foot: #48627f;
+
+      --on-ink: #cddcec;
+      --thead: #f7fafd;
+      --row-hover: #f4f8fc;
+      --dash: #bfd2e6;
+      --ghost-hover: #c3d4e6;
+      --weekend: #eaf1f8;
+      --weekend-legend: #d5e3f1;
+      --overlay: rgba(30,58,92,.38);
+      --shadow: rgba(30,58,92,.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
       margin: 0;
-      padding: 20px;
+      background: var(--paper);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      color: var(--ink);
+      margin: 0;
+      letter-spacing: -0.01em;
     }
 
-    header { margin-bottom: 20px; }
-    h1 { color: #0369a1; margin: 0 0 6px 0; }
-    .subtitle { color: var(--text-muted); margin: 0 0 16px 0; }
+    button, input, select, textarea { font: inherit; color: inherit; }
 
-    /* STYLES CITATION D'ENCOURAGEMENT */
-    .quote-card {
-      background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
-      border: 1px solid #bae6fd;
-      border-left: 5px solid var(--primary);
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      margin-bottom: 24px;
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+
+    /* =========================================================
+       Layout : barre latérale + contenu
+       ========================================================= */
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar) 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--side-bg);
+      border-right: 1px solid var(--line);
+      color: var(--side-text);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.06);
+      gap: 12px;
+      padding: 0 8px;
     }
 
-    .quote-content {
-      font-style: italic;
-      color: #0369a1;
-      font-size: 0.98rem;
-      line-height: 1.4;
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--side-mark);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
     }
 
-    .quote-author {
+    .brand-name {
+      font-family: var(--font-display);
       font-weight: 700;
-      font-style: normal;
-      color: var(--text-main);
-      display: block;
-      margin-top: 4px;
-      font-size: 0.85rem;
+      font-size: 1.08rem;
+      color: var(--side-title);
+      line-height: 1.15;
     }
 
-    .btn-quote {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
+    .brand-sub { font-size: .78rem; color: var(--side-muted); }
 
-    .btn-quote:hover { background: #0369a1; }
-
-    /* Navigation */
     .nav-tabs {
       display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 8px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .tab-btn {
-      padding: 10px 20px;
-      border: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 12px;
+      border: 0;
+      border-radius: var(--r-md);
       background: transparent;
-      font-size: 1rem;
+      color: var(--side-link);
       font-weight: 600;
-      color: var(--text-muted);
+      font-size: .93rem;
+      text-align: left;
       cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.2s;
+      transition: background .15s, color .15s;
     }
 
-    .tab-btn.active {
-      background: var(--primary);
-      color: white;
+    .tab-btn svg { width: 18px; height: 18px; flex-shrink: 0; opacity: .85; }
+    .tab-btn:hover { background: var(--side-hover); color: var(--side-title); }
+    .tab-btn.active { background: #fff; color: var(--ink); box-shadow: var(--side-active-shadow); }
+    .tab-btn.active svg { opacity: 1; color: var(--brand); }
+
+    .sidebar-foot {
+      margin-top: auto;
+      padding: 14px;
+      border-radius: var(--r-md);
+      background: var(--side-foot-bg);
+      font-size: .82rem;
+      color: var(--side-foot);
+      line-height: 1.45;
     }
 
+    .sidebar-foot strong { color: var(--side-title); font-weight: 600; }
+
+    .main {
+      min-width: 0;
+      padding: 28px 36px 60px;
+    }
+
+    .main-inner { max-width: 1180px; margin: 0 auto; }
+
+    /* =========================================================
+       Bandeau d'accueil
+       ========================================================= */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      padding-bottom: 26px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-date {
+      color: var(--muted);
+      font-weight: 500;
+      margin: 0 0 4px;
+    }
+    .hero-date::first-letter { text-transform: uppercase; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .quote-card {
+      margin-top: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      max-width: 640px;
+    }
+
+    .quote-content { color: var(--text-2); font-size: .98rem; }
+    .quote-content #quote-text { display: block; }
+
+    .quote-author {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .btn-quote {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--brand);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform .3s;
+    }
+
+    .btn-quote:hover { transform: rotate(90deg); }
+    .btn-quote svg { width: 16px; height: 16px; }
+
+    /* Compte à rebours : l'élément fort de la page */
+    .countdown {
+      text-align: right;
+      line-height: 1;
+    }
+
+    .countdown-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(3.4rem, 7vw, 5.4rem);
+      color: var(--ink);
+      letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-num span { color: var(--brand); }
+
+    .countdown-label {
+      margin-top: 8px;
+      color: var(--text-2);
+      font-weight: 600;
+      font-size: .95rem;
+      line-height: 1.35;
+    }
+
+    .countdown-label small { display: block; color: var(--muted); font-weight: 500; font-size: .8rem; }
+
+    /* =========================================================
+       Éléments communs
+       ========================================================= */
     .page { display: none; }
     .page.active { display: block; }
 
-    /* Dashboard */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 16px;
-    }
+    .page-head { margin-bottom: 20px; }
+    .page-head h2 { font-size: 1.5rem; font-weight: 700; }
+    .page-head p { margin: 4px 0 0; color: var(--muted); max-width: 64ch; }
 
-    .dash-card {
-      background: var(--card-bg);
-      padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    }
-
-    .dash-card h3 {
-      margin: 0 0 8px 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .dash-card.global {
-      background: linear-gradient(135deg, #0369a1, #0284c7);
-      border-color: #0369a1;
-      color: white;
-    }
-
-    .dash-card.global h3,
-    .dash-card.global .dash-detail { color: #e0f2fe; }
-    .dash-card.global .dash-value { color: white; }
-    .dash-card.global .progress-bar-bg { background: rgba(255,255,255,.25); }
-    .dash-card.global .progress-bar-fill { background: #ffffff; }
-
-    .dash-value {
-      font-size: 1.6rem;
+    .section-title {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--primary);
-    }
-
-    .dash-detail {
-      margin-top: 8px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: var(--success);
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    /* Rappels à venir */
-    .reminders-panel { margin-bottom: 24px; }
-
-    .reminders-panel h3 {
+      margin: 0 0 12px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 20px;
+    }
+
+    .dash-card { /* utilisé par la to-do */
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--r-md);
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: .92rem;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+
+    .btn-primary, .btn-add { background: var(--brand); color: #fff; border: 0; border-radius: var(--r-md); padding: 10px 16px; font-weight: 600; cursor: pointer; }
+    .btn-primary:hover, .btn-add:hover { background: var(--brand-hover); }
+    .btn-ghost { background: var(--surface); border-color: var(--line); color: var(--text-2); }
+    .btn-ghost:hover { border-color: var(--ghost-hover); }
+    .btn-danger { background: var(--alert-soft); color: var(--alert); }
+
+    .field {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .field:focus, input[type="date"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--brand);
+    }
+
+    /* =========================================================
+       Tableau de bord
+       ========================================================= */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-top: 3px solid var(--accent);
+    }
+
+    .kpi-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .kpi-label { font-weight: 700; font-size: .92rem; color: var(--ink); }
+
+    .kpi-tag {
+      font-size: .74rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 999px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      white-space: nowrap;
+    }
+
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .kpi-value small { font-size: 1rem; color: var(--muted); font-weight: 600; margin-left: 2px; }
+
+    .kpi-rows { display: flex; flex-direction: column; gap: 10px; }
+
+    .kpi-row-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: .82rem;
+      color: var(--text-2);
+      margin-bottom: 5px;
+    }
+
+    .kpi-row-top b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+    .bar { height: 6px; background: var(--line-2); border-radius: 999px; overflow: hidden; }
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .bar.light > span { opacity: .5; }
+
+    .kpi.global {
+      --accent: var(--brand);
+      grid-column: 1 / -1;
+      border-top-color: var(--brand);
+      flex-direction: row;
+      align-items: center;
+      gap: 28px;
+      padding: 22px 26px;
+    }
+
+    .kpi.global .global-body {
+      display: grid;
+      grid-template-columns: minmax(200px, auto) 1fr;
+      grid-template-areas: "label stats" "value stats" "caption stats";
+      column-gap: 32px;
+      row-gap: 6px;
+      align-items: center;
+    }
+    .kpi.global .global-body > .kpi-label { grid-area: label; }
+    .kpi.global .global-body > .kpi-value { grid-area: value; }
+    .kpi.global .global-body > .global-caption { grid-area: caption; }
+    .kpi.global .global-stats { grid-area: stats; }
+
+    .ring { position: relative; width: 124px; height: 124px; flex-shrink: 0; }
+    .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring .track { stroke: var(--line-2); }
+    .ring .fill {
+      stroke: var(--brand);
+      stroke-linecap: round;
+      transition: stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring-center .big {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ring-center .sub { font-size: .76rem; color: var(--muted); }
+
+    .global-body { display: flex; flex-direction: column; gap: 12px; min-width: 0; flex: 1; }
+    .kpi.global .kpi-value { font-size: 1.9rem; }
+
+    .global-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+    .gstat {
+      background: var(--paper);
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+    }
+
+    .gstat .n { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .gstat .n small { font-family: var(--font-body); white-space: nowrap; font-size: .78rem; color: var(--muted); font-weight: 500; }
+    .gstat .l { font-size: .74rem; color: var(--text-2); margin-top: 2px; line-height: 1.3; }
+
+    .global-caption { font-size: .84rem; color: var(--muted); }
+
+    /* Rappels */
+    .reminders-panel { margin-bottom: 28px; }
+
     .due-badge {
-      background: #ef4444;
-      color: white;
-      font-size: 0.75rem;
-      padding: 2px 8px;
+      background: var(--alert);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: .74rem;
+      font-weight: 600;
+      padding: 2px 9px;
       border-radius: 999px;
     }
 
-    .reminders-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .reminders-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 
     .reminders-list li {
       display: flex;
       justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      padding: 10px 2px;
+      border-bottom: 1px solid var(--line-2);
+      font-size: .92rem;
+    }
+
+    .reminders-list li:last-child { border-bottom: 0; }
+    .reminders-list li small { color: var(--muted); }
+    .reminders-list .r-date { white-space: nowrap; color: var(--text-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .reminders-list li.today { color: var(--alert); }
+    .reminders-list li.today .r-date { color: var(--alert); }
+    .reminders-list li.today > span:first-child::before {
+      content: "";
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--alert);
+      margin-right: 8px;
+      vertical-align: 2px;
+    }
+
+    .reminders-empty { color: var(--muted); font-size: .92rem; border: 0 !important; }
+
+    /* =========================================================
+       Modules : barre d'outils + tableau
+       ========================================================= */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
       gap: 12px;
-      padding: 8px 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 0.88rem;
+      margin-bottom: 12px;
     }
 
-    .reminders-list li.today {
-      background: #fef2f2;
-      border-color: #fecaca;
-      font-weight: 700;
-    }
-
-    .reminders-list .r-date {
-      white-space: nowrap;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .reminders-list li.today .r-date { color: #dc2626; }
-
-    .reminders-empty {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .module-selector { margin-bottom: 12px; }
+    .module-selector { display: flex; align-items: center; gap: 10px; }
+    .module-selector label { font-weight: 600; color: var(--text-2); }
 
     .module-selector select {
-      padding: 10px 16px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: white;
+      appearance: none;
+      padding: 10px 40px 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2343575a' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
       font-weight: 600;
+      color: var(--ink);
+      min-width: 260px;
+      cursor: pointer;
     }
 
-    /* Avancement du module sélectionné */
-    .module-progress {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
+    .module-progress { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .mp-pill {
-      background: white;
-      border: 1px solid var(--border);
+      padding: 5px 12px;
       border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      font-size: .84rem;
+      color: var(--text-2);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      font-variant-numeric: tabular-nums;
     }
 
-    .mp-pill strong { color: var(--primary); }
-    .mp-pill.total { border-color: var(--primary); background: var(--primary-light); }
+    .mp-pill strong { color: var(--ink); font-weight: 700; }
+    .mp-pill.total { background: var(--ink); border-color: var(--ink); color: rgba(255,255,255,.72); }
+    .mp-pill.total strong { color: #fff; }
 
-    /* Tableau */
     .table-container {
-      background: white;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow-x: auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: auto;
+      max-height: 72vh;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.9rem;
-    }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .92rem; }
 
-    th, td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #f1f5f9;
-    }
+    th, td { padding: 11px 14px; border-bottom: 1px solid var(--line-2); text-align: left; }
 
-    th {
-      background: #f8fafc;
-      color: var(--text-muted);
+    thead th {
+      position: sticky;
+      background: var(--thead);
+      color: var(--text-2);
       font-weight: 600;
+      font-size: .82rem;
+      z-index: 1;
     }
 
-    .th-group {
-      text-align: center;
-      border-left: 1px solid var(--border);
-    }
+    thead tr:first-child th { top: 0; }
+    thead tr:nth-child(2) th { top: 42px; }
+
+    #course-table-body tr:hover td { background: var(--row-hover); }
+    #course-table-body td:first-child { color: var(--ink); font-weight: 500; min-width: 260px; }
+    #course-table-body td:first-child strong { font-weight: 500; }
+
+    .th-group { text-align: center; border-left: 1px solid var(--line); }
+    .th-l1 { box-shadow: inset 0 -2px 0 var(--c1); }
+    .th-l2 { box-shadow: inset 0 -2px 0 var(--c2); }
+    .th-l3 { box-shadow: inset 0 -2px 0 var(--c3); }
 
     .cell-center { text-align: center; }
+    td.l1 input { accent-color: var(--c1); }
+    td.l2 input { accent-color: var(--c2); }
+    td.l3 input { accent-color: var(--c3); }
+    td.l-start { border-left: 1px solid var(--line-2); }
 
-    /* Boutons de rappel */
     .btn-reminder {
-      background: #e0f2fe;
-      color: #0369a1;
-      border: 1px solid #bae6fd;
       padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
+      border-radius: 999px;
+      border: 1px dashed var(--dash);
+      background: transparent;
+      color: var(--text-2);
+      font-size: .8rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
       white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
 
-    .btn-reminder:hover {
-      background: #0284c7;
-      color: white;
-    }
+    .btn-reminder:hover { border-color: var(--brand); color: var(--brand); }
 
     .btn-reminder.is-set {
-      background: #d1fae5;
-      color: #047857;
-      border-color: #a7f3d0;
+      border: 1px solid transparent;
+      background: var(--brand-soft);
+      color: var(--brand);
     }
 
-    .btn-reminder.is-set:hover {
-      background: #059669;
-      color: white;
-    }
-
-    /* Modale de rappel */
-    .reminder-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 23, 42, .6);
-      backdrop-filter: blur(4px);
-    }
-
-    .reminder-modal.open { display: flex; }
-
-    .reminder-card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      width: min(500px, 90%);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .reminder-dates {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      padding: 14px;
-      border-radius: 8px;
-      margin: 14px 0;
-      font-size: 0.95rem;
-    }
-
-    .reminder-status {
-      min-height: 20px;
-      font-size: 0.85rem;
-      color: #059669;
-      font-weight: 600;
-    }
-
-    .reminder-status.error { color: #dc2626; }
-
-    .reminder-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .reminder-actions button {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-r-delete { background: #fee2e2; color: #b91c1c; }
-    .btn-r-cancel { background: #f1f5f9; color: #475569; margin-left: auto; }
-    .btn-r-save { background: var(--primary); color: white; }
-
-    /* STYLES SPÉCIFIQUES SAMEDI PÉDAGOGIQUE */
-    .samedi-container {
-      background: white;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      padding: 24px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    }
-
-    .samedi-header-inputs {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .samedi-header-inputs input[type="date"] {
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-    }
-
-    .samedi-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    .samedi-table th, .samedi-table td {
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      text-align: center;
-    }
-
-    .samedi-table th.col-cours, .samedi-table td.col-cours {
-      text-align: left;
-      width: 60%;
-    }
+    /* =========================================================
+       Samedi pédagogique
+       ========================================================= */
+    .samedi-table th, .samedi-table td { text-align: center; }
+    .samedi-table th.col-cours, .samedi-table td.col-cours { text-align: left; width: 60%; }
 
     .samedi-table input[type="text"] {
       width: 100%;
-      border: none;
-      outline: none;
+      border: 0;
       background: transparent;
-      font-size: 0.95rem;
+      padding: 4px 0;
+      outline: none;
     }
 
-    .samedi-table input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: var(--primary);
+    .samedi-table input[type="text"]::placeholder { color: #a9b7b5; }
+
+    .samedi-footer {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 16px;
+      margin-top: 16px;
     }
 
-    /* Planning Journalier */
-    .calendar-controls {
+    .samedi-footer label { display: block; font-weight: 600; color: var(--text-2); margin-bottom: 6px; font-size: .9rem; }
+
+    /* =========================================================
+       To-do & planning journalier
+       ========================================================= */
+    .todo-form, .calendar-controls {
       display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .calendar-controls input[type="date"] {
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      font-size: 1rem;
+    .todo-form .field { flex: 1; min-width: 200px; }
+
+    .task-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 4px;
+      border-bottom: 1px solid var(--line-2);
     }
 
-    .btn-add {
-      padding: 8px 16px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .task-item:last-child { border-bottom: 0; }
+    .task-item.completed span { text-decoration: line-through; color: var(--muted); }
+    .task-item button { opacity: .5; }
+    .task-item:hover button { opacity: 1; }
+
+    .empty-state { color: var(--muted); padding: 8px 0; }
 
     .planner-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
     }
 
     .day-card {
-      background: white;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
       padding: 18px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
     .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      font-family: var(--font-display);
       font-weight: 700;
-      color: #0369a1;
-      border-bottom: 1px solid #f1f5f9;
-      padding-bottom: 8px;
-      margin: 0;
+      color: var(--ink);
     }
+    .day-header::first-letter { text-transform: uppercase; }
 
-    .task-input-group {
-      display: flex;
-      gap: 8px;
-    }
-
+    .task-input-group { display: flex; gap: 8px; }
     .task-input-group input {
       flex: 1;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.9rem;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
     }
 
-    .task-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .calendar-controls input[type="date"], .samedi-footer input[type="date"] {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
     }
 
-    .task-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      gap: 8px;
-    }
-
-    .task-item.completed span {
-      text-decoration: line-through;
-      color: var(--text-muted);
-    }
-
-    /* MEDTRACK */
-    .medtrack-print {
-      background: #fff;
-      color: #233b63;
-      padding: 4px 0 20px;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    .medtrack-title {
-      margin: 0 0 14px;
-      color: #233b63;
-      font-size: 1.55rem;
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-
+    /* =========================================================
+       Planning annuel
+       ========================================================= */
     .medtrack-legend {
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
-      gap: 18px;
-      margin: 0 0 16px;
-      font-size: .85rem;
-      color: #333;
-    }
-
-    .legend-title {
-      color: #233b63;
-      font-size: .9rem;
-      font-weight: 700;
+      gap: 6px 18px;
+      margin: 0 0 18px;
+      font-size: .86rem;
+      color: var(--text-2);
     }
 
     .legend-box {
       display: inline-block;
-      width: 24px;
-      height: 16px;
-      border: 1px solid #aaa;
-      vertical-align: middle;
-      margin-right: 6px;
+      width: 12px;
+      height: 12px;
       border-radius: 3px;
-      box-sizing: border-box;
+      vertical-align: -1px;
+      margin-right: 6px;
     }
 
-    .legend-box.holiday { background: #fed7aa; border-color: #f97316; }
-    .legend-box.ramadan { background: #e8e3ef; border-color: #a855f7; }
-    .legend-box.weekend { background: #f1f5f9; border-color: #cbd5e1; }
-    .legend-box.concours { background: #fecdd3; border-color: #e11d48; }
+    .legend-box.holiday { background: #f6c99f; }
+    .legend-box.ramadan { background: #d9cdee; }
+    .legend-box.weekend { background: var(--weekend-legend); }
+    .legend-box.concours { background: #f3a9a0; }
+    .legend-box.note { background: var(--brand); border-radius: 50%; }
+
+    #medtrack-calendar {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 16px;
+    }
 
     .medtrack-month {
-      margin-bottom: 22px;
-      border: 1px solid #d7e0ea;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 16px;
     }
 
     .medtrack-month-header {
-      padding: 10px;
-      text-align: center;
-      background: #233b63;
-      color: #fff;
-      font-size: 1rem;
+      font-family: var(--font-display);
       font-weight: 700;
-      box-sizing: border-box;
-      user-select: none;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
     }
 
-    .medtrack-month.concours {
-      border: 2px solid #ef4444;
-      box-shadow: 0 6px 22px rgba(239, 68, 68, 0.15);
+    .medtrack-month-header small {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: .78rem;
+      color: var(--muted);
     }
 
-    .medtrack-month.concours .medtrack-month-header {
-      background: #c90000;
-      cursor: pointer;
-    }
+    .medtrack-month.concours { border-color: #e9a59c; background: #fffaf9; }
+    .medtrack-month.concours .medtrack-month-header { color: #a1281a; cursor: pointer; }
 
+    .medtrack-weekdays,
     .medtrack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 1px;
-      background: #e2e8f0;
-      border-top: 1px solid #e2e8f0;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .medtrack-weekdays span {
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding-bottom: 4px;
     }
 
     .medtrack-day-cell {
       position: relative;
-      background: #ffffff;
-      padding: 10px;
-      min-height: 80px;
-      box-sizing: border-box;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      background: transparent;
       cursor: pointer;
-      transition: all .15s ease;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background .12s;
+      border: 0;
+      padding: 0;
     }
 
-    .medtrack-day-cell:hover {
-      z-index: 2;
-      box-shadow: inset 0 0 0 2px var(--primary);
-      background: #f0f9ff;
-    }
-
-    .medtrack-day-cell.weekend { background: #f8fafc; }
-    .medtrack-day-cell.holiday { background: #fff7ed; }
-    .medtrack-day-cell.ramadan { background: #faf5ff; }
-    .medtrack-day-cell.concours-day { background: #fff1f2; }
+    .medtrack-day-cell.blank { cursor: default; }
+    .medtrack-day-cell:not(.blank):hover { background: var(--brand-soft); }
+    .medtrack-day-cell.weekend { background: var(--weekend); }
+    .medtrack-day-cell.ramadan { background: #f1ecf9; }
+    .medtrack-day-cell.holiday { background: #fdeedd; }
+    .medtrack-day-cell.concours-day { background: #fdecea; }
+    .medtrack-day-cell.today { box-shadow: inset 0 0 0 2px var(--ink); }
 
     .medtrack-day-cell.has-note::after {
       content: "";
       position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 8px;
-      height: 8px;
+      bottom: 5px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      margin-left: -2.5px;
       border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 0 2px #fff;
-    }
-
-    .medtrack-day-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
+      background: var(--brand);
     }
 
     .medtrack-day {
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-
-    .medtrack-weekday {
-      font-size: 0.75rem;
-      color: #64748b;
+      font-size: .86rem;
       font-weight: 600;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
     }
 
-    .medtrack-day-hint {
-      font-size: 0.75rem;
-      line-height: 1.3;
-      color: #334155;
-      word-break: break-word;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
-
-    .medtrack-day-hint.empty {
-      color: #94a3b8;
-      font-style: italic;
-    }
-
-    .calendar-help {
-      margin: 0 0 16px;
-      padding: 12px 15px;
-      border-radius: 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #475569;
-      font-size: .9rem;
-    }
-
-    .calendar-help strong { color: #0369a1; }
+    .medtrack-day-cell.has-note .medtrack-day { color: var(--brand); font-weight: 800; }
 
     .melissa-encouragement {
-      margin-top: 24px;
-      padding: 22px 24px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #eff6ff, #ffffff);
-      border: 1px solid #bfdbfe;
-      text-align: center;
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: var(--r-lg);
+      background: var(--ink);
+      color: var(--on-ink);
     }
 
     .melissa-encouragement-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #0369a1;
-      margin-bottom: 8px;
-    }
-
-    .melissa-encouragement-text {
-      max-width: 780px;
-      margin: 0 auto;
-      color: #475569;
-      line-height: 1.6;
-    }
-
-    .melissa-signature {
-      margin-top: 12px;
-      font-size: .9rem;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
       font-weight: 700;
-      color: #64748b;
+      color: #fff;
+      margin-bottom: 6px;
     }
 
-    /* MODALES CALENDRIER MEDTRACK */
-    .calendar-modal {
+    .melissa-encouragement-text { max-width: 68ch; line-height: 1.6; }
+    .melissa-encouragement-text strong { color: #fff; font-weight: 600; }
+    .melissa-signature { margin-top: 10px; font-size: .88rem; color: var(--side-muted); }
+
+    /* =========================================================
+       Fenêtres (modales)
+       ========================================================= */
+    .reminder-modal, .calendar-modal {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(15, 23, 42, .62);
-      backdrop-filter: blur(4px);
+      background: var(--overlay);
+      backdrop-filter: blur(3px);
     }
 
-    .calendar-modal.open { display: flex; }
+    .reminder-modal.open, .calendar-modal.open { display: flex; }
 
-    .calendar-modal-card {
+    .reminder-card, .calendar-modal-card {
       position: relative;
-      width: min(620px, 100%);
+      width: min(520px, 100%);
       max-height: 90vh;
       overflow: auto;
-      box-sizing: border-box;
-      padding: 28px;
+      background: var(--surface);
       border-radius: 18px;
-      background: #fff;
-      box-shadow: 0 25px 70px rgba(15, 23, 42, .25);
+      padding: 26px;
+      box-shadow: 0 24px 60px var(--shadow);
+      animation: pop .18s ease-out;
     }
+
+    @keyframes pop { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .modal-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .modal-sub { color: var(--muted); margin: 0 0 18px; }
+
+    .modal-label { display: block; font-weight: 600; color: var(--text-2); margin-bottom: 6px; font-size: .9rem; }
+
+    .reminder-dates {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0 6px;
+    }
+
+    .rdate {
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 10px 12px;
+    }
+
+    .rdate .k { font-size: .8rem; color: var(--muted); }
+    .rdate .v { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    .reminder-status { min-height: 22px; font-size: .86rem; color: var(--brand); font-weight: 600; margin-top: 6px; }
+    .reminder-status.error { color: var(--alert); }
+
+    .reminder-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .reminder-actions .push { margin-left: auto; }
 
     .calendar-modal-close {
       position: absolute;
-      top: 12px;
-      right: 15px;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
       border: 0;
-      background: transparent;
-      color: #64748b;
-      font-size: 30px;
-      cursor: pointer;
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--text-2);
+      font-size: 20px;
       line-height: 1;
+      cursor: pointer;
     }
 
-    .calendar-modal-kicker {
-      color: #0284c7;
-      font-size: .76rem;
-      font-weight: 800;
-      letter-spacing: .12em;
-      margin-bottom: 7px;
-    }
+    .calendar-modal-kicker { color: var(--brand); font-weight: 600; font-size: .86rem; margin-bottom: 4px; }
+    .calendar-modal-card h3 { font-size: 1.35rem; margin-right: 40px; }
+    .calendar-modal-card h3::first-letter { text-transform: uppercase; }
+    .calendar-modal-subtitle { color: var(--muted); margin: 4px 0 16px; }
 
-    .calendar-modal-card h3 {
-      margin: 0 35px 5px 0;
-      font-size: 1.45rem;
-      color: #0f172a;
-    }
-
-    .calendar-modal-subtitle {
-      color: #64748b;
-      margin: 0 0 18px;
-    }
-
-    .calendar-modal-card label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 700;
-      color: #334155;
-    }
+    .calendar-modal-card label { display: block; font-weight: 600; color: var(--text-2); margin-bottom: 6px; font-size: .9rem; }
 
     #day-editor-textarea {
       width: 100%;
-      min-height: 190px;
-      box-sizing: border-box;
+      min-height: 180px;
       resize: vertical;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 14px;
-      font: inherit;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 12px 14px;
       line-height: 1.55;
-      outline: none;
     }
 
-    #day-editor-textarea:focus {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, .12);
-    }
+    .day-editor-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .day-editor-save { margin-left: auto; }
+    .day-editor-saved { min-height: 20px; margin-top: 8px; color: var(--brand); font-size: .86rem; text-align: right; font-weight: 600; }
 
-    .day-editor-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .day-editor-save,
-    .day-editor-delete,
-    .final-ready-btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 11px 16px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .day-editor-save {
-      background: #0284c7;
-      color: #fff;
-      margin-left: auto;
-    }
-
-    .day-editor-delete {
-      background: #f1f5f9;
-      color: #475569;
-    }
-
-    .day-editor-saved {
-      min-height: 20px;
-      margin-top: 9px;
-      color: #059669;
-      font-size: .85rem;
-      text-align: right;
-    }
-
-    .final-card {
-      text-align: center;
-      overflow: hidden;
-      background: linear-gradient(145deg, #fff, #fff7ed);
-    }
-
-    .final-symbol {
-      font-size: 2rem;
-      color: #f59e0b;
-      margin-bottom: 5px;
-    }
-
-    .final-card h3 {
-      font-size: 1.8rem;
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    .final-message {
-      color: #475569;
-      line-height: 1.65;
-      max-width: 500px;
-      margin: 16px auto;
-    }
+    .final-card { text-align: center; }
+    .final-card h3 { font-size: 1.7rem; margin: 6px 0 0; text-transform: none; }
+    .final-symbol { font-size: 1.8rem; color: var(--brand); }
+    .final-message { color: var(--text-2); line-height: 1.65; max-width: 46ch; margin: 14px auto; }
 
     .final-quote {
-      margin: 18px auto;
-      padding: 15px 18px;
-      max-width: 480px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.8);
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      font-weight: 700;
+      margin: 16px auto;
+      padding: 14px 16px;
+      max-width: 44ch;
+      border-radius: var(--r-md);
+      background: var(--brand-soft);
+      color: var(--ink);
+      font-weight: 600;
       line-height: 1.5;
     }
 
-    .final-ready-btn {
-      background: #0f172a;
-      color: #fff;
+    .final-ready-message { min-height: 24px; margin-top: 12px; color: var(--brand); font-weight: 700; }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+    @media (max-width: 1150px) {
+      .kpi.global .global-body { grid-template-columns: 1fr; grid-template-areas: "label" "value" "stats" "caption"; }
     }
 
-    .final-ready-message {
-      min-height: 24px;
-      margin-top: 13px;
-      color: #059669;
-      font-weight: 800;
-    }
+    @media (max-width: 900px) {
+      .app { grid-template-columns: minmax(0, 1fr); }
 
-    @media (max-width: 800px) {
-      body { padding: 12px; }
-      .medtrack-grid {
-        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: auto;
+        padding: 10px 12px;
+        gap: 10px;
+        flex-direction: row;
+        align-items: center;
       }
-      .medtrack-title { font-size: 1.2rem; }
-      .medtrack-legend { gap: 9px; }
-      .quote-card { flex-direction: column; align-items: flex-start; }
+
+      .brand-sub, .sidebar-foot { display: none; }
+      .brand { padding: 0; }
+      .brand-mark { width: 32px; height: 32px; }
+      .brand-name { font-size: .95rem; white-space: nowrap; }
+
+      .nav-tabs {
+        flex-direction: row;
+        min-width: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        flex: 1;
+      }
+
+      .nav-tabs::-webkit-scrollbar { display: none; }
+      .tab-btn { width: auto; white-space: nowrap; padding: 8px 12px; font-size: .86rem; }
+
+      .main { padding: 22px 16px 48px; }
+
+      .hero { grid-template-columns: 1fr; gap: 18px; }
+      .countdown { text-align: left; display: flex; align-items: baseline; gap: 14px; }
+      .countdown-label { margin: 0; }
+
+      .samedi-footer { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .brand-name { display: none; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .kpi.global { flex-direction: column; align-items: stretch; }
+      .ring { margin: 0 auto; }
+      .module-selector { width: 100%; }
+      .module-selector select { min-width: 0; flex: 1; }
+      #medtrack-calendar { grid-template-columns: 1fr; }
+      .reminder-dates { grid-template-columns: 1fr; }
     }
 
     @media print {
-      body {
-        background: #fff !important;
-        padding: 0;
-      }
-      .container { max-width: none; }
-      header, .quote-card, .nav-tabs {
-        display: none !important;
-      }
+      .sidebar, .hero { display: none !important; }
+      .app { display: block; }
       #page-medtrack { display: block !important; }
-      .medtrack-print { padding: 0; }
       .medtrack-month { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>🩺 Suivi Résidanat — Mélissa</h1>
-      <p class="subtitle">Espace d'organisation et de révision sur-mesure</p>
-    </header>
+<div class="app">
 
-    <!-- SECTION CITATIONS D'ENCOURAGEMENT -->
-    <div class="quote-card">
-      <div class="quote-content">
-        <span id="quote-text">« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. Courage Mélissa ! »</span>
-        <span class="quote-author" id="quote-author">— Note de motivation</span>
+  <!-- ================= BARRE LATÉRALE ================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v6a4 4 0 0 0 8 0V3"/><path d="M9 13v2a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="11" r="2"/></svg>
       </div>
-      <button class="btn-quote" onclick="generateNewQuote()">✨ Autre citation</button>
+      <div>
+        <div class="brand-name">Résidanat</div>
+        <div class="brand-sub">Espace de Mélissa</div>
+      </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchPage('modules', this)">📚 Suivi par Modules</button>
-      <button class="tab-btn" onclick="switchPage('samedi', this)">🩺 Samedi Pédagogique</button>
-      <button class="tab-btn" onclick="switchPage('todo', this)">📝 To-Do List</button>
-      <button class="tab-btn" onclick="switchPage('calendar', this)">📅 Planning Journalier</button>
-      <button class="tab-btn" onclick="switchPage('medtrack', this)">🗓️ Planning Annuel (MedTrack)</button>
+    <nav class="nav-tabs" aria-label="Sections">
+      <button class="tab-btn active" onclick="switchPage('modules', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/></svg>
+        Modules
+      </button>
+      <button class="tab-btn" onclick="switchPage('samedi', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M8 14l2.5 2.5L16 12"/></svg>
+        Samedi pédagogique
+      </button>
+      <button class="tab-btn" onclick="switchPage('todo', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>
+        À faire
+      </button>
+      <button class="tab-btn" onclick="switchPage('calendar', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Planning du jour
+      </button>
+      <button class="tab-btn" onclick="switchPage('medtrack', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M7 13h2M11 13h2M15 13h2M7 17h2M11 17h2"/></svg>
+        Planning annuel
+      </button>
     </nav>
 
-    <!-- PAGE 1 : SUIVI PAR MODULES -->
-    <div id="page-modules" class="page active">
-      <section class="dashboard-grid">
-        <div class="dash-card global">
-          <h3>🎯 Avancement global</h3>
-          <div class="dash-value" id="global-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="global-progress-bar"></div>
-          </div>
-          <div class="dash-detail" id="global-detail">—</div>
-        </div>
-        <div class="dash-card">
-          <h3>Couche 1 (C1)</h3>
-          <div class="dash-value" id="c1-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c1-progress-bar"></div>
-          </div>
-          <div class="dash-detail" id="c1-detail">—</div>
-        </div>
-        <div class="dash-card">
-          <h3>Couche 2 (C2)</h3>
-          <div class="dash-value" id="c2-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c2-progress-bar"></div>
-          </div>
-          <div class="dash-detail" id="c2-detail">—</div>
-        </div>
-        <div class="dash-card">
-          <h3>Couche 3 (C3)</h3>
-          <div class="dash-value" id="c3-progress-text">0%</div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="c3-progress-bar"></div>
-          </div>
-          <div class="dash-detail" id="c3-detail">—</div>
-        </div>
-      </section>
-
-      <section class="dash-card reminders-panel">
-        <h3>🔔 Mes prochains rappels QCM <span class="due-badge" id="due-badge" style="display:none"></span></h3>
-        <ul class="reminders-list" id="reminders-list"></ul>
-      </section>
-
-      <div class="module-selector">
-        <label for="module-select"><strong>Module : </strong></label>
-        <select id="module-select" onchange="renderTable()">
-          <option value="pharmaco">Pharmacologie</option>
-          <option value="biochimie">Biochimie</option>
-          <option value="immunologie">Immunologie</option>
-          <option value="anapath_acp">ACP</option>
-          <option value="embryo">Embryologie</option>
-          <option value="cytologie">Cytologie</option>
-          <option value="histologie">Histologie</option>
-          <option value="microbio">Microbiologie</option>
-          <option value="dermato">Dermatologie</option>
-          <option value="physiologie">Physiologie</option>
-          <option value="gastro">Gastro-entérologie</option>
-          <option value="ortho_mpr">Orthopédie - MPR</option>
-          <option value="pediatrie">Pédiatrie</option>
-          <option value="endocrino">Endocrinologie</option>
-          <option value="pneumo">Pneumologie</option>
-          <option value="cardio">Cardiologie</option>
-          <option value="infectieuse">Maladies infectieuses</option>
-          <option value="uro_nephro">Urologie - Néphrologie</option>
-          <option value="ophtalmo">Ophtalmologie</option>
-          <option value="orl">ORL</option>
-          <option value="epidemiologie">Épidémiologie</option>
-          <option value="medecine_travail">Médecine du travail</option>
-          <option value="psychiatrie">Psychiatrie</option>
-          <option value="medecine_legale">Médecine légale</option>
-          <option value="gyneco">Gynécologie - Obstétrique</option>
-          <option value="rhumato_systeme">Rhumatologie - Maladies de système</option>
-          <option value="hemato_onco">Hématologie - Oncologie</option>
-        </select>
-      </div>
-
-      <div class="module-progress" id="module-progress"></div>
-
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th rowspan="2">Nom du Cours</th>
-              <th colspan="2" class="th-group">Couche 1 (C1)</th>
-              <th colspan="2" class="th-group">Couche 2 (C2)</th>
-              <th colspan="2" class="th-group">Couche 3 (C3)</th>
-              <th rowspan="2" class="th-group">Rappels QCM</th>
-            </tr>
-            <tr>
-              <th class="th-group">Cours</th>
-              <th>QCM</th>
-              <th class="th-group">Cours</th>
-              <th>QCM</th>
-              <th class="th-group">Cours</th>
-              <th>QCM</th>
-            </tr>
-          </thead>
-          <tbody id="course-table-body"></tbody>
-        </table>
-      </div>
+    <div class="sidebar-foot">
+      <strong>Méthode des 3 couches</strong><br>
+      Lire le cours, faire les QCM, puis recommencer deux fois pour ancrer.
     </div>
+  </aside>
 
-    <!-- PAGE 2 : SAMEDI PÉDAGOGIQUE -->
-    <div id="page-samedi" class="page">
-      <div class="samedi-container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-          <div>
-            <h2 style="margin: 0; color: #0369a1;">Samedi pédagogique</h2>
-            <p style="color: var(--text-muted); margin: 4px 0 0 0; font-size: 0.9rem;">Suivi spécifique des séances du samedi</p>
+  <!-- ================= CONTENU ================= -->
+  <main class="main">
+    <div class="main-inner">
+
+      <header class="hero">
+        <div>
+          <p class="hero-date" id="hero-date"></p>
+          <h1>Bonjour Mélissa</h1>
+          <div class="quote-card">
+            <div class="quote-content">
+              <span id="quote-text">« La médecine est un art exigeant, mais chaque effort d'aujourd'hui construit la médecin d'exception que tu seras demain. »</span>
+              <span class="quote-author" id="quote-author">Note de motivation</span>
+            </div>
+            <button class="btn-quote" onclick="generateNewQuote()" aria-label="Autre citation" title="Autre citation">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+            </button>
           </div>
-          <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); border: 1px solid var(--primary); padding: 4px 8px; border-radius: 6px;">JUST DO IT</span>
+        </div>
+
+        <div class="countdown" aria-live="polite">
+          <div class="countdown-num" id="countdown-days">—</div>
+          <div class="countdown-label">jours avant le concours<small>octobre 2027</small></div>
+        </div>
+      </header>
+
+      <!-- PAGE 1 : MODULES -->
+      <section id="page-modules" class="page active">
+        <div class="dashboard-grid" id="dashboard"></div>
+
+        <div class="panel reminders-panel">
+          <h3 class="section-title">Prochains rappels QCM <span class="due-badge" id="due-badge" style="display:none"></span></h3>
+          <ul class="reminders-list" id="reminders-list"></ul>
+        </div>
+
+        <div class="toolbar">
+          <div class="module-selector">
+            <label for="module-select">Module</label>
+            <select id="module-select" onchange="renderTable()">
+              <option value="pharmaco">Pharmacologie</option>
+              <option value="biochimie">Biochimie</option>
+              <option value="immunologie">Immunologie</option>
+              <option value="anapath_acp">Anatomie pathologique (ACP)</option>
+              <option value="embryo">Embryologie</option>
+              <option value="cytologie">Cytologie</option>
+              <option value="histologie">Histologie</option>
+              <option value="microbio">Microbiologie</option>
+              <option value="dermato">Dermatologie</option>
+              <option value="physiologie">Physiologie</option>
+              <option value="gastro">Gastro-entérologie</option>
+              <option value="ortho_mpr">Orthopédie - MPR</option>
+              <option value="pediatrie">Pédiatrie</option>
+              <option value="endocrino">Endocrinologie</option>
+              <option value="pneumo">Pneumologie</option>
+              <option value="cardio">Cardiologie</option>
+              <option value="infectieuse">Maladies infectieuses</option>
+              <option value="uro_nephro">Urologie - Néphrologie</option>
+              <option value="ophtalmo">Ophtalmologie</option>
+              <option value="orl">ORL</option>
+              <option value="epidemiologie">Épidémiologie</option>
+              <option value="medecine_travail">Médecine du travail</option>
+              <option value="psychiatrie">Psychiatrie</option>
+              <option value="medecine_legale">Médecine légale</option>
+              <option value="gyneco">Gynécologie - Obstétrique</option>
+              <option value="rhumato_systeme">Rhumatologie - Maladies de système</option>
+              <option value="hemato_onco">Hématologie - Oncologie</option>
+            </select>
+          </div>
+          <div class="module-progress" id="module-progress"></div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">Cours</th>
+                <th colspan="2" class="th-group th-l1">Couche 1</th>
+                <th colspan="2" class="th-group th-l2">Couche 2</th>
+                <th colspan="2" class="th-group th-l3">Couche 3</th>
+                <th rowspan="2" class="th-group">Rappels QCM</th>
+              </tr>
+              <tr>
+                <th class="th-group">Cours</th>
+                <th class="cell-center">QCM</th>
+                <th class="th-group">Cours</th>
+                <th class="cell-center">QCM</th>
+                <th class="th-group">Cours</th>
+                <th class="cell-center">QCM</th>
+              </tr>
+            </thead>
+            <tbody id="course-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PAGE 2 : SAMEDI PÉDAGOGIQUE -->
+      <section id="page-samedi" class="page">
+        <div class="page-head">
+          <h2>Samedi pédagogique</h2>
+          <p>Les cours vus pendant les séances du samedi, avec leurs trois passages et les QCM.</p>
         </div>
 
         <div class="table-container">
@@ -1064,162 +1238,155 @@
             <thead>
               <tr>
                 <th class="col-cours">Cours</th>
-                <th>c1</th>
-                <th>c2</th>
-                <th>c3</th>
-                <th>Qcm</th>
+                <th class="th-l1">C1</th>
+                <th class="th-l2">C2</th>
+                <th class="th-l3">C3</th>
+                <th>QCM</th>
               </tr>
             </thead>
             <tbody id="samedi-table-body"></tbody>
           </table>
         </div>
 
-        <div class="samedi-header-inputs">
-          <div style="font-style: italic; color: #0369a1; font-weight: 600; font-size: 0.9rem;">
-            La discipline transforme les simples souhaits en réalité concrète.
+        <div class="samedi-footer">
+          <div>
+            <label for="samedi-notes">Notes</label>
+            <textarea id="samedi-notes" class="field" rows="4" placeholder="Ce qu'il faut retenir des séances, les points à revoir…" oninput="saveSamediData()"></textarea>
           </div>
           <div>
-            <label for="samedi-end-date"><strong>Date de fin : </strong></label>
+            <label for="samedi-end-date">Date de fin du cycle</label>
             <input type="date" id="samedi-end-date" onchange="saveSamediData()">
           </div>
         </div>
+      </section>
 
-        <div>
-          <label for="samedi-notes" style="display: block; font-weight: 700; margin-bottom: 6px; color: var(--text-muted);">Notes & Remarques :</label>
-          <textarea id="samedi-notes" placeholder="Remarques spécifiques au Samedi Pédagogique..." style="width: 100%; height: 80px; border: 1px solid var(--border); border-radius: 8px; padding: 10px; box-sizing: border-box; font-family: inherit;" oninput="saveSamediData()"></textarea>
+      <!-- PAGE 3 : À FAIRE -->
+      <section id="page-todo" class="page">
+        <div class="page-head">
+          <h2>À faire</h2>
+          <p>Les petites tâches de révision qui ne rentrent pas dans un module.</p>
         </div>
-      </div>
-    </div>
 
-    <!-- PAGE 3 : TO-DO LIST -->
-    <div id="page-todo" class="page">
-      <h2>📝 Ma To-Do List d'étude</h2>
-      <div class="dash-card" style="max-width: 800px; margin: 0 auto;">
-        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-          <input type="text" id="todo-page-input" placeholder="Ajouter une tâche (ex: Réviser QCM Cardio)..."
-                 style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;"
-                 onkeypress="if(event.key==='Enter') addTodo()">
-          <button onclick="addTodo()" class="btn-add" style="font-size: 1rem;">Ajouter</button>
+        <div class="dash-card" style="max-width: 760px;">
+          <div class="todo-form">
+            <input type="text" id="todo-page-input" class="field" placeholder="Ex. : refaire les QCM de cardio du chapitre 3"
+                   onkeypress="if(event.key==='Enter') addTodo()">
+            <button onclick="addTodo()" class="btn btn-primary">Ajouter</button>
+          </div>
+          <ul id="todo-page-list" class="task-list"></ul>
         </div>
-        <ul id="todo-page-list" class="task-list"></ul>
-      </div>
-    </div>
+      </section>
 
-    <!-- PAGE 4 : PLANNING JOURNALIER -->
-    <div id="page-calendar" class="page">
-      <h2>📅 Planning de Révision Journalier</h2>
-      <p style="color: var(--text-muted); margin-top: -8px; margin-bottom: 20px;">Organise tes objectifs jour par jour et suis ta progression quotidienne.</p>
+      <!-- PAGE 4 : PLANNING DU JOUR -->
+      <section id="page-calendar" class="page">
+        <div class="page-head">
+          <h2>Planning du jour</h2>
+          <p>Crée une journée, ajoute tes objectifs et coche-les au fil de la journée.</p>
+        </div>
 
-      <div class="calendar-controls">
-        <label for="date-picker"><strong>Ajouter une journée :</strong></label>
-        <input type="date" id="date-picker">
-        <button class="btn-add" onclick="addCalendarDay()">+ Créer la journée</button>
-      </div>
+        <div class="calendar-controls">
+          <input type="date" id="date-picker" aria-label="Date">
+          <button class="btn btn-primary" onclick="addCalendarDay()">Créer la journée</button>
+        </div>
 
-      <div class="planner-grid" id="planner-grid"></div>
-    </div>
+        <div class="planner-grid" id="planner-grid"></div>
+      </section>
 
-    <!-- PAGE 5 : PLANNING ANNUEL MEDTRACK 2026-2027 -->
-    <div id="page-medtrack" class="page">
-      <div class="medtrack-print">
-        <h2 class="medtrack-title">Planning de révision — Septembre 2026 → Octobre 2027</h2>
-
-        <div class="calendar-help">
-          <strong>Comment l’utiliser :</strong> clique sur n’importe quel jour pour écrire ton programme,
-          tes objectifs, tes QCM ou tes notes. Un point vert apparaît sur les jours déjà remplis.
-          Tes notes sont conservées dans ton navigateur.
+      <!-- PAGE 5 : PLANNING ANNUEL -->
+      <section id="page-medtrack" class="page">
+        <div class="page-head">
+          <h2>Planning annuel</h2>
+          <p>De septembre 2026 à octobre 2027. Clique sur un jour pour noter ton programme ; un point apparaît sur les jours remplis.</p>
         </div>
 
         <div class="medtrack-legend">
-          <span class="legend-title">Légende :</span>
-          <span><i class="legend-box holiday"></i> Jour férié officiel</span>
-          <span><i class="legend-box ramadan"></i> Ramadan (estimé)</span>
-          <span><i class="legend-box weekend"></i> Week-end (Ven/Sam)</span>
-          <span><i class="legend-box concours"></i> Mois du concours</span>
+          <span><i class="legend-box note"></i>Jour rempli</span>
+          <span><i class="legend-box weekend"></i>Week-end (ven. et sam.)</span>
+          <span><i class="legend-box holiday"></i>Jour férié</span>
+          <span><i class="legend-box ramadan"></i>Ramadan (estimé)</span>
+          <span><i class="legend-box concours"></i>Mois du concours</span>
         </div>
 
         <div id="medtrack-calendar"></div>
 
         <div class="melissa-encouragement">
-          <div class="melissa-encouragement-title">Mélissa, un jour à la fois.</div>
+          <div class="melissa-encouragement-title">Un jour à la fois.</div>
           <div class="melissa-encouragement-text">
-            Chaque case remplie est une petite victoire. Chaque cours appris, chaque QCM travaillé
-            et chaque journée où tu continues te rapproche de ton objectif.
-            <strong>Tu n’as pas besoin d’être parfaite, tu as juste besoin de continuer.</strong>
+            Chaque jour rempli est une petite victoire. Chaque cours appris et chaque QCM travaillé
+            te rapproche de ton objectif.
+            <strong>Tu n'as pas besoin d'être parfaite, tu as juste besoin de continuer.</strong>
           </div>
-          <div class="melissa-signature">Ton futur toi sera fière de la Mélissa d’aujourd’hui.</div>
+          <div class="melissa-signature">Ton futur toi sera fière de la Mélissa d'aujourd'hui.</div>
         </div>
-      </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ================= FENÊTRE : RAPPELS QCM ================= -->
+<div id="reminder-modal" class="reminder-modal" onclick="if(event.target===this) closeReminderModal()">
+  <div class="reminder-card" role="dialog" aria-modal="true" aria-labelledby="reminder-title">
+    <h3 class="modal-title" id="reminder-title">Programmer les rappels QCM</h3>
+    <p id="modal-cours-title" class="modal-sub"></p>
+
+    <label for="date-revision" class="modal-label">Date de première révision</label>
+    <input type="date" id="date-revision" class="field" oninput="previewReminderDates()" onchange="previewReminderDates()">
+
+    <div class="reminder-dates">
+      <div class="rdate"><div class="k">Rappel à J+8</div><div class="v" id="date-j8">--/--/----</div></div>
+      <div class="rdate"><div class="k">Rappel à J+30</div><div class="v" id="date-j30">--/--/----</div></div>
+    </div>
+
+    <div id="reminder-status" class="reminder-status"></div>
+
+    <div class="reminder-actions">
+      <button id="reminder-delete-btn" class="btn btn-danger" onclick="deleteReminder()">Supprimer</button>
+      <button class="btn btn-ghost push" onclick="closeReminderModal()">Annuler</button>
+      <button class="btn btn-primary" onclick="saveReminder()">Enregistrer</button>
     </div>
   </div>
+</div>
 
-  <!-- MODALE RAPPELS QCM -->
-  <div id="reminder-modal" class="reminder-modal" onclick="if(event.target===this) closeReminderModal()">
-    <div class="reminder-card">
-      <h3 style="margin-top: 0; color: #0369a1;">🔔 Rappels QCM</h3>
-      <p id="modal-cours-title" style="font-weight: bold; color: #0f172a;"></p>
+<!-- ================= FENÊTRE : NOTE DU JOUR ================= -->
+<div id="day-editor-modal" class="calendar-modal" aria-hidden="true" onclick="if(event.target===this) closeDayEditor()">
+  <div class="calendar-modal-card" role="dialog" aria-modal="true">
+    <button class="calendar-modal-close" onclick="closeDayEditor()" aria-label="Fermer">×</button>
+    <div class="calendar-modal-kicker">Journée de révision</div>
+    <h3 id="day-editor-title">Ma journée</h3>
+    <p id="day-editor-subtitle" class="calendar-modal-subtitle"></p>
 
-      <label for="date-revision" style="display: block; font-size: 0.9rem; margin-top: 10px;">Date de première révision :</label>
-      <input type="date" id="date-revision" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-top: 4px; box-sizing: border-box;" oninput="previewReminderDates()" onchange="previewReminderDates()">
+    <label for="day-editor-textarea">Programme et notes</label>
+    <textarea id="day-editor-textarea"
+      placeholder="Ex. : Cardiologie, 2 chapitres et 40 QCM&#10;À revoir : insuffisance cardiaque&#10;Objectif : 3 h de révision"></textarea>
 
-      <div class="reminder-dates">
-        <strong>📅 Rappels prévus :</strong>
-        <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
-          <li>Rappel J+8 : <span id="date-j8" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
-          <li>Rappel J+30 : <span id="date-j30" style="font-weight: bold; color: var(--primary);">--/--/----</span></li>
-        </ul>
-      </div>
-
-      <div id="reminder-status" class="reminder-status"></div>
-
-      <div class="reminder-actions">
-        <button id="reminder-delete-btn" class="btn-r-delete" onclick="deleteReminder()">Supprimer</button>
-        <button class="btn-r-cancel" onclick="closeReminderModal()">Annuler</button>
-        <button class="btn-r-save" onclick="saveReminder()">Enregistrer</button>
-      </div>
+    <div class="day-editor-actions">
+      <button class="btn btn-ghost day-editor-delete" onclick="deleteDayNote()">Effacer</button>
+      <button class="btn btn-primary day-editor-save" onclick="saveDayNote()">Enregistrer</button>
     </div>
+    <div id="day-editor-saved" class="day-editor-saved"></div>
   </div>
+</div>
 
-  <!-- MODALE : ÉCRIRE POUR UN JOUR -->
-  <div id="day-editor-modal" class="calendar-modal" aria-hidden="true">
-    <div class="calendar-modal-card">
-      <button class="calendar-modal-close" onclick="closeDayEditor()" aria-label="Fermer">×</button>
-      <div class="calendar-modal-kicker">JOURNÉE DE RÉVISION</div>
-      <h3 id="day-editor-title">Ma journée</h3>
-      <p id="day-editor-subtitle" class="calendar-modal-subtitle"></p>
-
-      <label for="day-editor-textarea">Ce que je veux faire / retenir aujourd’hui</label>
-      <textarea id="day-editor-textarea"
-        placeholder="Ex. : Cardiologie — 2 chapitres + 40 QCM&#10;À revoir : insuffisance cardiaque&#10;Objectif : 3 h de révision"></textarea>
-
-      <div class="day-editor-actions">
-        <button class="day-editor-delete" onclick="deleteDayNote()">Effacer</button>
-        <button class="day-editor-save" onclick="saveDayNote()">Enregistrer</button>
-      </div>
-      <div id="day-editor-saved" class="day-editor-saved"></div>
+<!-- ================= FENÊTRE : OCTOBRE 2027 ================= -->
+<div id="final-month-modal" class="calendar-modal final-modal" aria-hidden="true" onclick="if(event.target===this) closeFinalMonth()">
+  <div class="calendar-modal-card final-card" role="dialog" aria-modal="true">
+    <button class="calendar-modal-close" onclick="closeFinalMonth()" aria-label="Fermer">×</button>
+    <div class="final-symbol">✦</div>
+    <div class="calendar-modal-kicker">Octobre 2027</div>
+    <h3>Le dernier chapitre commence ici.</h3>
+    <p class="final-message">
+      Mélissa, tu es arrivée jusqu'ici après des mois de travail.
+      Chaque jour noté dans ce calendrier est un jour où tu as choisi de croire en ton objectif.
+    </p>
+    <div class="final-quote" id="final-quote">
+      « Tu n'es pas arrivée jusqu'ici par hasard. Tu as construit ce moment, jour après jour. »
     </div>
+    <button class="btn btn-primary" onclick="finalReady()">Je suis prête</button>
+    <div id="final-ready-message" class="final-ready-message"></div>
   </div>
+</div>
 
-  <!-- MODALE : OCTOBRE 2027 / DERNIER CHAPITRE -->
-  <div id="final-month-modal" class="calendar-modal final-modal" aria-hidden="true">
-    <div class="calendar-modal-card final-card">
-      <button class="calendar-modal-close" onclick="closeFinalMonth()" aria-label="Fermer">×</button>
-      <div class="final-symbol">✦</div>
-      <div class="calendar-modal-kicker">OCTOBRE 2027</div>
-      <h3>Le dernier chapitre commence ici.</h3>
-      <p class="final-message">
-        Mélissa, tu es arrivée jusqu’à cette case après des mois de travail.
-        Tout ce que tu auras écrit dans ce calendrier représente des journées où tu as choisi
-        de croire en ton objectif.
-      </p>
-      <div class="final-quote" id="final-quote">
-        « Tu n’es pas arrivée jusqu’ici par hasard. Tu as construit ce moment, jour après jour. »
-      </div>
-      <button class="final-ready-btn" onclick="finalReady()">Je suis prête pour le dernier chapitre ✨</button>
-      <div id="final-ready-message" class="final-ready-message"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
