@@ -42,6 +42,54 @@ const modulesData = {
     { id: 'b9', title: 'Exploration de la thyroide' }
   ],
 
+  biochimie3: [
+    { id: 'bc1', title: "Introduction à la biochimie de l'homme sain" },
+    { id: 'bc2', title: 'Biomarqueurs cardiaques' },
+    { id: 'bc3', title: "Différentes étapes de l'analyse biologique et risques d'erreurs (Quality Control)" },
+    { id: 'bc4', title: 'Dyslipidémies & Athérosclérose' },
+    { id: 'bc5', title: 'Stress oxydant' },
+    { id: 'bc6', title: 'Exploration biochimique des liquides de ponction' },
+    { id: 'bc7', title: 'Enzymes musculaires (tissulaires et sériques)' },
+    { id: 'bc8', title: 'Exploration biochimique du LCR' },
+    { id: 'bc9', title: 'Exploration des glucides' },
+    { id: 'bc10', title: 'Exploration des endocrinopathies' },
+    { id: 'bc11', title: 'Équilibre hydrominéral' },
+    { id: 'bc12', title: 'Bilan rénal & Protéinurie' },
+    { id: 'bc13', title: 'Exploration du métabolisme phosphocalcique & Marqueurs du remodelage osseux' },
+    { id: 'bc14', title: 'Mesure du débit de filtration glomérulaire (TD)' },
+    { id: 'bc15', title: 'Bilan hépatique' },
+    { id: 'bc16', title: 'Exploration biochimique de la digestion' },
+    { id: 'bc17', title: 'Acide urique' },
+    { id: 'bc18', title: 'Exploration biochimique des protéines plasmatiques' },
+    { id: 'bc19', title: 'Marqueurs tumoraux' }
+  ],
+
+  genetique: [
+    { id: 'gen1', title: "Introduction à l'étude de la génétique" },
+    { id: 'gen2', title: 'Conseil génétique' },
+    { id: 'gen3', title: 'Épigénétique' },
+    { id: 'gen4', title: "Régulation de l'expression génétique" },
+    { id: 'gen5', title: 'Organisation du génome' },
+    { id: 'gen6', title: 'Chromatine' },
+    { id: 'gen7', title: 'Structure des acides nucléiques' },
+    { id: 'gen8', title: 'Réplication' },
+    { id: 'gen9', title: 'Transcription' },
+    { id: 'gen10', title: 'Code génétique et traduction' },
+    { id: 'gen11', title: 'Modifications post-traductionnelles' },
+    { id: 'gen12', title: 'Outils de biologie moléculaire' },
+    { id: 'gen13', title: 'Hérédité mendélienne / monofactorielle' },
+    { id: 'gen14', title: 'Hérédité non conventionnelle' },
+    { id: 'gen15', title: 'Pharmacogénétique' },
+    { id: 'gen16', title: 'Thérapie génique' },
+    { id: 'gen17', title: 'Variations génétiques : Polymorphisme et mutation' },
+    { id: 'gen18', title: "Systèmes de réparation de l'ADN" },
+    { id: 'gen19', title: 'Cancérogenèse' },
+    { id: 'gen20', title: 'Caryotype' },
+    { id: 'gen21', title: 'Anomalies du caryotype' },
+    { id: 'gen22', title: 'Génétique des populations' },
+    { id: 'gen23', title: 'Maladies chromosomiques' }
+  ],
+
   anapath_acp: [
     { id: 'acp1', title: "Introduction à l'Anatomie Pathologique" },
     { id: 'acp2', title: 'Lésions cellulaires, tissulaires et adaptatives' },
@@ -154,6 +202,33 @@ const modulesData = {
     { id: 'mi26', title: 'Traitement & Prévention des Infections virales' }
   ],
 
+  parasitologie: [
+    // PARASITOLOGIE
+    { id: 'pa1', title: 'Introduction à la parasitologie' },
+    { id: 'pa2', title: 'Amibes et Amibiases' },
+    { id: 'pa3', title: 'Flagellés & Ciliés' },
+    { id: 'pa4', title: 'Leishmanies et Leishmanioses' },
+    { id: 'pa5', title: 'Parasites opportunistes (Coccidioses intestinales & Blastocystose)' },
+    { id: 'pa6', title: 'Trypanosomes et Trypanosomoses' },
+    { id: 'pa7', title: 'Toxoplasmes et Toxoplasmoses' },
+    { id: 'pa8', title: 'Plasmodium et Paludisme' },
+    { id: 'pa9', title: 'Généralités sur les Helminthes' },
+    { id: 'pa10', title: 'Cestodes' },
+    { id: 'pa11', title: 'Trématodes' },
+    { id: 'pa12', title: 'Nématodes' },
+    { id: 'pa13', title: 'Entomologie médicale' },
+    // MYCOLOGIE
+    { id: 'pa14', title: 'Introduction à la mycologie' },
+    { id: 'pa15', title: 'Candidoses & Malassezioses' },
+    { id: 'pa16', title: 'Cryptococcose & Pneumocystose & Microsporidioses' },
+    { id: 'pa17', title: 'Dermatophytes et Dermatophytoses' },
+    { id: 'pa18', title: 'Aspergillus et Aspergilloses' },
+    { id: 'pa19', title: 'Mycétomes & Sporotrichose' },
+    { id: 'pa20', title: 'Champignons dimorphiques' },
+    { id: 'pa21', title: 'Mucormycoses & Fusarioses & Zygomycoses' },
+    { id: 'pa22', title: 'SIDA et Parasitoses & SIDA et Mycoses' }
+  ],
+
   dermato: [
     { id: 'der1', title: 'Démarche diagnostique en Dermatologie' },
     { id: 'der2', title: 'Infections cutanées bactériennes à pyogènes' },
@@ -225,6 +300,38 @@ const modulesData = {
     { id: 'phy49', title: 'États de veille et de sommeil' },
     { id: 'phy50', title: 'EEG (TD)' },
     { id: 'phy51', title: 'EMG (TD)' }
+  ],
+
+  physiopatho: [
+    // APPAREIL CARDIO-RESPIRATOIRE
+    { id: 'pp1', title: 'Troubles hydrosodés' },
+    { id: 'pp2', title: 'Thermorégulation (Dysthermies)' },
+    { id: 'pp3', title: 'Dénutrition' },
+    { id: 'pp4', title: 'Insuffisance cardiaque (IC)' },
+    { id: 'pp5', title: 'Choc hypovolémique' },
+    { id: 'pp6', title: 'Choc cardiogénique' },
+    { id: 'pp7', title: 'Choc septique' },
+    { id: 'pp8', title: 'Choc anaphylactique' },
+    { id: 'pp9', title: 'Hypertension artérielle (HTA)' },
+    { id: 'pp10', title: 'Maladie thrombo-embolique veineuse' },
+    // APPAREILS NEUROLOGIQUE, LOCOMOTEUR ET CUTANÉ
+    { id: 'pp11', title: 'Hypertension intracrânienne' },
+    { id: 'pp12', title: 'Douleur' },
+    { id: 'pp13', title: 'Œdèmes périphériques' },
+    { id: 'pp14', title: "Troubles de l'hématose" },
+    { id: 'pp15', title: 'Insuffisance respiratoire aiguë' },
+    { id: 'pp16', title: 'Œdème pulmonaire aigu (OAP)' },
+    // APPAREIL DIGESTIF ET ORGANES HÉMATOPOÏÉTIQUES
+    { id: 'pp17', title: 'Ictères' },
+    { id: 'pp18', title: "Troubles de l'hémostase" },
+    { id: 'pp19', title: 'Hypertension portale (HTP)' },
+    { id: 'pp20', title: 'Occlusions intestinales' },
+    // APPAREILS ENDOCRINIEN, DE REPRODUCTION ET URINAIRE
+    { id: 'pp21', title: 'Dyskaliémies & Dyscalcémies & Dysphosphorémies' },
+    { id: 'pp22', title: 'Dysmagnésémies' },
+    { id: 'pp23', title: 'Acidocétose diabétique' },
+    { id: 'pp24', title: 'Insuffisance rénale aiguë (IRA)' },
+    { id: 'pp25', title: 'Troubles acidobasiques' }
   ],
 
   gastro: [
@@ -489,6 +596,36 @@ const modulesData = {
     { id: 'c34', title: 'Vasodilatateurs' },
     { id: 'c35', title: 'Cardiotoniques' },
     { id: 'c36', title: 'Anti-arythmiques' }
+  ],
+
+  neurologie: [
+    { id: 'n1', title: 'Anatomie fonctionnelle du SNC' },
+    { id: 'n2', title: 'Sémiologie et orientation diagnostique' },
+    { id: 'n3', title: 'Algies cranio-faciales (ACF)' },
+    { id: 'n4', title: 'Syndromes topographiques' },
+    { id: 'n5', title: 'Coma' },
+    { id: 'n6', title: 'Épilepsies' },
+    { id: 'n7', title: 'Accidents vasculaires cérébraux (AVC)' },
+    { id: 'n8', title: 'Infections du SNC' },
+    { id: 'n9', title: 'Encéphalites et maladies à prion' },
+    { id: 'n10', title: 'Neuropathies périphériques acquises (NPA)' },
+    { id: 'n11', title: 'Maladies du motoneurone (SLA et ASP)' },
+    { id: 'n12', title: 'Neuropathies périphériques héréditaires (NPH)' },
+    { id: 'n13', title: 'Ataxies cérébelleuses héréditaires (ACH)' },
+    { id: 'n14', title: 'Myopathies' },
+    { id: 'n15', title: 'Myasthénie' },
+    { id: 'n16', title: 'Sclérose en plaques' },
+    { id: 'n17', title: "Maladie d'Alzheimer et autres démences" },
+    { id: 'n18', title: 'Maladie de Parkinson et syndromes parkinsoniens' },
+    { id: 'n19', title: 'Hypertension intracrânienne' },
+    { id: 'n20', title: 'Hydrocéphalie' },
+    { id: 'n21', title: 'Tumeurs cérébrales' },
+    { id: 'n22', title: 'Compression médullaire' },
+    { id: 'n23', title: 'Hémorragie médullaire' },
+    { id: 'n24', title: 'Traumatismes cranio-encéphaliques' },
+    { id: 'n25', title: 'Traumatisme du rachis cervical' },
+    { id: 'n26', title: 'Malformations de la charnière occipito-vertébrale (COV)' },
+    { id: 'n27', title: 'Dysraphies (Spina bifida) & Craniosténoses' }
   ],
 
   infectieuse: [
@@ -872,6 +1009,31 @@ const modulesData = {
     { id: 'im24', title: 'Syndromes lymphoprolifératifs (Gammapathies monoclonales)' },
     { id: 'im25', title: 'Implications du HLA en médecine' },
     { id: 'im26', title: 'Immunothérapie & Immunosuppression' }
+  ],
+
+  geriatrie: [
+    { id: 'ger1', title: 'Troubles nutritionnels' },
+    { id: 'ger2', title: 'Perception de la mort & Non-finitude' },
+    { id: 'ger3', title: 'Éthique, isolement et maltraitance' },
+    { id: 'ger4', title: 'Examen clinique du sujet âgé (TD)' },
+    { id: 'ger5', title: 'Dénutrition (TD)' },
+    { id: 'ger6', title: "Échelles d'évaluation chez le sujet âgé (autonomie/dépendance) (TD)" },
+    { id: 'ger7', title: 'Troubles cognitifs du sujet âgé (TD)' },
+    { id: 'ger8', title: 'Complications du décubitus (TD)' },
+    { id: 'ger9', title: 'Règles de prescription médicamenteuse (TD)' }
+  ],
+
+  umc: [
+    { id: 'umc1', title: 'Organisation structurelle et fonctionnelle des urgences, Triage médical, Accueil et Orientation (Organisation des urgences)' },
+    { id: 'umc2', title: 'Médecine pré-hospitalière et aspects organisationnels' },
+    { id: 'umc3', title: "Régulation médicale en médecine d'urgence" },
+    { id: 'umc4', title: 'Oxygénothérapie aux urgences' },
+    { id: 'umc5', title: 'Médecine de catastrophe : classification et techniques de triage' },
+    { id: 'umc6', title: "Gestion de l'afflux massif des blessés aux urgences" },
+    { id: 'umc7', title: "Polytraumatisé : approche de l'urgentiste (PEC du polytraumatisé)" },
+    { id: 'umc8', title: 'Brûlures cutanées & Ingestion caustique' },
+    { id: 'umc9', title: 'Pathologies circonstancielles : Électrisation, Noyade, Pendaison, Strangulation' },
+    { id: 'umc10', title: "Envenimations végétales et animales (contient une partie sur l'Envenimation scorpionique)" }
   ]
 };
 
